@@ -1,0 +1,111 @@
+.Mypage {
+  max-width: 1200px;
+  margin: 100px auto 0 auto;
+}
+
+.UserInfo {
+  padding: 30px 100px;
+  border: 5px solid #e5e5e5;
+  border-radius: 30px;
+}
+.UserInfo .ImgWrap {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  border: 10px solid rgb(190, 216, 255);
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: content-box;
+}
+.UserInfo .ImgWrap img {
+  width: 100%;
+  height: 100%;
+}
+.UserInfo .TxtWrap {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 50px;
+}
+.UserInfo .TxtWrap ul {
+  font-size: 1.2rem;
+  line-height: 2rem;
+  font-weight: bold;
+}
+
+.Portfolios {
+  margin: 50px auto 0 auto;
+  height: 500px;
+}
+.Portfolios h2 {
+  font-size: 1.5rem;
+  display: inline-block;
+  width: 15%;
+  font-weight: bold;
+  vertical-align: top;
+  border-right: 1px solid #ddd;
+  height: 100%;
+}
+.Portfolios .Pf {
+  display: inline-block;
+  width: 85%;
+  vertical-align: top;
+  padding-left: 50px;
+}
+.Portfolios .Pf .PfWrap {
+  width: 100%;
+  background-color: rgb(227, 240, 255);
+  border-radius: 5px;
+  padding: 15px 20px;
+}
+.Portfolios .Pf .PfWrap::after {
+  content: '';
+  clear: both;
+  display: block;
+}
+.Portfolios .Pf .PfWrap a {
+  font-weight: bold;
+  font-size: 1.1rem;
+  display: inline-block;
+  /* float: left; */
+  /* width: calc(100% - 105px); */
+  line-height: 30px;
+  color: rgb(52, 77, 124);
+}
+
+.Portfolios .Pf .PfWrap a:hover {
+  color: rgb(11, 8, 39);
+}
+
+.Portfolios .Pf .PfWrap .Btns {
+  /* display: inline-block; */
+  width: 105px;
+  float: right;
+}
+.Portfolios .Pf .PfWrap .Btns button {
+  /* border: 2px solid #ddd; */
+  border: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-radius: 5px;
+  width: 50px;
+  height: 30px;
+  cursor: pointer;
+}
+.Portfolios .Pf .PfWrap .Btns button:first-child {
+  margin-right: 5px;
+}
+
+.MorePf {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: 3px solid #ddd;
+  background-color: white;
+  font-size: 2.7rem;
+  color: #ccc;
+  line-height: 40px;
+  cursor: pointer;
+  display: block;
+  margin: 30px auto 0 auto;
+}
