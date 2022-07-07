@@ -7,11 +7,11 @@ function Section(prop) {
   return (
     <div className="section-component">
       <div className="section-component-title">
-        <p>세션 컴포넌트 제목(ex : 한 줄 소개)</p>
+        <p>{sectionName}</p>
       </div>
       <hr className="section-hr" />
       <div className="section-component-content">
-        <p>세션 컴포넌트 input, 내용</p>
+        <p>{sectionName} input, 내용</p>
       </div>
     </div>
   );
