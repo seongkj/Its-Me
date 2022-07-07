@@ -1,0 +1,49 @@
+.ThemesWrap {
+  text-align: center;
+  margin-top: 150px;
+  background-color: #eee;
+  padding: 100px 0;
+}
+.ThemesWrap h1 {
+  font-size: 1.8rem;
+}
+.ThemesWrap .Themes {
+  margin-top: 50px;
+}
+.ThemesWrap .Themes a {
+  width: 250px;
+  height: 300px;
+  background-color: white;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  /* border: 2px solid #1c477e; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: 0.2s;
+}
+.ThemesWrap .Themes a:hover {
+  /* border-width: 6px; */
+}
+.ThemesWrap .Themes a:first-child {
+  margin-right: 30px;
+}
+.ThemesWrap .Themes a img {
+  width: 250px;
+  height: 300px;
+}
+.ThemesWrap .Themes a span {
+  display: block;
+  line-height: 300px;
+  background-color: rgba(28, 71, 126, 0.8);
+  color: white;
+  font-size: 1.5rem;
+  width: 100%;
+  height: 300px;
+  transition: 0.2s;
+  position: absolute;
+  left: 0;
+  top: -300px;
+}
+.ThemesWrap .Themes a:hover span {
+  top: 0;
+}
