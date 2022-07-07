@@ -1,0 +1,149 @@
+:root {
+  --main-color: rgb(16, 72, 146);
+  --main2-color: #293241;
+  --sub-color: #8BC9EE;
+  --sub2-color: #54b3d6;
+  --etc-color: #D9D9D9;
+  --error-color: #EE6C4D;
+}
+
+@font-face {
+  font-family: 'yg-jalnan';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'KoPubDotumMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/KoPubDotumMedium.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  animation: theme 21s linear infinite;
+}
+body:after,
+body:before {
+  content: '';
+  display: block;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  width: 100vmax;
+  height: 100vmax;
+  background: rgba(0, 0, 0, 0.05);
+  animation: background 90s linear infinite;
+}
+body:after {
+  left: 15vw;
+}
+body:before {
+  right: 15vw;
+  animation-delay: -30s;
+  animation-direction: reverse;
+}
+@keyframes theme {
+  0% {
+    background: #74c390;
+  }
+  16% {
+    background: #5dbdb6;
+  }
+  33% {
+    background: var(--sub-color);
+  }
+  50% {
+    background: var(--sub2-color);
+  }
+  66% {
+    background: rgba(16, 72, 146, 0.75);
+  }
+  83% {
+    background: var(--sub2-color);
+  }
+  100% {
+    background: #74c390;
+  }
+}
+@keyframes background {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.Title {
+  display: none;
+}
+
+.MainContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+  text-align: center;
+  align-items: center;
+  top: 50%;
+  transform: translate(0%, 50%);
+  color: white;
+}
+
+.MainText {
+  font-family: 'yg-jalnan';
+  color: white;
+  font-size: 13rem;
+}
+
+.SubText {
+  font-family: 'KoPubDotumMedium';
+  letter-spacing: 1px;
+  font-size: 2.5rem;
+}
+
+.MadeBtn {
+  font-family: 'KoPubDotumMedium';
+  cursor: pointer;
+  position: relative;
+  padding: 15px 40px;
+  color: var(--main-color);
+  background: white;
+  font-size: 1.7rem;
+  font-weight: bold;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: all 1s;
+}
+.MadeBtn:after, .MadeBtn:before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  border: 0px solid #fff;
+  transition: all 1s;
+}
+.MadeBtn:after {
+  top: -1px;
+  left: -1px;
+  border-top: 4px solid var(--main-color);
+  border-left: 4px solid var(--main-color);
+}
+.MadeBtn:before {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 4px solid var(--main-color);
+  border-right: 4px solid var(--main-color);
+}
+.MadeBtn:hover {
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.MadeBtn:hover:before, .MadeBtn:hover:after {
+  width: 100%;
+  height: 100%;
+}
