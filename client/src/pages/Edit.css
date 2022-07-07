@@ -39,7 +39,6 @@
   flex-direction: column;
   text-align: center;
 }
-
 .section-bar ul li {
 }
 
@@ -60,7 +59,10 @@
 /* section info 부분 */
 .section-info {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
+  margin-top: 30px;
 }
