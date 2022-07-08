@@ -3,7 +3,7 @@ import Edit from './pages/Edit/Edit';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import Mypage from './pages/Mypage/Mypage';
-import Main from './pages/Main';
+import Main from './pages/Main/Main';
 import './App.css';
 
 function App() {

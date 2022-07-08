@@ -39,8 +39,12 @@
   top: 4vh;
   right: 3vw;
 }
-.NavLinks .NavLink a{
+.NavLinks .NavLink a {
   font-family: 'KoPubDotumMedium';
   color: white;
   cursor: pointer;
+}
+
+.NavLinks .NavLink a:hover {
+  color: black;
 }
