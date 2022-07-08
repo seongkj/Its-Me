@@ -1,0 +1,46 @@
+:root {
+  --main-color: rgb(16, 72, 146);
+  --main2-color: #293241;
+  --sub-color: #8BC9EE;
+  --sub2-color: #54b3d6;
+  --etc-color: #D9D9D9;
+  --error-color: #EE6C4D;
+}
+
+@font-face {
+  font-family: 'yg-jalnan';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'KoPubDotumMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/KoPubDotumMedium.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.Title {
+  cursor: pointer;
+  color: white;
+  font-family: 'yg-jalnan';
+  position: fixed;
+  top: 4vh;
+  left: 3vw;
+  font-size: 1.5rem;
+}
+.NavLinks {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  position: fixed;
+  top: 4vh;
+  right: 3vw;
+}
+.NavLinks .NavLink a{
+  font-family: 'KoPubDotumMedium';
+  color: white;
+  cursor: pointer;
+}
