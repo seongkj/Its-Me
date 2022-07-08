@@ -1,5 +1,6 @@
+/* eslint-disable */
 import React, { useState, useEffect, useRef } from 'react';
-import '../../pages/Mypage.css';
+import './Mypage.css';
 import userInfo from '../../assets/mypage.json';
 
 const datas = userInfo.map((data) => {
