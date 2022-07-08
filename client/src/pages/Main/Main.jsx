@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import './Main.css';
-import Header from '../components/Header';
+import Header from '../../components/Header';
 
 function Main() {
   return (
