@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Edit from './components/Edit/Edit';
-import Login from './components/Login/Login';
-import SignUp from './components/SignUp/SignUp';
+import Edit from './pages/Edit/Edit';
+import Login from './pages/Login/Login';
+import SignUp from './pages/SignUp/SignUp';
+import Mypage from './pages/Mypage/Mypage';
 import Main from './pages/Main';
 import './App.css';
 
@@ -14,6 +15,7 @@ function App() {
           <Route path="/edit" element={<Edit />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/mypage" element={<Mypage />} />
         </Routes>
       </Router>
     </div>
