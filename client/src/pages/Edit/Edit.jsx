@@ -82,13 +82,16 @@ function SectionChoiceButton(prop) {
   const { id, name, isToggle, sectionTitle, setSectionTitle } = prop;
   const [toggle, setToggle] = useState(isToggle);
 
-  // 버튼 클릭 시 토글하여 색 변경, 섹션 컴포넌트 추가
+  // 버튼 클릭 시 토글하여 색 변경, 섹션 컴포넌트 추가, 삭제
   const onChangeColor = (event) => {
     setToggle(!toggle);
     if (sectionTitle.includes(event.target.innerHTML) === false) {
       setSectionTitle([...sectionTitle, event.target.innerHTML]);
     } else {
-      console.log('선택 섹션 삭제 되야함');
+      const deleteSection = sectionTitle.filter(
+        (el) => el !== event.target.innerHTML,
+      );
+      setSectionTitle(deleteSection);
     }
   };
   return (
