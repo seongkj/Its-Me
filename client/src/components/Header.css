@@ -47,4 +47,5 @@
 
 .NavLinks .NavLink a:hover {
   color: black;
+  font-weight: bold;
 }
