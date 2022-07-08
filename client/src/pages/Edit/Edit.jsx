@@ -1,7 +1,8 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import Section from './Section';
 
-import '../../pages/Edit.css';
+import './Edit.css';
 
 // 포트폴리오 섹션 정보
 const sectionName = [

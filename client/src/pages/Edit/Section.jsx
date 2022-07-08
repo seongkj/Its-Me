@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../pages/Section.css';
+import './Section.css';
 
 function Section(prop) {
   const { sectionName } = prop;

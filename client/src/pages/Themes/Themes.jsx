@@ -1,5 +1,6 @@
+/* eslint-disable */
 import React, { useState, useEffect, useRef } from 'react';
-import '../../pages/Themes.css';
+import './Themes.css';
 
 const Themes = () => {
   return (
