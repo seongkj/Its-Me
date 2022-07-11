@@ -33,27 +33,27 @@ function Edit() {
   };
 
   return (
-    <div className="edit">
-      <div className="edit-bar">
-        <div className="edit-option">
+    <div className="Edit">
+      <div className="EditBar">
+        <div className="EditOption">
           <button type="button">섹션 추가</button>
         </div>
-        <div className="edit-option">
+        <div className="EditOption">
           <button type="button">디자인 변경</button>
         </div>
 
-        <div className="edit-option">
+        <div className="EditOption">
           <button type="button" onClick={test}>
             테스트버튼
           </button>
         </div>
-        <div className="edit-option">
+        <div className="EditOption">
           <button type="button" onClick={test2}>
             테스트버튼2
           </button>
         </div>
       </div>
-      <div className="section-bar">
+      <div className="SectionBar">
         <ul>
           {data.map((el) => (
             <li>
@@ -68,7 +68,7 @@ function Edit() {
           ))}
         </ul>
       </div>
-      <div className="section-info">
+      <div className="SectionInfo">
         {sectionTitle.map((el) => (
           <Section sectionName={el} />
         ))}
@@ -99,7 +99,7 @@ function SectionChoiceButton(prop) {
       type="button"
       id={id}
       onClick={onChangeColor}
-      className={toggle ? 'section-button toggle' : 'section-button'}
+      className={toggle ? 'SectionButton Toggle' : 'SectionButton'}
     >
       {name}
     </button>
