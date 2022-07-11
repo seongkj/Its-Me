@@ -31,7 +31,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function ResetPassword() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -57,7 +57,10 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            회원가입
+            비밀번호 재설정
+          </Typography>
+          <Typography component="h1" variant="h6" sx={{ mt: 3 }}>
+            비밀번호를 재설정하려면 아래에 계정 정보를 입력하세요.
           </Typography>
           <Box
             component="form"
@@ -66,16 +69,6 @@ export default function SignUp() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="fullName"
-                  label="이름"
-                  name="fullName"
-                  autoComplete="fullName"
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -90,22 +83,10 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  name="password"
-                  label="비밀번호"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="passwordCheck"
-                  label="비밀번호 확인"
-                  type="password"
-                  id="passwordCheck"
-                  autoComplete="new-password"
+                  id="fullName"
+                  label="이름"
+                  name="fullName"
+                  autoComplete="fullName"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -126,15 +107,8 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              계정 생성
+              확인
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/login" variant="body2">
-                  이미 회원이라면? 로그인
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />

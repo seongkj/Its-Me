@@ -20,7 +20,7 @@ function Copyright(props) {
       {...props}
     >
       {'Copyright © '}
-      <Link color="inherit" href="#">
+      <Link color="inherit" href="/">
         잇츠미
       </Link>{' '}
       {new Date().getFullYear()}
@@ -95,12 +95,12 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  이메일 | 비밀번호 찾기
+                <Link href="/resetPassword" variant="body2">
+                  비밀번호 찾기
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signup" variant="body2">
                   회원가입
                 </Link>
               </Grid>
