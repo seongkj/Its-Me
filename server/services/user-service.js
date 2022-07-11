@@ -5,7 +5,9 @@ export async function findUserById(userIdx) {
 }
 
 export async function deleteUser(userIdx) {
-  const user = await userModel.remove(userIdx);
-  console.log('service:', user);
-  return user;
+  return await userModel.remove(userIdx);
+}
+
+export async function setUser(userIdx, userInfo) {
+  return await userModel.update(userIdx, userInfo);
 }
