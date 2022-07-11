@@ -1,7 +1,11 @@
-import getUserById from '../model/user-model.js';
+import * as userModel from '../model/user-model.js';
 
-async function findUserById(userIdx) {
-  return await getUserById(userIdx);
+export async function findUserById(userIdx) {
+  return await userModel.getUserById(userIdx);
 }
 
-export default findUserById;
+export async function deleteUser(userIdx) {
+  const user = await userModel.remove(userIdx);
+  console.log('service:', user);
+  return user;
+}

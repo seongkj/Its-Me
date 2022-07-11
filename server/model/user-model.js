@@ -1,6 +1,6 @@
 import db from './db.js';
 
-async function getUserById(userIdx) {
+export async function getUserById(userIdx) {
   return new Promise((resolve, reject) => {
     db.query(
       `SELECT * FROM itsme.user WHERE user_idx = ?`,
@@ -12,4 +12,10 @@ async function getUserById(userIdx) {
   });
 }
 
-export default getUserById;
+export async function remove(userIdx) {
+  return new Promise((resolve, reject) => {
+    db.query('DELETE FROM user WHERE user_idx=?', userIdx, (err, result) => {
+      return err ? reject(err) : resolve(userIdx);
+    });
+  });
+}
