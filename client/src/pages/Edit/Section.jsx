@@ -1,9 +1,12 @@
 import React from 'react';
+import Myself from './Sections/Myself';
+import Stack from './Sections/Stack';
 
 import './Section.css';
 
 function Section(prop) {
   const { sectionName } = prop;
+
   return (
     <div className="SectionComponent">
       <div className="SectionComponentTitle">
@@ -11,9 +14,8 @@ function Section(prop) {
       </div>
       <hr className="SectionHr" />
       <div className="SectionComponentContent">
-        <form>
-          <textarea></textarea>
-        </form>
+        {/* <Myself /> */}
+        <Stack />
       </div>
     </div>
   );

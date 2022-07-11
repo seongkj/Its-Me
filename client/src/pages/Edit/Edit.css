@@ -1,6 +1,10 @@
 .Edit {
   display: flex;
 }
+.OptionBar {
+  /* position: fixed; */
+  display: flex;
+}
 /* edit-bar 부분 */
 .EditBar {
   display: flex;

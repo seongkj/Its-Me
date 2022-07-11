@@ -1,0 +1,14 @@
+.StackTagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.StackTag {
+  background-color: white;
+  border-radius: 5px;
+}
+.StackTag button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

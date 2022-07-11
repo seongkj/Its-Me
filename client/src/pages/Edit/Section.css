@@ -19,12 +19,15 @@
 }
 
 .SectionComponentContent {
-  /* display: flex;
-  align-items: center; */
+  display: flex;
+  flex-direction: column;
 }
-.SectionComponentContent form {
+.SectionComponentContent > div {
   margin: 1rem;
 }
+/* .SectionComponentContent form {
+  margin: 1rem;
+} */
 .SectionComponentContent form textarea {
   resize: none;
   width: 100%;
