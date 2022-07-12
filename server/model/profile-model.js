@@ -1,41 +1,65 @@
-'use strict';
+import db from './db.js';
 
-import connection from './db.js';
-
-let Profile = function (profile) {
-  this.name = profile.name;
-  this.age = profile.age;
-  this.phone = profile.phone;
-  this.email = profile.email;
-  this.progile_img = profile.progile_img;
-  this.portfolio_idx = profile.portfolio_idx;
-};
-// 모든 사용자 검색
-Profile.findAll = function (result) {
-  connection.query('Select * from profile', function (err, res) {
-    if (err) {
-      console.log('error: ', err);
-      result(null, err);
-    } else {
-      console.log('employees : ', res);
-      result(null, res);
-    }
-  });
-};
-// 특정 사용자 검색
-Profile.findById = function (id, result) {
-  connection.query(
-    'Select * from user where profile_idx = ? ',
-    id,
-    function (err, res) {
-      if (err) {
-        console.log('error: ', err);
-        result(err, null);
-      } else {
-        result(null, res);
+export async function getProfileById(profileIdx) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'SELECT * FROM itsme.profile WHERE profile_idx = ?',
+      profileIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
       }
-    }
-  );
-};
+    );
+  });
+}
 
-export default Profile;
+export async function newProfile(profileInfo) {
+  console.log(profileInfo);
+  return new Promise((resolve, reject) => {
+    db.query(
+      'INSERT INTO profile(`name`,`age`,`phone`,`email`,`profile_img`,`portfolio_idx`) VALUES (?,?,?,?,?,?)',
+      [
+        profileInfo.name,
+        profileInfo.age,
+        profileInfo.phone,
+        profileInfo.email,
+        profileInfo.profile_img,
+        profileInfo.portfolio_idx,
+      ],
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
+  });
+}
+
+export async function remove(profileIdx) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'DELETE FROM profile WHERE profile_idx=?',
+      profileIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(profileIdx);
+      }
+    );
+  });
+}
+
+export async function update(profileIdx, profileInfo) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'UPDATE profile SET name=?, age=?, phone=?, email=?, profile_img=?, portfolio_idx=? WHERE profile_idx =?',
+      [
+        profileInfo.name,
+        profileInfo.age,
+        profileInfo.phone,
+        profileInfo.email,
+        profileInfo.profile_img,
+        profileInfo.portfolio_idx,
+        profileIdx,
+      ],
+      (err, result) => {
+        return err ? reject(err) : resolve({ profileIdx, ...profileInfo });
+      }
+    );
+  });
+}

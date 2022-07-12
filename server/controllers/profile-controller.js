@@ -1,18 +1,56 @@
-'use strict';
-import Profile from '../model/profile-model.js';
+import * as profileService from '../services/profile-service.js';
 
-export function findAll(req, res) {
-  Profile.findAll(function (err, user) {
-    console.log('controller');
-    if (err) res.send(err);
-    console.log('res', user);
-    res.send(user);
-  });
+export async function getProfile(req, res, next) {
+  try {
+    const profileIdx = req.params.profile_idx;
+    const profile = await profileService.findProfileById(profileIdx);
+    res.status(200).send({
+      status: 200,
+      message: '프로필 조회 성공',
+      data: profile,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+export async function newProfile(req, res, next) {
+  try {
+    const newprofile = await profileService.NewProfile(req.body);
+    res.status(200).send({
+      status: 200,
+      message: '새로운 프로필 생성',
+      data: newprofile,
+    });
+  } catch (err) {
+    next(err);
+  }
 }
 
-export function findById(req, res) {
-  Profile.findById(req.params.id, function (err, user) {
-    if (err) res.send(err);
-    res.json(user);
-  });
+export async function deleteProfile(req, res, next) {
+  try {
+    const profileIdx = req.params.profile_idx;
+    const deletedProfile = await profileService.deleteProfile(profileIdx);
+    console.log(deletedProfile);
+    res.status(200).send({
+      status: 200,
+      message: '프로필 정보 삭제 완료',
+      data: deletedProfile,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function updateProfile(req, res, next) {
+  try {
+    const profileIdx = req.params.profile_idx;
+    const updated = await profileService.setUser(profileIdx, req.body);
+    res.status(201).send({
+      status: 201,
+      message: '프로필 정보 업데이트 완료',
+      data: updated,
+    });
+  } catch (err) {
+    next(err);
+  }
 }

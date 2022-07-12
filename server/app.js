@@ -4,6 +4,16 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 
 import userRouter from './routes/user-router.js';
+import ProfileRoute from './routes/profile-router.js';
+import skillRoute from './routes/skill-router.js';
+import websiteRoute from './routes/website-router.js';
+import awardRoute from './routes/award-router.js';
+import careerRoute from './routes/career-router.js';
+import certificateRoute from './routes/certificate-router.js';
+import educationRoute from './routes/education-router.js';
+import etc_educationRoute from './routes/etc_education-router.js';
+import languageRoute from './routes/language-router.js';
+
 const app = express();
 const port = 3001;
 import morgan from 'morgan';
@@ -15,12 +25,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //라우터 연결
 app.use('/user', userRouter);
+app.use('/profiles', ProfileRoute);
+app.use('/skills', skillRoute);
+app.use('/websites', websiteRoute);
+app.use('/awards', awardRoute);
+app.use('/careers', careerRoute);
+app.use('/certificates', certificateRoute);
+app.use('/educations', educationRoute);
+app.use('/etc_educations', etc_educationRoute);
+app.use('/languages', languageRoute);
 
 const server = http.createServer(app);
-
-import ProfileRoute from './routes/profile-routes.js';
-
-app.use('/api/profile', ProfileRoute);
 
 app.get('/', (req, res) => {
   res.send('hello world');
