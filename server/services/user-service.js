@@ -1,7 +1,7 @@
 import * as userModel from '../model/user-model.js';
 
-export async function findUserById(userIdx) {
-  return await userModel.getUserById(userIdx);
+export async function findUserById(userId) {
+  return await userModel.findById(userId);
 }
 
 export async function deleteUser(userIdx) {

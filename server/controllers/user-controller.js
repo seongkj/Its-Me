@@ -2,8 +2,8 @@ import * as userService from '../services/user-service.js';
 
 export async function getUser(req, res, next) {
   try {
-    const userIdx = req.params.user_idx;
-    const user = await userService.findUserById(userIdx);
+    const userId = req.params.user_id;
+    const user = await userService.findUserById(userId);
     res.status(200).send({
       status: 200,
       message: '유저 조회 성공',
