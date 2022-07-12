@@ -33,42 +33,44 @@ function Edit() {
   };
 
   return (
-    <div className="edit">
-      <div className="edit-bar">
-        <div className="edit-option">
-          <button type="button">섹션 추가</button>
+    <div className="Edit">
+      <div className="OptionBar">
+        <div className="EditBar">
+          <div className="EditOption">
+            <button type="button">섹션 추가</button>
+          </div>
+          <div className="EditOption">
+            <button type="button">디자인 변경</button>
+          </div>
+          <div className="EditOption">
+            <button type="button" onClick={test}>
+              테스트버튼
+            </button>
+          </div>
+          <div className="EditOption">
+            <button type="button" onClick={test2}>
+              테스트버튼2
+            </button>
+          </div>
         </div>
-        <div className="edit-option">
-          <button type="button">디자인 변경</button>
+        <div className="SectionBar">
+          <ul>
+            {data.map((el) => (
+              <li>
+                <SectionChoiceButton
+                  id={el.id}
+                  name={el.name}
+                  isToggle={el.isToggle}
+                  sectionTitle={sectionTitle}
+                  setSectionTitle={setSectionTitle}
+                />
+              </li>
+            ))}
+          </ul>
         </div>
+      </div>
 
-        <div className="edit-option">
-          <button type="button" onClick={test}>
-            테스트버튼
-          </button>
-        </div>
-        <div className="edit-option">
-          <button type="button" onClick={test2}>
-            테스트버튼2
-          </button>
-        </div>
-      </div>
-      <div className="section-bar">
-        <ul>
-          {data.map((el) => (
-            <li>
-              <SectionChoiceButton
-                id={el.id}
-                name={el.name}
-                isToggle={el.isToggle}
-                sectionTitle={sectionTitle}
-                setSectionTitle={setSectionTitle}
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="section-info">
+      <div className="SectionInfo">
         {sectionTitle.map((el) => (
           <Section sectionName={el} />
         ))}
@@ -99,7 +101,7 @@ function SectionChoiceButton(prop) {
       type="button"
       id={id}
       onClick={onChangeColor}
-      className={toggle ? 'section-button toggle' : 'section-button'}
+      className={toggle ? 'SectionButton Toggle' : 'SectionButton'}
     >
       {name}
     </button>

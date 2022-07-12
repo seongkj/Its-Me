@@ -4,6 +4,8 @@ import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import Mypage from './pages/Mypage/Mypage';
 import Main from './pages/Main/Main';
+import ResetPassword from './pages/ResetPassword/ResetPassword';
+import Themes from './pages/Themes/Themes';
 import './App.css';
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/mypage" element={<Mypage />} />
+          <Route path="/resetPassword" element={<ResetPassword />} />
+          <Route path="/themes" element={<Themes />} />
         </Routes>
       </Router>
     </div>
