@@ -6,7 +6,6 @@ import Mypage from './pages/Mypage/Mypage';
 import Main from './pages/Main/Main';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import Themes from './pages/Themes/Themes';
-import Main from './pages/Main';
 import './App.css';
 
 function App() {
