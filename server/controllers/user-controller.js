@@ -16,8 +16,14 @@ export async function getUser(req, res, next) {
 // 비번 받아야함 => 비번 확인하는 과정 있어야함
 export async function deleteUser(req, res, next) {
   try {
+    const currentUserEmail = req.currentUserEmail;
+    const userPw = req.body.pw;
     const userIdx = req.params.user_idx;
-    const deletedUser = await userService.deleteUser(userIdx);
+    const deletedUser = await userService.deleteUser(
+      userIdx,
+      userPw,
+      currentUserEmail
+    );
     console.log(deletedUser);
     res.status(200).send({
       status: 200,
@@ -32,6 +38,10 @@ export async function deleteUser(req, res, next) {
 export async function updateUser(req, res, next) {
   try {
     const userIdx = req.params.user_idx;
+    // const currentUserIdx = req.currentUserIdx;
+    // if(userIdx != currentUserIdx) {
+
+    // }
     const updated = await userService.setUser(userIdx, req.body);
     res.status(201).send({
       status: 201,
