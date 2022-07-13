@@ -1,14 +1,16 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
@@ -32,13 +34,21 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const [error, setError] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
+      fullName: data.get('fullName'),
       email: data.get('email'),
       password: data.get('password'),
+      passwordConfirm: data.get('passwordConfirm'),
+      mobile: data.get('mobile'),
     });
+
+    if (password !== passwordConfirm) {
+      setError('비밀번호가 일치하지 않습니다');
+    }
   };
 
   return (
@@ -101,10 +111,10 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  name="passwordCheck"
+                  name="passwordConfirm"
                   label="비밀번호 확인"
                   type="password"
-                  id="passwordCheck"
+                  id="passwordConfirm"
                   autoComplete="new-password"
                 />
               </Grid>

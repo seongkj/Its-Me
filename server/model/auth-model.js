@@ -1,9 +1,13 @@
-// import db from './db';
+import db from './db';
 
-// db.query(
-//   'SELECT * FROM workspace WHERE workspace_idx=?',
-//   workspaceIdx,
-//   (err, result) => {
-//     return err ? reject(err) : resolve(result[0]);
-//   }
-// );
+async function create(userInfo) {
+  return new Promise((resolve, reject) => {
+    db.query('INSERT INTO user SET ?', userInfo, (err, result) => {
+      return err
+        ? reject(err)
+        : resolve({ user_idx: result.user_idx, ...userInfo });
+    });
+  });
+}
+
+export default create;
