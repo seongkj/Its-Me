@@ -14,8 +14,7 @@ import certificateRoute from './routes/certificate-router.js';
 import educationRoute from './routes/education-router.js';
 import etc_educationRoute from './routes/etc_education-router.js';
 import languageRoute from './routes/language-router.js';
-
-
+import portfolioRoute from './routes/portfolio-router.js';
 
 const app = express();
 const port = 3001;
@@ -37,10 +36,10 @@ app.use('/certificates', certificateRoute);
 app.use('/educations', educationRoute);
 app.use('/etc_educations', etc_educationRoute);
 app.use('/languages', languageRoute);
+app.use('/portfolios', portfolioRoute);
 
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
-
 
 const server = http.createServer(app);
 
