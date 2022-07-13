@@ -4,6 +4,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 
 import userRouter from './routes/user-router.js';
+import authRouter from './routes/auth-router.js';
 import ProfileRoute from './routes/profile-router.js';
 import skillRoute from './routes/skill-router.js';
 import websiteRoute from './routes/website-router.js';
@@ -13,6 +14,8 @@ import certificateRoute from './routes/certificate-router.js';
 import educationRoute from './routes/education-router.js';
 import etc_educationRoute from './routes/etc_education-router.js';
 import languageRoute from './routes/language-router.js';
+
+
 
 const app = express();
 const port = 3001;
@@ -24,7 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //라우터 연결
-app.use('/user', userRouter);
+
 app.use('/profiles', ProfileRoute);
 app.use('/skills', skillRoute);
 app.use('/websites', websiteRoute);
@@ -34,6 +37,10 @@ app.use('/certificates', certificateRoute);
 app.use('/educations', educationRoute);
 app.use('/etc_educations', etc_educationRoute);
 app.use('/languages', languageRoute);
+
+app.use('/users', userRouter);
+app.use('/auth', authRouter);
+
 
 const server = http.createServer(app);
 
