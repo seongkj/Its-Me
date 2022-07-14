@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
 
 function Copyright(props) {
   return (
@@ -34,21 +35,20 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const [error, setError] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      fullName: data.get('fullName'),
+    const newData = {
+      name: data.get('name'),
       email: data.get('email'),
       password: data.get('password'),
       passwordConfirm: data.get('passwordConfirm'),
       mobile: data.get('mobile'),
-    });
-
-    if (password !== passwordConfirm) {
-      setError('비밀번호가 일치하지 않습니다');
-    }
+    };
+    const jsonData = JSON.stringify(newData);
+    axios
+      .post('http://localhost:3001/auth/signup', jsonData)
+      .then((res) => console.log(res));
   };
 
   return (
@@ -80,10 +80,10 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="fullName"
+                  id="name"
                   label="이름"
-                  name="fullName"
-                  autoComplete="fullName"
+                  name="name"
+                  autoComplete="name"
                 />
               </Grid>
               <Grid item xs={12}>
