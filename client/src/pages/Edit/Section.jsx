@@ -1,6 +1,7 @@
 import React from 'react';
 import Myself from './Sections/Myself';
 import Stack from './Sections/Stack';
+import Education from './Sections/Education';
 
 import './Section.css';
 
@@ -15,7 +16,8 @@ function Section(prop) {
       <hr className="SectionHr" />
       <div className="SectionComponentContent">
         {/* <Myself /> */}
-        <Stack />
+        {/* <Stack /> */}
+        <Education />
       </div>
     </div>
   );

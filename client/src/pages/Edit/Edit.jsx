@@ -19,17 +19,18 @@ const sectionName = [
 ];
 
 function Edit() {
-  const [sectionTitle, setSectionTitle] = useState(sectionName);
+  const [sections, setSections] = useState(sectionName);
   const [sectionButton, setSectionButton] = useState([]);
+  const [editChoice, setEditChoice] = useState(true);
+
+  const [designs, setDesigns] = useState([1, 2]);
+
+  const [clicked, setClicked] = useState();
 
   // 테스트 버튼
   const test = () => {
     console.log(sectionButton);
-    const qwer = sectionButton.filter((el) => el === '한 줄 소개');
-    console.log(qwer);
-  };
-  const test2 = () => {
-    console.log(sectionTitle);
+    console.log(sectionName.includes());
   };
 
   return (
@@ -37,45 +38,57 @@ function Edit() {
       <div className="OptionBar">
         <div className="EditBar">
           <div className="EditOption">
-            <button type="button">섹션 추가</button>
+            <button type="button" onClick={() => changeSection(setEditChoice)}>
+              섹션 변경
+            </button>
           </div>
           <div className="EditOption">
-            <button type="button">디자인 변경</button>
+            <button type="button" onClick={() => changeDesign(setEditChoice)}>
+              디자인 변경
+            </button>
           </div>
           <div className="EditOption">
             <button type="button" onClick={test}>
               테스트버튼
             </button>
           </div>
-          <div className="EditOption">
-            <button type="button" onClick={test2}>
-              테스트버튼2
-            </button>
+        </div>
+        {editChoice ? (
+          <div className="SectionBar">
+            <ul>
+              {sections.map((el) => (
+                <li>
+                  <SectionChoiceButton
+                    key={el.id}
+                    id={el.id}
+                    name={el.name}
+                    isToggle={el.isToggle}
+                    sectionButton={sectionButton}
+                    setSectionButton={setSectionButton}
+                  />
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-        <div className="SectionBar">
-          <ul>
-            {sectionTitle.map((el) => (
-              <li>
-                <SectionChoiceButton
-                  key={el.id}
-                  id={el.id}
-                  name={el.name}
-                  isToggle={el.isToggle}
-                  sectionButton={sectionButton}
-                  setSectionButton={setSectionButton}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
+        ) : (
+          <div className="SectionBar">
+            <ul>
+              {designs.map((el) => (
+                <li>{el}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
-      <div className="SectionInfo">
-        {sectionButton.map((el, i) => (
-          <Section sectionName={el} key={i} />
-        ))}
-      </div>
+      {editChoice ? (
+        <div className="SectionInfo">
+          {sectionButton.map((el, i) => (
+            <Section sectionName={el} key={i} />
+          ))}
+          <button>전체 POST</button>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -86,7 +99,6 @@ function SectionChoiceButton(prop) {
   const [clicked, setClicked] = useState(isToggle);
 
   // 버튼 클릭 시 토글하여 색 변경, 섹션 컴포넌트 추가, 삭제
-
   const changeColor = () => {
     setClicked(!clicked);
   };
@@ -118,4 +130,14 @@ function SectionChoiceButton(prop) {
     </button>
   );
 }
+
+//섹션 변경
+function changeSection(setEditChoice) {
+  setEditChoice(true);
+}
+//디자인 변경
+function changeDesign(setEditChoice) {
+  setEditChoice(false);
+}
+
 export default Edit;
