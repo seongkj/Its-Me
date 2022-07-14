@@ -19,17 +19,17 @@ const sectionName = [
 ];
 
 function Edit() {
-  const [data, setData] = useState(sectionName);
-  const [sectionTitle, setSectionTitle] = useState([]);
+  const [sectionTitle, setSectionTitle] = useState(sectionName);
+  const [sectionButton, setSectionButton] = useState([]);
 
   // 테스트 버튼
   const test = () => {
-    console.log(sectionTitle);
-    const qwer = sectionTitle.filter((el) => el === '한 줄 소개');
+    console.log(sectionButton);
+    const qwer = sectionButton.filter((el) => el === '한 줄 소개');
     console.log(qwer);
   };
   const test2 = () => {
-    console.log(data);
+    console.log(sectionTitle);
   };
 
   return (
@@ -55,14 +55,15 @@ function Edit() {
         </div>
         <div className="SectionBar">
           <ul>
-            {data.map((el) => (
+            {sectionTitle.map((el) => (
               <li>
                 <SectionChoiceButton
+                  key={el.id}
                   id={el.id}
                   name={el.name}
                   isToggle={el.isToggle}
-                  sectionTitle={sectionTitle}
-                  setSectionTitle={setSectionTitle}
+                  sectionButton={sectionButton}
+                  setSectionButton={setSectionButton}
                 />
               </li>
             ))}
@@ -71,8 +72,8 @@ function Edit() {
       </div>
 
       <div className="SectionInfo">
-        {sectionTitle.map((el) => (
-          <Section sectionName={el} />
+        {sectionButton.map((el, i) => (
+          <Section sectionName={el} key={i} />
         ))}
       </div>
     </div>
@@ -81,27 +82,37 @@ function Edit() {
 
 // 섹션 요소 선택 버튼
 function SectionChoiceButton(prop) {
-  const { id, name, isToggle, sectionTitle, setSectionTitle } = prop;
-  const [toggle, setToggle] = useState(isToggle);
+  const { id, name, isToggle, sectionButton, setSectionButton } = prop;
+  const [clicked, setClicked] = useState(isToggle);
 
   // 버튼 클릭 시 토글하여 색 변경, 섹션 컴포넌트 추가, 삭제
+
+  const changeColor = () => {
+    setClicked(!clicked);
+  };
+  const addSectionTitle = (clickedTitle) => {
+    setSectionButton([...sectionButton, clickedTitle]);
+  };
+  const removeSectionTitle = (clickedTitle) => {
+    const deleteSection = sectionButton.filter((el) => el !== clickedTitle);
+    setSectionButton(deleteSection);
+  };
+
   const onChangeColor = (event) => {
-    setToggle(!toggle);
-    if (sectionTitle.includes(event.target.innerHTML) === false) {
-      setSectionTitle([...sectionTitle, event.target.innerHTML]);
+    changeColor();
+    if (sectionButton.includes(event.target.innerHTML) === false) {
+      addSectionTitle(event.target.innerHTML);
     } else {
-      const deleteSection = sectionTitle.filter(
-        (el) => el !== event.target.innerHTML,
-      );
-      setSectionTitle(deleteSection);
+      removeSectionTitle(event.target.innerHTML);
     }
   };
+
   return (
     <button
       type="button"
       id={id}
       onClick={onChangeColor}
-      className={toggle ? 'SectionButton Toggle' : 'SectionButton'}
+      className={clicked ? 'SectionButton Toggle' : 'SectionButton'}
     >
       {name}
     </button>
