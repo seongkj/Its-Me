@@ -45,10 +45,10 @@ export default function SignUp() {
       passwordConfirm: data.get('passwordConfirm'),
       mobile: data.get('mobile'),
     };
-    const jsonData = JSON.stringify(newData);
     axios
-      .post('http://localhost:3001/auth/signup', jsonData)
-      .then((res) => console.log(res));
+      .post('http://localhost:3001/auth/signup', newData)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (
