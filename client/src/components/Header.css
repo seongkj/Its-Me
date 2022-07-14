@@ -22,9 +22,9 @@
   font-style: normal;
 }
 
-.Title {
+.HeaderTitle a{
   cursor: pointer;
-  color: white;
+  color: var(--main-color);
   font-family: 'yg-jalnan';
   position: fixed;
   top: 4vh;
@@ -41,11 +41,11 @@
 }
 .NavLinks .NavLink a {
   font-family: 'KoPubDotumMedium';
-  color: white;
+  color: var(--main2-color);
   cursor: pointer;
 }
 
 .NavLinks .NavLink a:hover {
-  color: black;
+  color: var(--main2-color);
   font-weight: bold;
 }
