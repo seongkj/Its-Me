@@ -25,24 +25,54 @@ function Edit() {
 
   // 테스트 버튼
   const test = () => {
-    console.log(sectionTitle);
-    const qwer = sectionTitle.filter((el) => el === '한 줄 소개');
+    console.log(sectionButton);
+    const qwer = sectionButton.filter((el) => el === '한 줄 소개');
     console.log(qwer);
   };
   const test2 = () => {
-    console.log(data);
+    console.log(sectionTitle);
   };
 
   return (
-    <div className="edit">
-      <div className="edit-bar">
-        <div className="edit-option">
-          <button type="button">섹션 추가</button>
+    <div className="Edit">
+      <div className="OptionBar">
+        <div className="EditBar">
+          <div className="EditOption">
+            <button type="button">섹션 추가</button>
+          </div>
+          <div className="EditOption">
+            <button type="button">디자인 변경</button>
+          </div>
+          <div className="EditOption">
+            <button type="button" onClick={test}>
+              테스트버튼
+            </button>
+          </div>
+          <div className="EditOption">
+            <button type="button" onClick={test2}>
+              테스트버튼2
+            </button>
+          </div>
         </div>
-        <div className="edit-option">
-          <button type="button">디자인 변경</button>
+        <div className="SectionBar">
+          <ul>
+            {sectionTitle.map((el) => (
+              <li>
+                <SectionChoiceButton
+                  key={el.id}
+                  id={el.id}
+                  name={el.name}
+                  isToggle={el.isToggle}
+                  sectionButton={sectionButton}
+                  setSectionButton={setSectionButton}
+                />
+              </li>
+            ))}
+          </ul>
         </div>
+      </div>
 
+<<<<<<< HEAD
         <div className="edit-option">
           <button type="button" onClick={test}>
             테스트버튼
@@ -75,6 +105,11 @@ function Edit() {
         {sectionTitle.map((el) => (
           // fixme 리스트를 순환해서 컴포넌트를 리턴할 때에는 해당 컴포넌트에 key를 설정해주어야 합니다. 참고(https://ko.reactjs.org/docs/lists-and-keys.html)
           <Section sectionName={el} />
+=======
+      <div className="SectionInfo">
+        {sectionButton.map((el, i) => (
+          <Section sectionName={el} key={i} />
+>>>>>>> e56f291c36d4b8f490d3e47693036e8528e8cc3b
         ))}
       </div>
     </div>
@@ -83,6 +118,7 @@ function Edit() {
 
 // 섹션 요소 선택 버튼
 function SectionChoiceButton(prop) {
+<<<<<<< HEAD
   const { id, name, isToggle, sectionTitle, setSectionTitle } = prop;
   // fixme toggle은 Button의 색을 어떻게 보여줄지 구분하기 위한 변수로 쓰이지만 이름만 봤을때 무엇을 위한 변수인지 알 수 없습니다. clicked와 같은 변수명은 어떨까요?
   const [toggle, setToggle] = useState(isToggle);
@@ -113,25 +149,51 @@ function SectionChoiceButton(prop) {
       removeSectionTitle();
     }
    */
+=======
+  const { id, name, isToggle, sectionButton, setSectionButton } = prop;
+  const [clicked, setClicked] = useState(isToggle);
+
+  // 버튼 클릭 시 토글하여 색 변경, 섹션 컴포넌트 추가, 삭제
+
+  const changeColor = () => {
+    setClicked(!clicked);
+  };
+  const addSectionTitle = (clickedTitle) => {
+    setSectionButton([...sectionButton, clickedTitle]);
+  };
+  const removeSectionTitle = (clickedTitle) => {
+    const deleteSection = sectionButton.filter((el) => el !== clickedTitle);
+    setSectionButton(deleteSection);
+  };
+>>>>>>> e56f291c36d4b8f490d3e47693036e8528e8cc3b
 
   const onChangeColor = (event) => {
-    setToggle(!toggle);
-    if (sectionTitle.includes(event.target.innerHTML) === false) {
-      setSectionTitle([...sectionTitle, event.target.innerHTML]);
+    changeColor();
+    if (sectionButton.includes(event.target.innerHTML) === false) {
+      addSectionTitle(event.target.innerHTML);
     } else {
+<<<<<<< HEAD
       const deleteSection = sectionTitle.filter(
           (el) => el !== clickedTitle,
       );
       setSectionTitle(deleteSection);
+=======
+      removeSectionTitle(event.target.innerHTML);
+>>>>>>> e56f291c36d4b8f490d3e47693036e8528e8cc3b
     }
   };
+
   return (
     <button
       type="button"
       id={id}
       onClick={onChangeColor}
+<<<<<<< HEAD
       // className={toggle ? 'section-button toggle' : 'section-button'}
       className={toggle ? 'section-button toggle' : 'section-button'}
+=======
+      className={clicked ? 'SectionButton Toggle' : 'SectionButton'}
+>>>>>>> e56f291c36d4b8f490d3e47693036e8528e8cc3b
     >
       {name}
     </button>
