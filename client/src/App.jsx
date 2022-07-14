@@ -6,6 +6,7 @@ import Mypage from './pages/Mypage/Mypage';
 import Main from './pages/Main/Main';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import Themes from './pages/Themes/Themes';
+import Portfolio from './pages/Portfolio/Portfolio';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/resetPassword" element={<ResetPassword />} />
           <Route path="/themes" element={<Themes />} />
+          <Route path="/portfolio" element={<Portfolio />} />
         </Routes>
       </Router>
     </div>
