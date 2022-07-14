@@ -57,7 +57,7 @@
     background: #2395ff;
   }
   16% {
-    background: #ac6cff;
+    background: #9682f7;
   }
   33% {
     background: var(--sub-color);
@@ -84,9 +84,9 @@
   }
 }
 
-.Title {
+/* .Title {
   display: none;
-}
+} */
 
 .MainContainer {
   display: flex;
