@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
   Button,
@@ -9,10 +10,20 @@ import {
   Box,
   Typography,
   Container,
+  Alert,
+  FormHelperText,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const FormHelperTexts = styled(FormHelperText)`
+  width: 100%;
+  padding-left: 16px;
+  font-weight: 700 !important;
+  color: #d32f2f !important;
+`;
 
 function Copyright(props) {
   return (
@@ -40,6 +51,8 @@ export default function SignUp() {
   const [confirmPw, setConfirmPw] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [pwError, setPwError] = useState('');
+  const [signupError, setSignupError] = useState('');
 
   const onChangeEmail = (e) => setEmail(e.target.value);
   const onChangePw = (e) => setPw(e.target.value);
@@ -47,8 +60,23 @@ export default function SignUp() {
   const onChangeName = (e) => setName(e.target.value);
   const onChangePhone = (e) => setPhone(e.target.value);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const navigate = useNavigate();
+
+  const onHandlePost = async (data) => {
+    axios
+      .post('http://localhost:3001/auth/signup', data)
+      .then((res) => {
+        console.log(res, '성공');
+        navigate('/');
+      })
+      .catch((err) => {
+        console.log(err);
+        setSignupError('이미 가입된 이메일입니다');
+      });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     const data = {
       email: email,
@@ -57,10 +85,13 @@ export default function SignUp() {
       phone: phone,
       profile_img: null,
     };
-    axios
-      .post('http://localhost:3001/auth/signup', data)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+
+    if (pw !== confirmPw) setPwError('비밀번호가 일치하지 않습니다.');
+    else setPwError('');
+
+    if (pw.length >= 6 && pw === confirmPw) {
+      onHandlePost(data);
+    }
   };
 
   return (
@@ -117,7 +148,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   name="pw"
-                  label="비밀번호"
+                  label="비밀번호 (6자리 이상)"
                   type="password"
                   id="pw"
                   autoComplete="new-password"
@@ -136,8 +167,10 @@ export default function SignUp() {
                   autoComplete="new-password"
                   value={confirmPw}
                   onChange={onChangeConfirmPw}
+                  error={pwError !== '' || false}
                 />
               </Grid>
+              <FormHelperTexts>{pwError}</FormHelperTexts>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -152,6 +185,11 @@ export default function SignUp() {
                 />
               </Grid>
             </Grid>
+            {signupError !== '' && (
+              <Alert sx={{ mt: 3 }} severity="error">
+                {<strong>{signupError}</strong>}
+              </Alert>
+            )}
             <Button
               type="submit"
               fullWidth
