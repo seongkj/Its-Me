@@ -13,20 +13,24 @@ export async function getCareerById(careerIdx) {
 }
 
 export async function newCareer(careerInfo) {
-  console.log(careerInfo);
+  const { company, start_date, end_date, position, comment, portfolio_idx } =
+    careerInfo;
   return new Promise((resolve, reject) => {
     db.query(
       'INSERT INTO career(`company`,`start_date`,`end_date`,`position`,`comment`,`portfolio_idx`) VALUES (?,?,?,?,?,?)',
-      [
-        careerInfo.company,
-        careerInfo.start_date,
-        careerInfo.end_date,
-        careerInfo.position,
-        careerInfo.comment,
-        careerInfo.portfolio_idx,
-      ],
+      [company, start_date, end_date, position, comment, portfolio_idx],
       (err, result) => {
-        return err ? reject(err) : resolve(result);
+        return err
+          ? reject(err)
+          : resolve({
+              career_idx: result.insertId,
+              company,
+              start_date,
+              end_date,
+              position,
+              comment,
+              portfolio_idx,
+            });
       }
     );
   });

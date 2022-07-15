@@ -13,19 +13,22 @@ export async function getLanguageById(languageIdx) {
 }
 
 export async function newLanguage(languageInfo) {
-  console.log(languageInfo);
+  const { name, level, test, acquisition_date, portfolio_idx } = languageInfo;
   return new Promise((resolve, reject) => {
     db.query(
       'INSERT INTO language(`name`,`level`,`test`,`acquisition_date`,`portfolio_idx`) VALUES (?,?,?,?,?)',
-      [
-        languageInfo.name,
-        languageInfo.level,
-        languageInfo.test,
-        languageInfo.acquisition_date,
-        languageInfo.portfolio_idx,
-      ],
+      [name, level, test, acquisition_date, portfolio_idx],
       (err, result) => {
-        return err ? reject(err) : resolve(result);
+        return err
+          ? reject(err)
+          : resolve({
+              language_idx: result.insertId,
+              name,
+              level,
+              test,
+              acquisition_date,
+              portfolio_idx,
+            });
       }
     );
   });

@@ -2,6 +2,7 @@
 import React from 'react';
 import './Main.css';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 function Main() {
   return (
@@ -15,6 +16,7 @@ function Main() {
           만들기
         </a>
       </div>
+      <Footer />
     </div>
   );
 }
