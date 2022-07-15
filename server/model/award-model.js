@@ -13,13 +13,20 @@ export async function getAwardById(awardIdx) {
 }
 
 export async function newAward(awardInfo) {
-  console.log(awardInfo);
+  const { title, award_date, portfolio_idx } = awardInfo;
   return new Promise((resolve, reject) => {
     db.query(
       'INSERT INTO award(`title`,`award_date`,`portfolio_idx`) VALUES (?,?,?)',
-      [awardInfo.title, awardInfo.award_date, awardInfo.portfolio_idx],
+      [title, award_date, portfolio_idx],
       (err, result) => {
-        return err ? reject(err) : resolve(result);
+        return err
+          ? reject(err)
+          : resolve({
+              award_idx: result.insertId,
+              title,
+              award_date,
+              portfolio_idx,
+            });
       }
     );
   });
