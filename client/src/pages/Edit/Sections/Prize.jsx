@@ -20,14 +20,8 @@ function Prize() {
       [name]: value,
     });
   };
-
-  const [prizes, setPrizes] = useState([
-    {
-      id: 1,
-      prizeName: '',
-      prizeDate: '',
-    },
-  ]);
+  
+  const [prizes, setPrizes] = useState([]);
 
   const nextId = useRef(0);
 
