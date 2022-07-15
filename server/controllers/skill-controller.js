@@ -19,7 +19,7 @@ export async function newSkill(req, res, next) {
     res.status(200).send({
       status: 200,
       message: '스킬 정보 생성',
-      data: newskill,
+      data: req.body,
     });
   } catch (err) {
     next(err);
@@ -48,7 +48,7 @@ export async function updateSkill(req, res, next) {
     res.status(201).send({
       status: 201,
       message: '스킬 정보 업데이트 완료',
-      data: updated,
+      data: req.body,
     });
   } catch (err) {
     next(err);

@@ -19,7 +19,7 @@ export async function newProfile(req, res, next) {
     res.status(200).send({
       status: 200,
       message: '새로운 프로필 생성',
-      data: newprofile,
+      data: req.body,
     });
   } catch (err) {
     next(err);
@@ -48,7 +48,7 @@ export async function updateProfile(req, res, next) {
     res.status(201).send({
       status: 201,
       message: '프로필 정보 업데이트 완료',
-      data: updated,
+      data: req.body,
     });
   } catch (err) {
     next(err);
