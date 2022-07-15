@@ -15,6 +15,19 @@ export async function getWebSite(req, res, next) {
 }
 export async function newWebSite(req, res, next) {
   try {
+    let imageUrl = '';
+    let imageKey = '';
+    if (req.file) {
+      imageUrl = req.file.location;
+      imageKey = req.file.key;
+      console.log(req.file);
+      console.log(imageUrl);
+      req.body.thumbnail = imageUrl;
+    } else {
+      // throw new Error('이미지가 없습니다. 이미지를 추가해주세요!');
+      console.log('error');
+    }
+    console.log(req.body);
     const newwebsite = await websiteService.NewWebSite(req.body);
     res.status(200).send({
       status: 200,
