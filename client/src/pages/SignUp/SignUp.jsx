@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
   Button,
@@ -9,9 +10,20 @@ import {
   Box,
   Typography,
   Container,
+  Alert,
+  FormHelperText,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+import styled from 'styled-components';
+
+const FormHelperTexts = styled(FormHelperText)`
+  width: 100%;
+  padding-left: 16px;
+  font-weight: 700 !important;
+  color: #d32f2f !important;
+`;
 
 function Copyright(props) {
   return (
@@ -34,20 +46,51 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const [error, setError] = useState('');
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      fullName: data.get('fullName'),
-      email: data.get('email'),
-      password: data.get('password'),
-      passwordConfirm: data.get('passwordConfirm'),
-      mobile: data.get('mobile'),
-    });
+  const [email, setEmail] = useState('');
+  const [pw, setPw] = useState('');
+  const [confirmPw, setConfirmPw] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [pwError, setPwError] = useState('');
+  const [signupError, setSignupError] = useState('');
 
-    if (password !== passwordConfirm) {
-      setError('비밀번호가 일치하지 않습니다');
+  const onChangeEmail = (e) => setEmail(e.target.value);
+  const onChangePw = (e) => setPw(e.target.value);
+  const onChangeConfirmPw = (e) => setConfirmPw(e.target.value);
+  const onChangeName = (e) => setName(e.target.value);
+  const onChangePhone = (e) => setPhone(e.target.value);
+
+  const navigate = useNavigate();
+
+  const onHandlePost = async (data) => {
+    axios
+      .post('http://localhost:3001/auth/signup', data)
+      .then((res) => {
+        console.log(res, '성공');
+        navigate('/');
+      })
+      .catch((err) => {
+        console.log(err);
+        setSignupError('이미 가입된 이메일입니다');
+      });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = {
+      email: email,
+      pw: pw,
+      name: name,
+      phone: phone,
+      profile_img: null,
+    };
+
+    if (pw !== confirmPw) setPwError('비밀번호가 일치하지 않습니다.');
+    else setPwError('');
+
+    if (pw.length >= 6 && pw === confirmPw) {
+      onHandlePost(data);
     }
   };
 
@@ -80,10 +123,12 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="fullName"
+                  id="name"
                   label="이름"
-                  name="fullName"
-                  autoComplete="fullName"
+                  name="name"
+                  autoComplete="name"
+                  value={name}
+                  onChange={onChangeName}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -94,42 +139,57 @@ export default function SignUp() {
                   label="이메일"
                   name="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={onChangeEmail}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="password"
-                  label="비밀번호"
+                  name="pw"
+                  label="비밀번호 (6자리 이상)"
                   type="password"
-                  id="password"
+                  id="pw"
                   autoComplete="new-password"
+                  value={pw}
+                  onChange={onChangePw}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="passwordConfirm"
+                  name="confirmPw"
                   label="비밀번호 확인"
                   type="password"
-                  id="passwordConfirm"
+                  id="confirmPw"
                   autoComplete="new-password"
+                  value={confirmPw}
+                  onChange={onChangeConfirmPw}
+                  error={pwError !== '' || false}
                 />
               </Grid>
+              <FormHelperTexts>{pwError}</FormHelperTexts>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="mobile"
+                  name="phone"
                   label="연락처"
                   type="text"
-                  id="mobile"
+                  id="phone"
                   autoComplete="tel-national"
+                  value={phone}
+                  onChange={onChangePhone}
                 />
               </Grid>
             </Grid>
+            {signupError !== '' && (
+              <Alert sx={{ mt: 3 }} severity="error">
+                {<strong>{signupError}</strong>}
+              </Alert>
+            )}
             <Button
               type="submit"
               fullWidth
