@@ -12,7 +12,7 @@ function Main() {
       <div className="MainContainer">
         <p className="MainText">It's me</p>
         <p className="SubText">자신만의 포트폴리오를 만들고 싶다면?</p>
-        <a className="MadeBtn" href="#">
+        <a className="MadeBtn" href="/themes">
           만들기
         </a>
       </div>
