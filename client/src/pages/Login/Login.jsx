@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import {
   Avatar,
   Button,
@@ -9,9 +9,11 @@ import {
   Box,
   Typography,
   Container,
+  Alert,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
 
 function Copyright(props) {
   return (
@@ -34,13 +36,34 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const [email, setEmail] = useState('');
+  const [pw, setPw] = useState('');
+  const [loginError, setLoginError] = useState('');
+
+  const onChangeEmail = (e) => setEmail(e.target.value);
+  const onChangePw = (e) => setPw(e.target.value);
+
+  const onHandlePost = async (data) => {
+    axios
+      .post('http://localhost:3001/auth/login', data)
+      .then((res) => {
+        console.log(res, '성공');
+        navigate('/');
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoginError('로그인에 실패했습니다.');
+      });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      email: email,
+      pw: pw,
+    };
+
+    if (email && pw) onHandlePost(data);
   };
 
   return (
@@ -76,16 +99,20 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={onChangeEmail}
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="password"
+              name="pw"
               label="비밀번호"
               type="password"
-              id="password"
+              id="pw"
               autoComplete="current-password"
+              value={pw}
+              onChange={onChangePw}
             />
             <Button
               type="submit"

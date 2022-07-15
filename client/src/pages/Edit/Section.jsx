@@ -3,6 +3,7 @@ import Myself from './Sections/Myself';
 import Stack from './Sections/Stack';
 import Education from './Sections/Education';
 import Project from './Sections/Project';
+import Prize from './Sections/Prize';
 
 import './Section.css';
 
@@ -18,8 +19,10 @@ function Section(prop) {
       <div className="SectionComponentContent">
         {/* <Myself /> */}
         {/* <Stack /> */}
-        <Education />
-        <Project />
+        {/* <Education /> */}
+        {/* <Project /> */}
+        {/* <Project /> */}
+        <Prize />
       </div>
     </div>
   );

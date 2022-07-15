@@ -1,5 +1,6 @@
 import * as userModel from '../model/user-model.js';
 import bcrypt from 'bcrypt';
+import { CustomError } from '../middlewares/customError.js';
 
 export async function findUserById(userId) {
   return await userModel.findById(userId);
@@ -21,4 +22,14 @@ export async function deleteUser(userIdx, pw, email) {
 
 export async function setUser(userIdx, userInfo) {
   return await userModel.update(userIdx, userInfo);
+}
+
+export async function resetPassword(userIdx, pw) {
+  const hashedPassword = await bcrypt.hash(pw, 10);
+  return await userModel.setPassword(userIdx, hashedPassword);
+}
+
+export async function updatePassword(idx, pw) {
+  const hashedPassword = await bcrypt.hash(pw, 10);
+  return userModel.setPassword(idx, hashedPassword);
 }
