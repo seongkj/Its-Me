@@ -2,6 +2,7 @@ import React from 'react';
 import Myself from './Sections/Myself';
 import Stack from './Sections/Stack';
 import Project from './Sections/Project';
+import Prize from './Sections/Prize';
 
 import './Section.css';
 
@@ -17,7 +18,8 @@ function Section(prop) {
       <div className="SectionComponentContent">
         {/* <Myself /> */}
         {/* <Stack /> */}
-        <Project />
+        {/* <Project /> */}
+        <Prize />
       </div>
     </div>
   );
