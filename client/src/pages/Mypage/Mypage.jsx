@@ -16,9 +16,22 @@ const Mypage = () => {
   const [portfolios, setPortfolios] = useState([
     {
       url: '/test',
-      destcription: `안녕하세요, ㅇㅇㅇ의 포트폴리오입니다.`,
+      destcription: `안녕하세요, ${userName}의 포트폴리오입니다.`,
     },
   ]);
+
+  useEffect(() => {
+    for (let i = 0; i < datas.length; i++) {
+      if (datas[i].name === '홍길동') {
+        setUserName(datas[i].name);
+        setUserEmail(datas[i].email);
+        setUserPhone(datas[i].phone);
+        setUserImg(datas[i].profile_img);
+      }
+    }
+  }, []);
+
+  console.log(userName);
 
   const PortLists = (props) => {
     const handleCopyPort = (e) => {
@@ -44,17 +57,6 @@ const Mypage = () => {
     });
     return portList;
   };
-
-  useEffect(() => {
-    for (let i = 0; i < datas.length; i++) {
-      if (datas[i].name === '홍길동') {
-        setUserName(datas[i].name);
-        setUserEmail(datas[i].email);
-        setUserPhone(datas[i].phone);
-        setUserImg(datas[i].profile_img);
-      }
-    }
-  }, []);
 
   const handleMorePort = (e) => {
     e.preventDefault();

@@ -16,11 +16,14 @@ export async function newWebSite(websiteInfo) {
   console.log(websiteInfo);
   return new Promise((resolve, reject) => {
     db.query(
-      'INSERT INTO website(`link`,`comment`,`thumbnail`,`portfolio_idx`) VALUES (?,?,?,?)',
+      'INSERT INTO website(`title`,`link`,`comment`,`thumbnail`,`start_date`,`end_date`,`portfolio_idx`) VALUES (?,?,?,?,?,?,?)',
       [
+        websiteInfo.title,
         websiteInfo.link,
         websiteInfo.comment,
         websiteInfo.thumbnail,
+        websiteInfo.start_date,
+        websiteInfo.end_date,
         websiteInfo.portfolio_idx,
       ],
       (err, result) => {
@@ -45,11 +48,14 @@ export async function remove(websiteIdx) {
 export async function update(websiteIdx, websiteInfo) {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE website SET link=?,comment=?,thumbnail=?, portfolio_idx=? WHERE website_idx =?',
+      'UPDATE website SET title=?, link=?,comment=?,thumbnail=?,start_date=?,end_date=?, portfolio_idx=? WHERE website_idx =?',
       [
+        websiteInfo.title,
         websiteInfo.link,
         websiteInfo.comment,
         websiteInfo.thumbnail,
+        websiteInfo.start_date,
+        websiteInfo.end_date,
         websiteInfo.portfolio_idx,
         websiteIdx,
       ],
