@@ -19,7 +19,7 @@ export async function newWebSite(req, res, next) {
     res.status(200).send({
       status: 200,
       message: '웹사이트 정보 생성',
-      data: req.body,
+      data: newwebsite,
     });
   } catch (err) {
     next(err);
@@ -48,7 +48,7 @@ export async function updateWebSite(req, res, next) {
     res.status(201).send({
       status: 201,
       message: '웹사이트 정보 업데이트 완료',
-      data: req.body,
+      data: updated,
     });
   } catch (err) {
     next(err);

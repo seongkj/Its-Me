@@ -19,7 +19,7 @@ export async function newPortfolio(req, res, next) {
     res.status(200).send({
       status: 200,
       message: 'portfolio 정보 생성',
-      data: req.body,
+      data: newportfolio,
     });
   } catch (err) {
     next(err);
@@ -50,7 +50,7 @@ export async function updatePortfolio(req, res, next) {
     res.status(201).send({
       status: 201,
       message: 'portfolio 정보 업데이트 완료',
-      data: req.body,
+      data: updated,
     });
   } catch (err) {
     next(err);
