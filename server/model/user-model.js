@@ -63,3 +63,15 @@ export async function create(userInfo) {
     });
   });
 }
+
+export async function setPassword(userIdx, pw) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'UPDATE user SET pw = ? WHERE user_idx= ?',
+      [pw, userIdx],
+      (err, result) => {
+        return err ? reject(err) : resolve({ user_idx: userIdx });
+      }
+    );
+  });
+}

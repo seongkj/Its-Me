@@ -15,8 +15,6 @@ import educationRoute from './routes/education-router.js';
 import etc_educationRoute from './routes/etc_education-router.js';
 import languageRoute from './routes/language-router.js';
 
-
-
 const app = express();
 const port = 3001;
 import morgan from 'morgan';
@@ -40,7 +38,6 @@ app.use('/languages', languageRoute);
 
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
-
 
 const server = http.createServer(app);
 

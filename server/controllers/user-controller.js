@@ -1,4 +1,5 @@
 import * as userService from '../services/user-service.js';
+import sendMailer from '../config/email-config.js';
 
 export async function getUser(req, res, next) {
   try {
@@ -50,5 +51,64 @@ export async function updateUser(req, res, next) {
     });
   } catch (err) {
     next(err);
+  }
+}
+//랜덤 문자열
+function generaeRandomPassword() {
+  return Math.floor(Math.random() * 10 ** 8)
+    .toString()
+    .padStart('0', 8);
+}
+
+//비밀번호 재설정
+export async function resetPassword(req, res, next) {
+  try {
+    if (req.body.email == '') {
+      res.status.send({
+        status: 400,
+        message: '이메일을 입력해주세요',
+      });
+    }
+    const email = req.body;
+    const userIdx = req.currentUserIdx;
+    const user = await userService.findUserById(email);
+    if (!user) {
+      res.status.send({
+        status: 404,
+        message: '해당 유저가 존재하지 않습니다.',
+      });
+    }
+    const randomPassword = generaeRandomPassword();
+    const currentUser = await userService.resetPassword(
+      userIdx,
+      randomPassword
+    );
+    await sendMailer(email, randomPassword);
+    res.status(200).send({
+      status: 200,
+      message: '비밀번호 초기화 완료',
+      data: currentUser,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function updatePassword(req, res, next) {
+  try {
+    const pw = req.body.pw;
+    const currentUserIdx = req.currentUserIdx;
+    const user = await userService.updatePassword(
+      currentUserEmail,
+      currentUserIdx,
+      pw
+    );
+    res.status(200).send({
+      ststus: 200,
+      message: '비밀번호 재설정 완료',
+      data: user,
+    });
+  } catch (err) {
+    return next(err);
   }
 }
