@@ -13,13 +13,19 @@ export async function getSkillById(skillIdx) {
 }
 
 export async function newSkill(skillInfo) {
-  console.log(skillInfo);
+  const { name, portfolio_idx } = skillInfo;
   return new Promise((resolve, reject) => {
     db.query(
       'INSERT INTO skill(`name`,`portfolio_idx`) VALUES (?,?)',
-      [skillInfo.name, skillInfo.portfolio_idx],
+      [name, portfolio_idx],
       (err, result) => {
-        return err ? reject(err) : resolve(result);
+        return err
+          ? reject(err)
+          : resolve({
+              skill_idx: result.insertId,
+              name,
+              portfolio_idx,
+            });
       }
     );
   });

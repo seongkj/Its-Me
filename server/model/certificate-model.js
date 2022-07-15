@@ -13,18 +13,22 @@ export async function getCertificateById(certificateIdx) {
 }
 
 export async function newCertificate(certificateInfo) {
-  console.log(certificateInfo);
+  const { title, organization, acquisition_date, portfolio_idx } =
+    certificateInfo;
   return new Promise((resolve, reject) => {
     db.query(
       'INSERT INTO certificate(`title`,`organization`,`acquisition_date`,`portfolio_idx`) VALUES (?,?,?,?)',
-      [
-        certificateInfo.title,
-        certificateInfo.organization,
-        certificateInfo.acquisition_date,
-        certificateInfo.portfolio_idx,
-      ],
+      [title, organization, acquisition_date, portfolio_idx],
       (err, result) => {
-        return err ? reject(err) : resolve(result);
+        return err
+          ? reject(err)
+          : resolve({
+              certificate_idx: result.insertId,
+              title,
+              organization,
+              acquisition_date,
+              portfolio_idx,
+            });
       }
     );
   });
