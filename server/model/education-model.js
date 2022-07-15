@@ -13,19 +13,22 @@ export async function getEducationById(educationIdx) {
 }
 
 export async function newEducation(educationInfo) {
-  console.log(educationInfo);
+  const { school, status, major, graduate_date, portfolio_idx } = educationInfo;
   return new Promise((resolve, reject) => {
     db.query(
       'INSERT INTO education(`school`,`status`,`major`,`graduate_date`,`portfolio_idx`) VALUES (?,?,?,?,?)',
-      [
-        educationInfo.school,
-        educationInfo.status,
-        educationInfo.major,
-        educationInfo.graduate_date,
-        educationInfo.portfolio_idx,
-      ],
+      [school, status, major, graduate_date, portfolio_idx],
       (err, result) => {
-        return err ? reject(err) : resolve(result);
+        return err
+          ? reject(err)
+          : resolve({
+              education_idx: result.insertId,
+              school,
+              status,
+              major,
+              graduate_date,
+              portfolio_idx,
+            });
       }
     );
   });
@@ -44,17 +47,11 @@ export async function remove(educationIdx) {
 }
 
 export async function update(educationIdx, educationInfo) {
+  const { school, status, major, graduate_date, portfolio_idx } = educationInfo;
   return new Promise((resolve, reject) => {
     db.query(
       'UPDATE education SET school=?,status=?,major=?, graduate_date=?, portfolio_idx=? WHERE education_idx =?',
-      [
-        educationInfo.school,
-        educationInfo.status,
-        educationInfo.major,
-        educationInfo.graduate_date,
-        educationInfo.portfolio_idx,
-        educationIdx,
-      ],
+      [school, status, major, graduate_date, portfolio_idx, educationIdx],
       (err, result) => {
         return err ? reject(err) : resolve({ educationIdx, ...educationInfo });
       }

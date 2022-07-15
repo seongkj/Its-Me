@@ -13,20 +13,23 @@ export async function getProfileById(profileIdx) {
 }
 
 export async function newProfile(profileInfo) {
-  console.log(profileInfo);
+  const { name, age, phone, email, profile_img, portfolio_idx } = profileInfo;
   return new Promise((resolve, reject) => {
     db.query(
       'INSERT INTO profile(`name`,`age`,`phone`,`email`,`profile_img`,`portfolio_idx`) VALUES (?,?,?,?,?,?)',
-      [
-        profileInfo.name,
-        profileInfo.age,
-        profileInfo.phone,
-        profileInfo.email,
-        profileInfo.profile_img,
-        profileInfo.portfolio_idx,
-      ],
+      [name, age, phone, email, profile_img, portfolio_idx],
       (err, result) => {
-        return err ? reject(err) : resolve(result);
+        return err
+          ? reject(err)
+          : resolve({
+              profile_idx: result.insertId,
+              name,
+              age,
+              phone,
+              email,
+              profile_img,
+              portfolio_idx,
+            });
       }
     );
   });

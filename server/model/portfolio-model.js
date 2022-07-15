@@ -23,8 +23,7 @@ export async function getPortfolioById(portfolioIdx) {
       ON po.portfolio_idx = ski.portfolio_idx
       JOIN itsme.website AS web
       ON po.portfolio_idx = web.portfolio_idx
-      WHERE po.portfolio_idx = ?`
-,
+      WHERE po.portfolio_idx = ?`,
       portfolioIdx,
       (err, result) => {
         return err ? reject(err) : resolve(result);
@@ -34,13 +33,20 @@ export async function getPortfolioById(portfolioIdx) {
 }
 
 export async function newPortfolio(portfolioInfo) {
-  console.log(portfolioInfo);
+  const { template, title, user_idx } = portfolioInfo;
   return new Promise((resolve, reject) => {
     db.query(
       'INSERT INTO portfolio(`template`,`title`,`user_idx`) VALUES (?,?,?)',
-      [portfolioInfo.template, portfolioInfo.title, portfolioInfo.user_idx],
+      [template, title, user_idx],
       (err, result) => {
-        return err ? reject(err) : resolve(result);
+        return err
+          ? reject(err)
+          : resolve({
+              portfolio_idx: result.insertId,
+              template,
+              title,
+              user_idx,
+            });
       }
     );
   });
