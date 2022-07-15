@@ -88,15 +88,19 @@
   color: black;
 }
 .ProjectWrap4 {
+  margin-bottom: 20px;
 }
-.ProjectWrap4 button {
+.ProjectWrap4 p {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   color: #999;
-  cursor: pointer;
+  width: 100%;
 }
 .ProjectWrap4 span {
   margin-left: 5px;
+}
+.ProjectWrap4 input {
+  width: 95%;
 }
 
 /*슬라이드 컨트롤러*/

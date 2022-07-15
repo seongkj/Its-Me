@@ -17,57 +17,22 @@ const autoGrow = (e) => {
 };
 
 const Project = () => {
-  const [projects, setProjects] = useState([]);
-
-  const ProjectLists = (props) => {
-    const projectList = props.data.map((e) => {
-      return (
-        <SwiperSlide>
-          <form>
-            <div className="ProjectWrap1">
-              <img
-                src="https://t1.daumcdn.net/cfile/tistory/99ACFA3359A6674308"
-                alt=""
-              />
-              <span>사진 추가</span>
-            </div>
-            <div className="ProjectWrap2">
-              <input type="text" placeholder="프로젝트명" />
-              <div className="date">
-                <input
-                  type="date"
-                  name="startProject"
-                  id="StartProject"
-                  placeholder="시작일"
-                />
-                <input
-                  type="date"
-                  name="endProject"
-                  id="EndProject"
-                  placeholder="완료일"
-                />
-              </div>
-            </div>
-            <div className="ProjectWrap3">
-              <TextareaAutosize placeholder="역할 및 주요 성과" />
-            </div>
-            <div className="ProjectWrap4">
-              <button type="button">
-                <FontAwesomeIcon icon={faLink} />
-                <span>링크 추가</span>
-              </button>
-            </div>
-          </form>
-        </SwiperSlide>
-      );
-    });
-    return projectList;
-  };
-
+  const [projects, setProjects] = useState([{}]);
+  const [whatIdid, setWhatIdid] = useState([]);
+  // console.log(title);
   const newProject = (e) => {
     e.preventDefault();
     setProjects([...projects, {}]);
   };
+
+  const onChange = (e) => {
+    const { value } = e.target;
+    setWhatIdid({
+      ...whatIdid,
+      value,
+    });
+  };
+  console.log(whatIdid);
 
   return (
     <div>
@@ -80,85 +45,57 @@ const Project = () => {
           spaceBetween={50}
           slidesPerView={1}
           navigation
-          pagination={{ clickable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log('slide change')}
         >
-          <SwiperSlide>
-            <form>
-              <div className="ProjectWrap1">
-                <img
-                  src="https://t1.daumcdn.net/cfile/tistory/99ACFA3359A6674308"
-                  alt=""
-                />
-                <span>사진 추가</span>
-              </div>
-              <div className="ProjectWrap2">
-                <input type="text" placeholder="프로젝트명" />
-                <div className="date">
-                  <input
-                    type="date"
-                    name="startProject"
-                    id="StartProject"
-                    placeholder="시작일"
+          {projects.map((project) => (
+            <SwiperSlide>
+              <form>
+                <div className="ProjectWrap1">
+                  <img
+                    src="https://t1.daumcdn.net/cfile/tistory/99ACFA3359A6674308"
+                    alt=""
                   />
-                  <input
-                    type="date"
-                    name="endProject"
-                    id="EndProject"
-                    placeholder="완료일"
+                  <span>사진 추가</span>
+                </div>
+                <div className="ProjectWrap2">
+                  <input type="text" placeholder="프로젝트명" />
+                  <div className="date">
+                    <input
+                      type="date"
+                      name="startProject"
+                      id="StartProject"
+                      placeholder="시작일"
+                    />
+                    <input
+                      type="date"
+                      name="endProject"
+                      id="EndProject"
+                      placeholder="완료일"
+                    />
+                  </div>
+                </div>
+                <div className="ProjectWrap3">
+                  <TextareaAutosize
+                    placeholder="역할 및 주요 성과"
+                    onChange={onChange}
                   />
                 </div>
-              </div>
-              <div className="ProjectWrap3">
-                <TextareaAutosize placeholder="역할 및 주요 성과" />
-              </div>
-              <div className="ProjectWrap4">
-                <button type="button">
-                  <FontAwesomeIcon icon={faLink} />
-                  <span>링크 추가</span>
-                </button>
-              </div>
-            </form>
-          </SwiperSlide>
-          <SwiperSlide>
-            <form>
-              <div className="ProjectWrap1">
-                <img
-                  src="https://t1.daumcdn.net/cfile/tistory/99ACFA3359A6674308"
-                  alt=""
-                />
-                <span>사진 추가</span>
-              </div>
-              <div className="ProjectWrap2">
-                <input type="text" placeholder="프로젝트명" />
-                <div className="date">
-                  <input
-                    type="date"
-                    name="startProject"
-                    id="StartProject"
-                    placeholder="시작일"
-                  />
-                  <input
-                    type="date"
-                    name="endProject"
-                    id="EndProject"
-                    placeholder="완료일"
-                  />
+                <div className="ProjectWrap4">
+                  <p>
+                    <FontAwesomeIcon icon={faLink} />
+                    <span>
+                      <input
+                        type="text"
+                        name="linksec"
+                        id="LinkSec"
+                        className="LinkSec"
+                        placeholder="링크 추가"
+                      />
+                    </span>
+                  </p>
                 </div>
-              </div>
-              <div className="ProjectWrap3">
-                <TextareaAutosize placeholder="역할 및 주요 성과" />
-              </div>
-              <div className="ProjectWrap4">
-                <button type="button">
-                  <FontAwesomeIcon icon={faLink} />
-                  <span>링크 추가</span>
-                </button>
-              </div>
-            </form>
-          </SwiperSlide>
-          <ProjectLists data={projects} />
+              </form>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>
