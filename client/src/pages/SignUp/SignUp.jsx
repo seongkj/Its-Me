@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import {
   Avatar,
   Button,
@@ -35,18 +35,30 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const [email, setEmail] = useState('');
+  const [pw, setPw] = useState('');
+  const [confirmPw, setConfirmPw] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+
+  const onChangeEmail = (e) => setEmail(e.target.value);
+  const onChangePw = (e) => setPw(e.target.value);
+  const onChangeConfirmPw = (e) => setConfirmPw(e.target.value);
+  const onChangeName = (e) => setName(e.target.value);
+  const onChangePhone = (e) => setPhone(e.target.value);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const newData = {
-      name: data.get('name'),
-      email: data.get('email'),
-      password: data.get('password'),
-      passwordConfirm: data.get('passwordConfirm'),
-      mobile: data.get('mobile'),
+
+    const data = {
+      email: email,
+      pw: pw,
+      name: name,
+      phone: phone,
+      profile_img: null,
     };
     axios
-      .post('http://localhost:3001/auth/signup', newData)
+      .post('http://localhost:3001/auth/signup', data)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
@@ -84,6 +96,8 @@ export default function SignUp() {
                   label="이름"
                   name="name"
                   autoComplete="name"
+                  value={name}
+                  onChange={onChangeName}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -94,39 +108,47 @@ export default function SignUp() {
                   label="이메일"
                   name="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={onChangeEmail}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="password"
+                  name="pw"
                   label="비밀번호"
                   type="password"
-                  id="password"
+                  id="pw"
                   autoComplete="new-password"
+                  value={pw}
+                  onChange={onChangePw}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="passwordConfirm"
+                  name="confirmPw"
                   label="비밀번호 확인"
                   type="password"
-                  id="passwordConfirm"
+                  id="confirmPw"
                   autoComplete="new-password"
+                  value={confirmPw}
+                  onChange={onChangeConfirmPw}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="mobile"
+                  name="phone"
                   label="연락처"
                   type="text"
-                  id="mobile"
+                  id="phone"
                   autoComplete="tel-national"
+                  value={phone}
+                  onChange={onChangePhone}
                 />
               </Grid>
             </Grid>
