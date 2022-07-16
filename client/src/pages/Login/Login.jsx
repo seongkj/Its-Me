@@ -9,8 +9,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-// fixme 아래와 같이 import 하면 코드가 더 깔끔합니다.
-// import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 
@@ -32,7 +30,6 @@ function Copyright(props) {
   );
 }
 
-// fixme theme은 모든 페이지에 적용하는것이 앱이 통일성 있어보일거같습니다.
 const theme = createTheme();
 
 export default function SignIn() {
