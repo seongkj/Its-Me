@@ -21,19 +21,15 @@ const sectionName = [
 function Edit() {
   const [sections, setSections] = useState(sectionName);
   const [sectionButton, setSectionButton] = useState([]);
-  const [editChoice, setEditChoice] = useState(true);
 
   const [designs, setDesigns] = useState([1, 2]);
 
-  const [display, toggleDisplay] = useReducer(
-    (val) => (val === 'flex' ? 'none' : 'flex'),
-    'flex',
-  );
+  const [displaySection, setDisplaySection] = useState({ display: 'flex' });
+  const [displayDesign, setDisplayDesign] = useState({ display: 'none' });
 
   // 테스트 버튼
   const test = () => {
     console.log(sectionButton);
-    console.log(sectionName.includes());
   };
 
   return (
@@ -41,58 +37,58 @@ function Edit() {
       <div className="OptionBar">
         <div className="EditBar">
           <div className="EditOption">
-            <button type="button" onClick={() => changeSection(setEditChoice)}>
+            <button
+              type="button"
+              onClick={() => changeSection(setDisplaySection, setDisplayDesign)}
+            >
               섹션 변경
             </button>
           </div>
           <div className="EditOption">
-            <button type="button" onClick={() => changeDesign(setEditChoice)}>
+            <button
+              type="button"
+              onClick={() => changeDesign(setDisplaySection, setDisplayDesign)}
+            >
               디자인 변경
             </button>
           </div>
           <div className="EditOption">
-            <button type="button" onClick={toggleDisplay}>
+            <button type="button" onClick={test}>
               테스트버튼
             </button>
           </div>
-          <div className="EditOption" style={{ display }}>
-            <button type="button">테스트버튼2</button>
-          </div>
         </div>
+
         <div className="SectionBar">
-          {editChoice ? (
-            <ul style={{ display }}>
-              {sections.map((el) => (
-                <li>
-                  <SectionChoiceButton
-                    key={el.id}
-                    id={el.id}
-                    name={el.name}
-                    isToggle={el.isToggle}
-                    sectionButton={sectionButton}
-                    setSectionButton={setSectionButton}
-                  />
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <ul>
-              {designs.map((el) => (
-                <li>{el}</li>
-              ))}
-            </ul>
-          )}
+          <ul style={displaySection}>
+            {sections.map((el) => (
+              <li>
+                <SectionChoiceButton
+                  key={el.id}
+                  id={el.id}
+                  name={el.name}
+                  isToggle={el.isToggle}
+                  sectionButton={sectionButton}
+                  setSectionButton={setSectionButton}
+                />
+              </li>
+            ))}
+          </ul>
+
+          <ul style={displayDesign}>
+            {designs.map((el) => (
+              <li>{el}</li>
+            ))}
+          </ul>
         </div>
       </div>
 
-      {editChoice ? (
-        <div className="SectionInfo" style={{ display }}>
-          {sectionButton.map((el, i) => (
-            <Section sectionName={el} key={i} />
-          ))}
-          <button>전체 POST</button>
-        </div>
-      ) : null}
+      <div className="SectionInfo" style={displaySection}>
+        {sectionButton.map((el, i) => (
+          <Section sectionName={el} key={i} />
+        ))}
+        <button>전체 POST</button>
+      </div>
     </div>
   );
 }
@@ -136,12 +132,14 @@ function SectionChoiceButton(prop) {
 }
 
 //섹션 변경
-function changeSection(setEditChoice) {
-  setEditChoice(true);
+function changeSection(setDisplaySection, setDisplayDesign) {
+  setDisplaySection({ display: 'flex' });
+  setDisplayDesign({ display: 'none' });
 }
 //디자인 변경
-function changeDesign(setEditChoice) {
-  setEditChoice(false);
+function changeDesign(setDisplaySection, setDisplayDesign) {
+  setDisplaySection({ display: 'none' });
+  setDisplayDesign({ display: 'flex' });
 }
 
 export default Edit;
