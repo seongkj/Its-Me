@@ -1,6 +1,7 @@
 import React from 'react';
 import Myself from './Sections/Myself';
 import Stack from './Sections/Stack';
+import Education from './Sections/Education';
 import Project from './Sections/Project';
 import Prize from './Sections/Prize';
 
@@ -16,11 +17,14 @@ function Section(prop) {
       </div>
       <hr className="SectionHr" />
       <div className="SectionComponentContent">
+        {/* {sectionName === '한 줄 소개' ? <Myself /> : null} */}
         {/* <Myself /> */}
         {/* <Stack /> */}
+        <Education />
         {/* <Project /> */}
-        <Prize />
+        {/* <Prize /> */}
       </div>
+      {}
     </div>
   );
 }

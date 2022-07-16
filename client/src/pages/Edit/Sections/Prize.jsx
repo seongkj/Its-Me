@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
-import './Prize.css';
+// import './Prize.css';
 import PrizeList from './PrizeList';
 
 function Prize() {
@@ -20,7 +20,7 @@ function Prize() {
       [name]: value,
     });
   };
-  
+
   const [prizes, setPrizes] = useState([]);
 
   const nextId = useRef(0);
@@ -42,8 +42,8 @@ function Prize() {
   };
 
   // 삭제
-  const onRemove = id => {
-    setPrizes(prizes.filter(prize => prize.id !== id));
+  const onRemove = (id) => {
+    setPrizes(prizes.filter((prize) => prize.id !== id));
   };
 
   return (

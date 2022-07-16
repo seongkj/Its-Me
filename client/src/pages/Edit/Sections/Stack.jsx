@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
@@ -20,6 +21,13 @@ function Stack() {
     const deletStack = stack.filter((el) => el !== delStack);
     setStack(deletStack);
   };
+
+  //기술 스택 POST
+  // async function postStack() {
+  //   return await axios.post(`http://localhost:3000/, {
+
+  //   })
+  // }
 
   return (
     <div>
@@ -44,6 +52,7 @@ function Stack() {
           );
         })}
       </div>
+      <button type="button">POST</button>
     </div>
   );
 }
