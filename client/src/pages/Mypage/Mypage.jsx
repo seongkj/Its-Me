@@ -9,7 +9,6 @@ const datas = userInfo.map((data) => {
 });
 
 const Mypage = () => {
-  const [portfolios, setPortfolios] = useState([]);
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPhone, setUserPhone] = useState('');
