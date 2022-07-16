@@ -16,7 +16,7 @@ const Mypage = () => {
   const [portfolios, setPortfolios] = useState([
     {
       url: '/test',
-      destcription: `안녕하세요, ${userName}의 포트폴리오입니다.`,
+      destcription: `새로운 포트폴리오`,
     },
   ]);
 
@@ -71,11 +71,6 @@ const Mypage = () => {
     } else alert('포트폴리오 작성은 최대 3개까지 가능합니다.');
   };
 
-  const handleCopyPort = (event) => {
-    event.preventDefault();
-    setPortfolios([...portfolios, { url: '/test', description: '안녕하세여, ㅇㅇㅇ의 포트폴리오입니다.'}])
-  }
-
   return (
     <div className="Mypage">
       <div
@@ -96,45 +91,15 @@ const Mypage = () => {
             </ul>
           </div>
         </div>
-      </div>
-
-      <div className="Portfolios">
-        <button type="button" className="MorePf" onClick={handleCopyPort}>
-          +
-        </button>
-        <h2>포트폴리오</h2>
-        {portfolios.map(portfolio => (
-            <div className="Pf">
-              <div className="PfWrap">
-                <a href="/">안녕하세요, ㅇㅇㅇ의 포트폴리오 입니다.</a>
-                <div className="Btns">
-                  <button type="button" className="Modify" onClick={handleCopyPort}>
-                    수정
-                  </button>
-                  <button type="button" className="Copy">
-                    복사
-                  </button>
-                </div>
-              </div>
-
-            </div>
-        ))}
-        {/*<div className="Pf">*/}
-        {/*  <div className="PfWrap">*/}
-        {/*    <a href="/">안녕하세요, ㅇㅇㅇ의 포트폴리오 입니다.</a>*/}
-        {/*    <div className="Btns">*/}
-        {/*      <button type="button" className="Modify">*/}
-        {/*        수정*/}
-        {/*      </button>*/}
-        {/*      <button type="button" className="Copy">*/}
-        {/*        복사*/}
-        {/*      </button>*/}
-        {/*    </div>*/}
-        {/*  </div>*/}
-        {/*  <button type="button" className="MorePf">*/}
-        {/*    +*/}
-        {/*  </button>*/}
-        {/*</div>*/}
+        <div className="Portfolios">
+          <h2>포트폴리오</h2>
+          <div className="Pf">
+            <PortLists data={portfolios} />
+            <button type="button" className="MorePf" onClick={handleMorePort}>
+              +
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
