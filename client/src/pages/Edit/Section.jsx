@@ -17,13 +17,14 @@ function Section(prop) {
       </div>
       <hr className="SectionHr" />
       <div className="SectionComponentContent">
+        {/* {sectionName === '한 줄 소개' ? <Myself /> : null} */}
         {/* <Myself /> */}
         {/* <Stack /> */}
-        {/* <Education /> */}
+        <Education />
         {/* <Project /> */}
-        {/* <Project /> */}
-        <Prize />
+        {/* <Prize /> */}
       </div>
+      {}
     </div>
   );
 }

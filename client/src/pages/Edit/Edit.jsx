@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import Section from './Section';
 
 import './Edit.css';
@@ -25,7 +25,10 @@ function Edit() {
 
   const [designs, setDesigns] = useState([1, 2]);
 
-  const [clicked, setClicked] = useState();
+  const [display, toggleDisplay] = useReducer(
+    (val) => (val === 'flex' ? 'none' : 'flex'),
+    'flex',
+  );
 
   // 테스트 버튼
   const test = () => {
@@ -48,14 +51,17 @@ function Edit() {
             </button>
           </div>
           <div className="EditOption">
-            <button type="button" onClick={test}>
+            <button type="button" onClick={toggleDisplay}>
               테스트버튼
             </button>
           </div>
+          <div className="EditOption" style={{ display }}>
+            <button type="button">테스트버튼2</button>
+          </div>
         </div>
-        {editChoice ? (
-          <div className="SectionBar">
-            <ul>
+        <div className="SectionBar">
+          {editChoice ? (
+            <ul style={{ display }}>
               {sections.map((el) => (
                 <li>
                   <SectionChoiceButton
@@ -69,20 +75,18 @@ function Edit() {
                 </li>
               ))}
             </ul>
-          </div>
-        ) : (
-          <div className="SectionBar">
+          ) : (
             <ul>
               {designs.map((el) => (
                 <li>{el}</li>
               ))}
             </ul>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       {editChoice ? (
-        <div className="SectionInfo">
+        <div className="SectionInfo" style={{ display }}>
           {sectionButton.map((el, i) => (
             <Section sectionName={el} key={i} />
           ))}
