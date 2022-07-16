@@ -1,3 +1,4 @@
+// fixme 필요없는 코드는 지우는것이 어떨까요 ?
 /* eslint-disable */
 import React from 'react';
 import { Link } from 'react-router-dom';
