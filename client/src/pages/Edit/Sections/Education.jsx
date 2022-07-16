@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
@@ -13,7 +13,25 @@ function Education() {
   } = useForm();
 
   const [value1, setValue1] = useState('');
-  const handleChange = (event) => console.log(event.target.value);
+  const handleChange = (event) => setValue1(event.target.value);
+
+  useEffect(() => {
+    const newData = {
+      school: 'zzz',
+      status: 'xxx',
+      major: 'ccc',
+      graduate_date: '2022-07-15',
+      portfolio_idx: 1,
+    };
+    const debounce = setTimeout(() => {
+      console.log(value1);
+      axios
+        .post('http://localhost:3001/educations', newData)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    }, 1000);
+    return () => clearTimeout(debounce);
+  }, [value1]);
 
   function onSubmit(data) {
     const newData = {
