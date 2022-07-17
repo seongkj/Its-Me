@@ -3,7 +3,7 @@ import React from 'react';
 function Prize({ prize, onRemove }) {
   return (
     <div>
-      <b>{prize.prizeDate}</b> <span>({prize.prizeName})</span>
+      <b>{prize.prizeDate}</b> <span>{prize.prizeName}</span>
       <button onClick={() => onRemove(prize.id)}>삭제</button>
     </div>
   );
