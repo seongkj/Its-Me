@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useReducer } from 'react';
 import Section from './Section';
 
@@ -20,15 +19,18 @@ const sectionName = [
 
 function Edit() {
   const [sections, setSections] = useState(sectionName);
-  const [sectionButton, setSectionButton] = useState([]);
-
   const [designs, setDesigns] = useState([1, 2]);
+
+  const [sectionButton, setSectionButton] = useState([]);
 
   const [displaySection, setDisplaySection] = useState({ display: 'flex' });
   const [displayDesign, setDisplayDesign] = useState({ display: 'none' });
 
   // 테스트 버튼
   const test = () => {
+    console.log(sectionName.sort((a, b) => a.id - b.id));
+  };
+  const test2 = () => {
     console.log(sectionButton);
   };
 
@@ -55,6 +57,11 @@ function Edit() {
           <div className="EditOption">
             <button type="button" onClick={test}>
               테스트버튼
+            </button>
+          </div>
+          <div className="EditOption">
+            <button type="button" onClick={test2}>
+              테스트버튼2
             </button>
           </div>
         </div>
@@ -99,12 +106,12 @@ function SectionChoiceButton(prop) {
   const [clicked, setClicked] = useState(isToggle);
 
   // 버튼 클릭 시 토글하여 색 변경, 섹션 컴포넌트 추가, 삭제
-  const changeColor = () => {
-    setClicked(!clicked);
-  };
+  const changeColor = () => setClicked(!clicked);
+
   const addSectionTitle = (clickedTitle) => {
     setSectionButton([...sectionButton, clickedTitle]);
   };
+
   const removeSectionTitle = (clickedTitle) => {
     const deleteSection = sectionButton.filter((el) => el !== clickedTitle);
     setSectionButton(deleteSection);
@@ -112,6 +119,8 @@ function SectionChoiceButton(prop) {
 
   const onChangeColor = (event) => {
     changeColor();
+    console.log(event.target.id);
+
     if (sectionButton.includes(event.target.innerHTML) === false) {
       addSectionTitle(event.target.innerHTML);
     } else {
