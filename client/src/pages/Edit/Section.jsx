@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useReducer } from 'react';
 import Myself from './Sections/Myself';
 import Stack from './Sections/Stack';
 import Education from './Sections/Education';
@@ -9,6 +9,12 @@ import './Section.css';
 
 function Section(prop) {
   const { sectionName } = prop;
+
+  const [displaySection, setDisplaySection] = useState({ display: 'block' });
+  const [display, toggleDisplay] = useReducer(
+    (val) => (val === 'block' ? 'none' : 'block'),
+    'block',
+  );
 
   return (
     <div className="SectionComponent">

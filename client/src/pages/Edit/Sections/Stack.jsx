@@ -41,16 +41,14 @@ function Stack() {
         <button type="submit">등록</button>
       </form>
       <div className="StackTagList">
-        {stack.map((el, i) => {
-          return (
-            <p key={i} className="StackTag">
-              {el}
-              <button onClick={() => removeStack(el)}>
-                <FontAwesomeIcon icon={faX} />
-              </button>
-            </p>
-          );
-        })}
+        {stack.map((el, i) => (
+          <p key={i} className="StackTag">
+            {el}
+            <button onClick={() => removeStack(el)}>
+              <FontAwesomeIcon icon={faX} />
+            </button>
+          </p>
+        ))}
       </div>
       <button type="button">POST</button>
     </div>

@@ -32,7 +32,7 @@ const Project = () => {
       value,
     });
   };
-  console.log(whatIdid);
+  // console.log(whatIdid);
 
   return (
     <div>
@@ -46,8 +46,8 @@ const Project = () => {
           slidesPerView={1}
           navigation
         >
-          {projects.map((project) => (
-            <SwiperSlide>
+          {projects.map((project, i) => (
+            <SwiperSlide key={i}>
               <form>
                 <div className="ProjectWrap1">
                   <img
