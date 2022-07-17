@@ -99,12 +99,12 @@ function SectionChoiceButton(prop) {
   const [clicked, setClicked] = useState(isToggle);
 
   // 버튼 클릭 시 토글하여 색 변경, 섹션 컴포넌트 추가, 삭제
-  const changeColor = () => {
-    setClicked(!clicked);
-  };
+  const changeColor = () => setClicked(!clicked);
+
   const addSectionTitle = (clickedTitle) => {
     setSectionButton([...sectionButton, clickedTitle]);
   };
+
   const removeSectionTitle = (clickedTitle) => {
     const deleteSection = sectionButton.filter((el) => el !== clickedTitle);
     setSectionButton(deleteSection);
