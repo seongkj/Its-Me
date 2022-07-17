@@ -4,6 +4,7 @@ import Stack from './Sections/Stack';
 import Education from './Sections/Education';
 import Project from './Sections/Project';
 import Prize from './Sections/Prize';
+import Certificate from './Sections/Certificate';
 import Language from './Sections/Language';
 
 import './Section.css';
@@ -23,6 +24,7 @@ function Section(prop) {
         {sectionName === '학력' ? <Education /> : null}
         {sectionName === '프로젝트' ? <Project /> : null}
         {sectionName === '수상' ? <Prize /> : null}
+        {sectionName === '시험 및 자격증' ? <Certificate /> : null}
         {sectionName === '외국어' ? <Language /> : null}
       </div>
     </div>
