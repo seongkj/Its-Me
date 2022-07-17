@@ -6,6 +6,8 @@ import Project from './Sections/Project';
 import Prize from './Sections/Prize';
 import Certificate from './Sections/Certificate';
 import Language from './Sections/Language';
+import Career from './Sections/Career';
+import EtcEducation from './Sections/EtcEducation';
 
 import './Section.css';
 
@@ -26,6 +28,8 @@ function Section(prop) {
         {sectionName === '수상' ? <Prize /> : null}
         {sectionName === '시험 및 자격증' ? <Certificate /> : null}
         {sectionName === '외국어' ? <Language /> : null}
+        {sectionName === '경력' ? <Career /> : null}
+        {sectionName === '교육 및 기타 이력' ? <EtcEducation /> : null}
       </div>
     </div>
   );
