@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
   Button,
@@ -39,6 +40,7 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [loginError, setLoginError] = useState('');
+  const navigate = useNavigate();
 
   const onChangeEmail = (e) => setEmail(e.target.value);
   const onChangePw = (e) => setPw(e.target.value);
@@ -48,6 +50,7 @@ export default function SignIn() {
       .post('http://localhost:3001/auth/login', data)
       .then((res) => {
         console.log(res, '성공');
+        localStorage.setItem('token', res.data.data.token);
         navigate('/');
       })
       .catch((err) => {

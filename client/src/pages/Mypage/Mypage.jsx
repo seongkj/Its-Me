@@ -4,6 +4,8 @@ import './Mypage.css';
 import userInfo from '../../assets/mypage.json';
 import Header from '../../components/Header';
 
+const token = localStorage.getItem('token') || '';
+
 const datas = userInfo.map((data) => {
   return data;
 });
@@ -73,10 +75,6 @@ const Mypage = () => {
 
   return (
     <div className="Mypage">
-      <div
-        className="MainBG"
-        style={{ height: '10vh', position: 'relative', marginBottom: '100px' }}
-      ></div>
       <Header />
       <div className="MypageWrap">
         <div className="UserInfo">
@@ -85,9 +83,18 @@ const Mypage = () => {
           </div>
           <div className="TxtWrap">
             <ul>
-              <li>이름 : {userName}</li>
-              <li>이메일 : {userEmail}</li>
-              <li>연락처 : {userPhone}</li>
+              <li>
+                <span>이름</span>
+                {userName}
+              </li>
+              <li>
+                <span>이메일</span>
+                {userEmail}
+              </li>
+              <li>
+                <span>연락처</span>
+                {userPhone}
+              </li>
             </ul>
           </div>
         </div>
