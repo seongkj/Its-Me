@@ -2,21 +2,20 @@
   margin: 0 auto;
 }
 .MypageWrap {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 1200px;
+  margin: 100px auto 0 auto;
   position: relative;
 }
 
 .UserInfo {
-  padding: 30px 100px;
-  border: 5px solid #e5e5e5;
+  padding: 30px 50px;
+  background-color: #f1f1f1;
   border-radius: 30px;
 }
 .UserInfo .ImgWrap {
   width: 150px;
   height: 150px;
   border-radius: 100%;
-  border: 10px solid rgb(196, 220, 255);
   overflow: hidden;
   display: inline-block;
   vertical-align: middle;
@@ -27,14 +26,21 @@
   height: 100%;
 }
 .UserInfo .TxtWrap {
+  border-left: 1px solid #ccc;
+  padding-left: 50px;
   display: inline-block;
   vertical-align: middle;
   margin-left: 50px;
+  width: calc(100% - 250px);
 }
 .UserInfo .TxtWrap ul {
   font-size: 1.2rem;
-  line-height: 2rem;
+  line-height: 2.5rem;
   font-weight: bold;
+}
+.UserInfo .TxtWrap span {
+  width: 100px;
+  display: inline-block;
 }
 
 .Portfolios {
