@@ -18,7 +18,7 @@ function Portfolio() {
             <p>010-1111-1111 </p>
           </div>
         </div>
-        <hr></hr>
+        <hr className='MainHr'></hr>
         <div className="PortEduInfo">
           <p className="PortMainTxt">학력사항</p>
           <div className="PortTxtWrap2">
@@ -26,7 +26,7 @@ function Portfolio() {
             <p>ddd고등학교</p>
           </div>
         </div>
-        <hr></hr>
+        <hr className='MainHr'></hr>
         <div className="PortEduInfo">
           <p className="PortMainTxt">자격정보</p>
           <div className="PortTxtWrap2">
@@ -40,7 +40,7 @@ function Portfolio() {
             </div>
           </div>
         </div>
-        <hr></hr>
+        <hr className='MainHr'></hr>
         <div className="PortEduInfo">
           <p className="PortMainTxt">수상내역</p>
           <div className="PortTxtWrap2">
@@ -54,7 +54,7 @@ function Portfolio() {
             </div>
           </div>
         </div>
-        <hr></hr>
+        <hr className='MainHr'></hr>
         <div className="PortEduInfo">
           <p className="PortMainTxt">경력사항</p>
           <div className="PortTxtWrap2">
@@ -70,12 +70,12 @@ function Portfolio() {
             </div>
           </div>
         </div>
-        <hr></hr>
+        <hr className='MainHr'></hr>
         <div className="PortEduInfo">
           <p className="PortMainTxt">프로그램/툴 숙련도</p>
           <div class="DashBoard">
             <div className="DashWrap">
-              <svg>
+              <svg className='DashBoardSvg'>
                 <circle class="bg" cx="57" cy="57" r="52" />
                 <circle class="meter-1" cx="57" cy="57" r="52" />
               </svg>
@@ -84,7 +84,7 @@ function Portfolio() {
               </p>
             </div>
             <div className="DashWrap">
-              <svg>
+              <svg className='DashBoardSvg'>
                 <circle class="bg" cx="57" cy="57" r="52" />
                 <circle class="meter-2" cx="57" cy="57" r="52" />
               </svg>
@@ -93,7 +93,7 @@ function Portfolio() {
               </p>
             </div>
             <div className="DashWrap">
-              <svg>
+              <svg className='DashBoardSvg'>
                 <circle class="bg" cx="57" cy="57" r="52" />
                 <circle class="meter-3" cx="57" cy="57" r="52" />
               </svg>
@@ -103,7 +103,7 @@ function Portfolio() {
             </div>
           </div>
         </div>
-        <hr></hr>
+        <hr className='MainHr'></hr>
       </div>
     </div>
   );

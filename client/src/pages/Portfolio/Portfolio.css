@@ -6,7 +6,7 @@
   --etc-color: #d9d9d9;
   --error-color: #ee6c4d;
 }
-hr {
+.MainHr {
   width: 100%;
   margin: 3em auto;
 }
@@ -76,7 +76,7 @@ hr {
   text-align: center;
   margin-top: 2vh;
 }
-svg {
+.DashBoardSvg {
   width: 114px;
   height: 114px;
 }
