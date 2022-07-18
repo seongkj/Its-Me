@@ -32,7 +32,6 @@ export async function deletePortfolio(req, res, next) {
     const deletedportfolio = await portfolioService.deletePortfolio(
       portfolioIdx
     );
-    console.log(deletedportfolio);
     res.status(200).send({
       status: 200,
       message: 'portfolio 정보 삭제 완료',

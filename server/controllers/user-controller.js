@@ -25,7 +25,6 @@ export async function deleteUser(req, res, next) {
       userPw,
       currentUserEmail
     );
-    console.log(deletedUser);
     res.status(200).send({
       status: 200,
       message: '유저 정보 삭제 완료',

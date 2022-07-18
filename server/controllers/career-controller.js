@@ -30,7 +30,6 @@ export async function deleteCareer(req, res, next) {
   try {
     const careerIdx = req.params.career_idx;
     const deletedcareer = await careerService.deleteCareer(careerIdx);
-    console.log(deletedcareer);
     res.status(200).send({
       status: 200,
       message: '커리어 정보 삭제 완료',
