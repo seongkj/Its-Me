@@ -1,11 +1,10 @@
-/* eslint-disable */
 import React, { useState, useEffect, useRef } from 'react';
 import './Themes.css';
 import Header from '../../components/Header';
 
-const token = localStorage.getItem('token') || '';
-
 const Themes = () => {
+  const token = localStorage.getItem('token') || '';
+
   return (
     <div className="ThemesWrap">
       <div

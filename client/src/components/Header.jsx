@@ -2,9 +2,8 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 
-const token = localStorage.getItem('token') || '';
-
 function Header() {
+  const token = localStorage.getItem('token') || '';
   const navigate = useNavigate();
   const onClick = () => {
     localStorage.clear();

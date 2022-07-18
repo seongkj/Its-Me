@@ -1,12 +1,11 @@
-/* eslint-disable */
 import React from 'react';
 import './Main.css';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
-const token = localStorage.getItem('token') || '';
-
 function Main() {
+  const token = localStorage.getItem('token') || '';
+
   return (
     <div>
       <div className="MainBG"></div>
