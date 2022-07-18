@@ -2,8 +2,8 @@ import * as userModel from '../model/user-model.js';
 import bcrypt from 'bcrypt';
 import { CustomError } from '../middlewares/customError.js';
 
-export async function findUserById(userId) {
-  return await userModel.findById(userId);
+export async function findUserById(userIdx) {
+  return await userModel.findById(userIdx);
 }
 
 export async function deleteUser(userIdx, pw, email) {
