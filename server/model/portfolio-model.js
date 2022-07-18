@@ -1,5 +1,17 @@
 import db from './db.js';
 
+export async function getPortfoliosById(userIdx) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'SELECT * FROM itsme.portfolio WHERE user_idx = ?',
+      userIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
+  });
+}
+
 export async function getPortfolioById(portfolioIdx) {
   const portfolio_json = {};
   // award 수집
