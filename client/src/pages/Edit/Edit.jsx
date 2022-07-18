@@ -118,7 +118,6 @@ function SectionChoiceButton(prop) {
 
   const onChangeColor = (event) => {
     changeColor();
-    console.log(event.target.id);
 
     if (sectionButton.includes(event.target.innerHTML) === false) {
       addSectionTitle(event.target.innerHTML);
