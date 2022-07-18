@@ -3,8 +3,8 @@ import sendMailer from '../config/email-config.js';
 
 export async function getUser(req, res, next) {
   try {
-    const userId = req.params.user_id;
-    const user = await userService.findUserById(userId);
+    const userIdx = req.params.user_idx;
+    const user = await userService.findUserById(userIdx);
     res.status(200).send({
       status: 200,
       message: '유저 조회 성공',
@@ -38,10 +38,6 @@ export async function deleteUser(req, res, next) {
 export async function updateUser(req, res, next) {
   try {
     const userIdx = req.params.user_idx;
-    // const currentUserIdx = req.currentUserIdx;
-    // if(userIdx != currentUserIdx) {
-
-    // }
     const updated = await userService.setUser(userIdx, req.body);
     res.status(201).send({
       status: 201,
@@ -63,19 +59,13 @@ function generaeRandomPassword() {
 export async function resetPassword(req, res, next) {
   try {
     if (req.body.email == '') {
-      res.status.send({
-        status: 400,
-        message: '이메일을 입력해주세요',
-      });
+      throw new CustomError(400, '이메일을 입력해주세요.');
     }
     const email = req.body;
     const userIdx = req.currentUserIdx;
     const user = await userService.findUserById(email);
     if (!user) {
-      res.status.send({
-        status: 404,
-        message: '해당 유저가 존재하지 않습니다.',
-      });
+      throw new CustomError(404, '해당 유저가 존재하지 않습니다.');
     }
     const randomPassword = generaeRandomPassword();
     const currentUser = await userService.resetPassword(

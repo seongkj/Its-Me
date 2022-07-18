@@ -1,10 +1,10 @@
 import db from './db.js';
 
-export async function findById(userId) {
+export async function findById(userIdx) {
   return new Promise((resolve, reject) => {
     db.query(
       'SELECT * FROM itsme.user WHERE user_idx = ?',
-      userId,
+      userIdx,
       (err, result) => {
         return err ? reject(err) : resolve(result);
       }
