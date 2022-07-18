@@ -4,100 +4,167 @@ import './Project.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import TextareaAutosize from 'react-textarea-autosize';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-// import 'swiper/css/scrollbar';
-import 'swiper/css';
+import axios from 'axios';
+import ProjectList from './ProjectList';
 
 const autoGrow = (e) => {
   e.style.height = '5px';
   e.style.height = e.scrollHeight + 'px';
 };
 
-const Project = () => {
-  const [projects, setProjects] = useState([{}]);
-  const [whatIdid, setWhatIdid] = useState([]);
-  // console.log(title);
-  const newProject = (e) => {
-    e.preventDefault();
-    setProjects([...projects, {}]);
-  };
+const Project = ({ ownerData, setOwnerData }) => {
+  const [inputs, setInputs] = useState({
+    thumbnail: '',
+    title: '',
+    start_date: '',
+    end_date: '',
+    comment: '',
+    link: '',
+  });
+
+  const { thumbnail, title, start_date, end_date, comment, link } = inputs;
 
   const onChange = (e) => {
-    const { value } = e.target;
-    setWhatIdid({
-      ...whatIdid,
-      value,
+    const { name, value } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
     });
   };
-  // console.log(whatIdid);
+
+  // 등록
+  const nextId = useRef(0);
+  const [projects, setProjects] = useState([]);
+
+  const onCreate = (e) => {
+    e.preventDefault();
+    const project = {
+      id: nextId.current,
+      thumbnail,
+      title,
+      start_date,
+      end_date,
+      comment,
+      link,
+    };
+    if (title === '') {
+      alert('타이틀을 등록해주세요');
+    } else if (start_date === '') {
+      alert('시작일을 등록해주세요');
+    } else if (end_date === '') {
+      alert('완료일을 등록해주세요');
+    } else if (comment === '') {
+      alert('상세 설명을 등록해주세요');
+    } else if (
+      title !== '' &&
+      start_date !== '' &&
+      end_date !== '' &&
+      comment !== ''
+    ) {
+      setProjects(projects.concat(project));
+      setInputs({
+        thumbnail: '',
+        title: '',
+        start_date: '',
+        end_date: '',
+        comment: '',
+        link: '',
+      });
+      nextId.current += 1;
+    }
+  };
+
+  // 이미지 업로드
+  const [img, setImg] = useState('');
+
+  const formSubmit = (e) => {
+    const img = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', img);
+
+    axios
+      .post('http://localhost:3001/websites/1', formData)
+      .then((res) => {
+        setImg(res.data.location);
+        alert('성공');
+      })
+      .catch((err) => {
+        alert('실패');
+      });
+  };
+
+  // 삭제
+  const onRemove = (id) => {
+    setProjects(projects.filter((project) => project.id !== id));
+  };
 
   return (
     <div>
       <div className="ProjectWrap">
-        <button type="button" className="AddSlider" onClick={newProject}>
+        {/* <button type="button" className="AddSlider">
           +
-        </button>
-        <Swiper
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          spaceBetween={50}
-          slidesPerView={1}
-          navigation
-        >
-          {projects.map((project, i) => (
-            <SwiperSlide key={i}>
-              <form>
-                <div className="ProjectWrap1">
-                  <img
-                    src="https://t1.daumcdn.net/cfile/tistory/99ACFA3359A6674308"
-                    alt=""
-                  />
-                  <span>사진 추가</span>
-                </div>
-                <div className="ProjectWrap2">
-                  <input type="text" placeholder="프로젝트명" />
-                  <div className="date">
-                    <input
-                      type="date"
-                      name="startProject"
-                      id="StartProject"
-                      placeholder="시작일"
-                    />
-                    <input
-                      type="date"
-                      name="endProject"
-                      id="EndProject"
-                      placeholder="완료일"
-                    />
-                  </div>
-                </div>
-                <div className="ProjectWrap3">
-                  <TextareaAutosize
-                    placeholder="역할 및 주요 성과"
-                    onChange={onChange}
-                  />
-                </div>
-                <div className="ProjectWrap4">
-                  <p>
-                    <FontAwesomeIcon icon={faLink} />
-                    <span>
-                      <input
-                        type="text"
-                        name="linksec"
-                        id="LinkSec"
-                        className="LinkSec"
-                        placeholder="링크 추가"
-                      />
-                    </span>
-                  </p>
-                </div>
-              </form>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        </button> */}
+        <form>
+          <div className="ProjectWrap1">
+            <img src={img} alt="" name="thumbnail" value={thumbnail} />
+            <input
+              type="file"
+              accept="image/*"
+              id="img"
+              onChange={formSubmit}
+            />
+          </div>
+          <div className="ProjectWrap2">
+            <input
+              type="text"
+              placeholder="프로젝트명"
+              name="title"
+              value={title}
+              onChange={onChange}
+            />
+            <div className="date">
+              <input
+                type="date"
+                name="start_date"
+                id="StartProject"
+                placeholder="시작일"
+                value={start_date}
+                onChange={onChange}
+              />
+              <input
+                type="date"
+                name="end_date"
+                id="EndProject"
+                placeholder="완료일"
+                value={end_date}
+                onChange={onChange}
+              />
+            </div>
+            <TextareaAutosize
+              placeholder="역할 및 주요 성과"
+              name="comment"
+              value={comment}
+              onChange={onChange}
+            />
+            <p>
+              <FontAwesomeIcon icon={faLink} />
+              <span>
+                <input
+                  type="text"
+                  id="LinkSec"
+                  className="LinkSec"
+                  placeholder="링크 추가"
+                  name="link"
+                  value={link}
+                  onChange={onChange}
+                />
+              </span>
+            </p>
+          </div>
+          <button onClick={onCreate}>등록</button>
+        </form>
       </div>
+      <ProjectList projects={projects} onRemove={onRemove} />
     </div>
   );
 };
