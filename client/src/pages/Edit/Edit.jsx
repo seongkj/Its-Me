@@ -93,7 +93,6 @@ function Edit() {
         {sectionButton.map((el, i) => (
           <Section sectionName={el} key={i} />
         ))}
-        <button>전체 POST</button>
       </div>
     </div>
   );
