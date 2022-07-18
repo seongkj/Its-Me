@@ -8,6 +8,8 @@ import ResetPassword from './pages/ResetPassword/ResetPassword';
 import Themes from './pages/Themes/Themes';
 import Portfolio from './pages/Portfolio/Portfolio';
 import './App.css';
+import PdfComponent from './pages/Portfolio/PdfComponent';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -21,7 +23,7 @@ function App() {
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/resetPassword" element={<ResetPassword />} />
           <Route path="/themes" element={<Themes />} />
-          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/pdfComponent" element={<PdfComponent />} />
         </Routes>
       </Router>
     </div>
