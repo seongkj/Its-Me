@@ -80,17 +80,17 @@ export async function getPortfolioById(portfolioIdx) {
     );
   });
   portfolio_json['language'] = language_data;
-  // profile 수집
-  const profile_data = await new Promise((resolve, reject) => {
+  // introduce 수집
+  const introduce_data = await new Promise((resolve, reject) => {
     db.query(
-      `SELECT * FROM itsme.profile WHERE portfolio_idx = ?`,
+      `SELECT * FROM itsme.introduce WHERE portfolio_idx = ?`,
       portfolioIdx,
       (err, result) => {
         return err ? reject(err) : resolve(result);
       }
     );
   });
-  portfolio_json['profile'] = profile_data;
+  portfolio_json['introduce'] = introduce_data;
   // skill 수집
   const skill_data = await new Promise((resolve, reject) => {
     db.query(

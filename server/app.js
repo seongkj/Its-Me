@@ -4,6 +4,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 
 import userRouter from './routes/user-router.js';
+import introduceRouter from './routes/introduce-router.js';
 import authRouter from './routes/auth-router.js';
 import ProfileRoute from './routes/profile-router.js';
 import skillRoute from './routes/skill-router.js';
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/profiles', ProfileRoute);
 app.use('/skills', skillRoute);
+app.use('/introduces', introduceRouter);
 app.use('/websites', websiteRoute);
 app.use('/awards', awardRoute);
 app.use('/careers', careerRoute);
