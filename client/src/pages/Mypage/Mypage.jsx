@@ -4,6 +4,8 @@ import './Mypage.css';
 import userInfo from '../../assets/mypage.json';
 import Header from '../../components/Header';
 
+const token = localStorage.getItem('token') || '';
+
 const datas = userInfo.map((data) => {
   return data;
 });

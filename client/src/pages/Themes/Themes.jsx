@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Themes.css';
 import Header from '../../components/Header';
 
+const token = localStorage.getItem('token') || '';
+
 const Themes = () => {
   return (
     <div className="ThemesWrap">
