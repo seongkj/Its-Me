@@ -30,7 +30,6 @@ export async function deleteProfile(req, res, next) {
   try {
     const profileIdx = req.params.profile_idx;
     const deletedProfile = await profileService.deleteProfile(profileIdx);
-    console.log(deletedProfile);
     res.status(200).send({
       status: 200,
       message: '프로필 정보 삭제 완료',

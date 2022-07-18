@@ -30,7 +30,6 @@ export async function deleteLanguage(req, res, next) {
   try {
     const languageIdx = req.params.language_idx;
     const deletedlanguage = await languageService.deleteLanguage(languageIdx);
-    console.log(deletedlanguage);
     res.status(200).send({
       status: 200,
       message: 'Language 정보 삭제 완료',

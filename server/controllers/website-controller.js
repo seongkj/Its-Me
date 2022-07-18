@@ -20,12 +20,9 @@ export async function newWebSite(req, res, next) {
     if (req.file) {
       imageUrl = req.file.location;
       imageKey = req.file.key;
-      console.log(req.file);
-      console.log(imageUrl);
       req.body.thumbnail = imageUrl;
     } else {
-      // throw new Error('이미지가 없습니다. 이미지를 추가해주세요!');
-      console.log('error');
+      throw new Error('이미지가 없습니다. 이미지를 추가해주세요!');
     }
     const newwebsite = await websiteService.NewWebSite(req.body);
     res.status(200).send({
@@ -42,7 +39,6 @@ export async function deleteWebSite(req, res, next) {
   try {
     const websiteIdx = req.params.website_idx;
     const deletedwebsite = await websiteService.deleteWebSite(websiteIdx);
-    console.log(deletedwebsite);
     res.status(200).send({
       status: 200,
       message: '웹사이트 정보 삭제 완료',
