@@ -1,5 +1,8 @@
 import * as portfolioModel from '../model/portfolio-model.js';
 
+export async function findPortfoliosById(userIdx) {
+  return await portfolioModel.getPortfoliosById(userIdx);
+}
 export async function findPortfolioById(portfolioIdx) {
   return await portfolioModel.getPortfolioById(portfolioIdx);
 }
