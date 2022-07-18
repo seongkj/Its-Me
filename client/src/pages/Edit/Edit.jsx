@@ -10,11 +10,10 @@ const sectionName = [
   { id: 3, name: '경력', isToggle: false },
   { id: 4, name: '학력', isToggle: false },
   { id: 5, name: '교육 및 기타 이력', isToggle: false },
-  { id: 6, name: '프로젝트', isToggle: false },
+  { id: 6, name: '프로젝트/웹사이트', isToggle: false },
   { id: 7, name: '수상', isToggle: false },
   { id: 8, name: '시험 및 자격증', isToggle: false },
   { id: 9, name: '외국어', isToggle: false },
-  { id: 10, name: '포트폴리오/웹사이트', isToggle: false },
 ];
 
 function Edit() {
@@ -119,7 +118,6 @@ function SectionChoiceButton(prop) {
 
   const onChangeColor = (event) => {
     changeColor();
-    console.log(event.target.id);
 
     if (sectionButton.includes(event.target.innerHTML) === false) {
       addSectionTitle(event.target.innerHTML);
