@@ -6,10 +6,8 @@ import Mypage from './pages/Mypage/Mypage';
 import Main from './pages/Main/Main';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import Themes from './pages/Themes/Themes';
-import Portfolio from './pages/Portfolio/Portfolio';
 import './App.css';
 import PdfComponent from './pages/Portfolio/PdfComponent';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
