@@ -36,7 +36,6 @@ export async function deleteEtc_education(req, res, next) {
     const deletedetc_education = await etc_educationService.deleteEtc_education(
       etc_educationIdx
     );
-    console.log(deletedetc_education);
     res.status(200).send({
       status: 200,
       message: 'ETC에듀케이션 정보 삭제 완료',

@@ -1,35 +1,118 @@
 import db from './db.js';
 
 export async function getPortfolioById(portfolioIdx) {
-  return new Promise((resolve, reject) => {
+  const portfolio_json = {};
+  // award 수집
+  const award_data = await new Promise((resolve, reject) => {
     db.query(
-      `SELECT * 
-      FROM itsme.portfolio AS po 
-      JOIN itsme.career AS ca
-      ON po.portfolio_idx = ca.portfolio_idx 
-      JOIN itsme.award AS aw
-      ON po.portfolio_idx = aw.portfolio_idx
-      JOIN itsme.certificate AS cer
-      ON po.portfolio_idx = cer.portfolio_idx
-      JOIN itsme.education AS edu
-      ON po.portfolio_idx = edu.portfolio_idx
-      JOIN itsme.etc_education AS etc
-      ON po.portfolio_idx = etc.portfolio_idx
-      JOIN itsme.language AS lan
-      ON po.portfolio_idx = lan.portfolio_idx
-      JOIN itsme.profile AS pro
-      ON po.portfolio_idx = pro.portfolio_idx
-      JOIN itsme.skill AS ski
-      ON po.portfolio_idx = ski.portfolio_idx
-      JOIN itsme.website AS web
-      ON po.portfolio_idx = web.portfolio_idx
-      WHERE po.portfolio_idx = ?`,
+      `SELECT * FROM itsme.award WHERE portfolio_idx = ?`,
       portfolioIdx,
       (err, result) => {
         return err ? reject(err) : resolve(result);
       }
     );
   });
+  portfolio_json['award'] = award_data;
+  // career 수집
+  const career_data = await new Promise((resolve, reject) => {
+    db.query(
+      `SELECT * FROM itsme.career WHERE portfolio_idx = ?`,
+      portfolioIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
+  });
+  portfolio_json['career'] = career_data;
+  // certificate 수집
+  const certificate_data = await new Promise((resolve, reject) => {
+    db.query(
+      `SELECT * FROM itsme.certificate WHERE portfolio_idx = ?`,
+      portfolioIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
+  });
+  portfolio_json['certificate'] = certificate_data;
+  // education 수집
+  const education_data = await new Promise((resolve, reject) => {
+    db.query(
+      `SELECT * FROM itsme.education WHERE portfolio_idx = ?`,
+      portfolioIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
+  });
+  portfolio_json['education'] = education_data;
+  // etc_education 수집
+  const etc_education_data = await new Promise((resolve, reject) => {
+    db.query(
+      `SELECT * FROM itsme.etc_education WHERE portfolio_idx = ?`,
+      portfolioIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
+  });
+  portfolio_json['etc_education'] = etc_education_data;
+  // language 수집
+  const language_data = await new Promise((resolve, reject) => {
+    db.query(
+      `SELECT * FROM itsme.language WHERE portfolio_idx = ?`,
+      portfolioIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
+  });
+  portfolio_json['language'] = language_data;
+  // portfolio 수집
+  const portfolio_data = await new Promise((resolve, reject) => {
+    db.query(
+      `SELECT * FROM itsme.portfolio WHERE portfolio_idx = ?`,
+      portfolioIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
+  });
+  portfolio_json['portfolio'] = portfolio_data;
+  // profile 수집
+  const profile_data = await new Promise((resolve, reject) => {
+    db.query(
+      `SELECT * FROM itsme.profile WHERE portfolio_idx = ?`,
+      portfolioIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
+  });
+  portfolio_json['profile'] = profile_data;
+  // skill 수집
+  const skill_data = await new Promise((resolve, reject) => {
+    db.query(
+      `SELECT * FROM itsme.skill WHERE portfolio_idx = ?`,
+      portfolioIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
+  });
+  portfolio_json['skill'] = skill_data;
+  // website 수집
+  const website_data = await new Promise((resolve, reject) => {
+    db.query(
+      `SELECT * FROM itsme.website WHERE portfolio_idx = ?`,
+      portfolioIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
+  });
+  portfolio_json['website'] = website_data;
+  return portfolio_json;
 }
 
 export async function newPortfolio(portfolioInfo) {

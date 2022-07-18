@@ -30,7 +30,6 @@ export async function deleteAward(req, res, next) {
   try {
     const awardIdx = req.params.award_idx;
     const deletedaward = await awardService.deleteAward(awardIdx);
-    console.log(deletedaward);
     res.status(200).send({
       status: 200,
       message: '어워드 정보 삭제 완료',
