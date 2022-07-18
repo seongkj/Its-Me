@@ -68,17 +68,6 @@ export async function getPortfolioById(portfolioIdx) {
     );
   });
   portfolio_json['language'] = language_data;
-  // portfolio 수집
-  const portfolio_data = await new Promise((resolve, reject) => {
-    db.query(
-      `SELECT * FROM itsme.portfolio WHERE portfolio_idx = ?`,
-      portfolioIdx,
-      (err, result) => {
-        return err ? reject(err) : resolve(result);
-      }
-    );
-  });
-  portfolio_json['portfolio'] = portfolio_data;
   // profile 수집
   const profile_data = await new Promise((resolve, reject) => {
     db.query(
