@@ -10,14 +10,17 @@ const Footer = memo(() => {
 });
 
 const FooterContainer = styled.div`
+  width: 100%;
   bottom: 4vh;
   position: fixed;
 `;
 
 const FooterText = styled.div`
+  width: 100%;
+  text-align: center;
   color: #293241;
   font-size: 14px;
-  font-weight: 600; 
+  font-weight: 600;
 `;
 
 export default Footer;

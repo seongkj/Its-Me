@@ -1,3 +1,4 @@
+import { request } from 'http';
 import * as websiteService from '../services/website-service.js';
 
 export async function getWebSite(req, res, next) {
@@ -22,7 +23,7 @@ export async function newWebSite(req, res, next) {
       imageKey = req.file.key;
       req.body.thumbnail = imageUrl;
     } else {
-      throw new Error('이미지가 없습니다. 이미지를 추가해주세요!');
+      req.body.thumbnail = '';
     }
     const newwebsite = await websiteService.NewWebSite(req.body);
     res.status(200).send({
