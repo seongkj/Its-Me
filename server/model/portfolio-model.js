@@ -142,7 +142,9 @@ export async function remove(portfolioIdx) {
       'DELETE FROM portfolio WHERE portfolio_idx=?',
       portfolioIdx,
       (err, result) => {
-        return err ? reject(err) : resolve(portfolioIdx);
+        return result.affectedRows == 0
+          ? resolve({ error: 'error' })
+          : resolve({ result: `${portfolioIdx} 삭제 완료` });
       }
     );
   });

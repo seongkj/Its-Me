@@ -50,7 +50,9 @@ export async function remove(websiteIdx) {
       'DELETE FROM website WHERE website_idx=?',
       websiteIdx,
       (err, result) => {
-        return err ? reject(err) : resolve(websiteIdx);
+        return result.affectedRows == 0
+          ? resolve({ error: 'error' })
+          : resolve({ result: `${websiteIdx} 삭제 완료` });
       }
     );
   });

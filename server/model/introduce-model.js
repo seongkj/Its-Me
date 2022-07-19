@@ -38,7 +38,9 @@ export async function remove(introduceIdx) {
       'DELETE FROM introduce WHERE introduce_idx=?',
       introduceIdx,
       (err, result) => {
-        return err ? reject(err) : resolve(introduceIdx);
+        return result.affectedRows == 0
+          ? resolve({ error: 'error' })
+          : resolve({ result: `${introduceIdx} 삭제 완료` });
       }
     );
   });

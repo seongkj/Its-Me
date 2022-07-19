@@ -42,7 +42,9 @@ export async function remove(careerIdx) {
       'DELETE FROM career WHERE career_idx=?',
       careerIdx,
       (err, result) => {
-        return err ? reject(err) : resolve(careerIdx);
+        return result.affectedRows == 0
+          ? resolve({ error: 'error' })
+          : resolve({ result: `${careerIdx} 삭제 완료` });
       }
     );
   });
