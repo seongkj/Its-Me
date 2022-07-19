@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useRef } from 'react';
 import PrizeList from './PrizeList';
+import axios from 'axios';
 
 function Prize() {
   const [inputs, setInputs] = useState({
@@ -29,13 +30,33 @@ function Prize() {
       prizeName,
       prizeDate,
     };
-    setPrizes(prizes.concat(prize));
 
-    setInputs({
-      prizeName: '',
-      prizeDate: '',
-    });
-    nextId.current += 1;
+    if (prizeDate === '') {
+      alert('수상일을 등록해주세요');
+    } else if (prizeName === '') {
+      alert('수상 내역을 등록해주세요');
+    } else if (prizeDate !== '' && prizeName !== '') {
+      setPrizes(prizes.concat(prize));
+
+      const data = {
+        title: prizeName,
+        award_date: prizeDate,
+        portfolio_idx: 1,
+      };
+
+      if (prizeName && prizeDate) {
+        axios
+          .post('http://localhost:3001/awards', data)
+          .then((res) => console.log(res, '성공'))
+          .catch((err) => console.log(err, '실패'));
+      }
+
+      setInputs({
+        prizeName: '',
+        prizeDate: '',
+      });
+      nextId.current += 1;
+    }
   };
 
   // 삭제

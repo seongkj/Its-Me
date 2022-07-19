@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useRef } from 'react';
 import CertificateList from './CertificateList';
+import axios from 'axios';
 
 function Certificate() {
   const [inputs, setInputs] = useState({
@@ -31,19 +32,47 @@ function Certificate() {
       certificateName,
       certificateOrg,
     };
-    setCertificates(certificates.concat(certificate));
+    if (certificateDate === '') {
+      alert('취득일을 등록해주세요');
+    } else if (certificateName === '') {
+      alert('자격증 명을 등록해주세요');
+    } else if (certificateOrg === '') {
+      alert('발급기관을 등록해주세요');
+    } else if (
+      certificateDate !== '' &&
+      certificateName !== '' &&
+      certificateOrg !== ''
+    ) {
+      setCertificates(certificates.concat(certificate));
 
-    setInputs({
-      certificateDate: '',
-      certificateName: '',
-      certificateOrg: '',
-    });
-    nextId.current += 1;
+      const data = {
+        title: certificateName,
+        organization: certificateOrg,
+        acquisition_date: certificateDate,
+        portfolio_idx: 1,
+      };
+
+      if (certificateName && certificateDate && certificateOrg) {
+        axios
+          .post('http://localhost:3001/certificates', data)
+          .then((res) => console.log(res, '성공'))
+          .catch((err) => console.log(err, '실패'));
+      }
+
+      setInputs({
+        certificateDate: '',
+        certificateName: '',
+        certificateOrg: '',
+      });
+      nextId.current += 1;
+    }
   };
 
   // 삭제
   const onRemove = (id) => {
-    setCertificates(certificates.filter((certificate) => certificate.id !== id));
+    setCertificates(
+      certificates.filter((certificate) => certificate.id !== id),
+    );
   };
 
   return (
@@ -66,7 +95,7 @@ function Certificate() {
         type="text"
         name="certificateOrg"
         value={certificateOrg}
-        placeholder="발행처"
+        placeholder="발급기관"
         onChange={onChange}
       />
       <button onClick={onCreate}>등록</button>
