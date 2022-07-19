@@ -61,17 +61,14 @@ export async function resetPassword(req, res, next) {
     if (req.body.email == '') {
       throw new CustomError(400, '이메일을 입력해주세요.');
     }
-    const email = req.body;
-    const userIdx = req.currentUserIdx;
+    const email = req.body.email;
     const user = await userService.findUserById(email);
     if (!user) {
       throw new CustomError(404, '해당 유저가 존재하지 않습니다.');
     }
     const randomPassword = generaeRandomPassword();
-    const currentUser = await userService.resetPassword(
-      userIdx,
-      randomPassword
-    );
+    const currentUser = await userService.resetPassword(email, randomPassword);
+    console.log(randomPassword);
     await sendMailer(email, randomPassword);
     res.status(200).send({
       status: 200,
@@ -86,12 +83,8 @@ export async function resetPassword(req, res, next) {
 export async function updatePassword(req, res, next) {
   try {
     const pw = req.body.pw;
-    const currentUserIdx = req.currentUserIdx;
-    const user = await userService.updatePassword(
-      currentUserEmail,
-      currentUserIdx,
-      pw
-    );
+    const currentUserEmail = req.currentUserEmail;
+    const user = await userService.updatePassword(currentUserEmail, pw);
     res.status(200).send({
       ststus: 200,
       message: '비밀번호 재설정 완료',
