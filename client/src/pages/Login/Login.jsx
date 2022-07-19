@@ -51,6 +51,7 @@ export default function SignIn() {
       .then((res) => {
         console.log(res, '성공');
         localStorage.setItem('token', res.data.data.token);
+        localStorage.setItem('userIdx', res.data.data.user_idx);
         navigate('/');
       })
       .catch((err) => {

@@ -1,5 +1,14 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import Section from './Section';
+
+import {
+  getPortfolio,
+  getPortfolios,
+  postPortfolios,
+  deletePortfolios,
+} from '../../utils/api';
 
 import './Edit.css';
 
@@ -25,12 +34,34 @@ function Edit() {
   const [displaySection, setDisplaySection] = useState({ display: 'flex' });
   const [displayDesign, setDisplayDesign] = useState({ display: 'none' });
 
+  //edit 페이지에 왔을 때 포트폴리오생성? 새로고침 할 때마다 포트폴리오를 생성해서 일단 보류
+  function postPofol() {
+    const newData = {
+      template: 1,
+      title: '자기소개서 제목',
+      user_idx: localStorage.getItem('userIdx'),
+    };
+    console.log(newData);
+    postPortfolios(newData).then((res) => {
+      console.log(res);
+    });
+  }
+  useEffect(() => {
+    console.log('asdf');
+    // postPofol();
+  }, []);
+
   // 테스트 버튼
   const test = () => {
-    console.log(sectionName.sort((a, b) => a.id - b.id));
+    getPortfolio(1).then((res) => console.log(res));
+    // deletePortfolios(39).then((res) => console.log(res));
   };
+
   const test2 = () => {
     console.log(sectionButton);
+    getPortfolios().then((res) => {
+      console.log(res);
+    });
   };
 
   return (
@@ -93,6 +124,16 @@ function Edit() {
         {sectionButton.map((el, i) => (
           <Section sectionName={el} key={i} />
         ))}
+
+        <Link to="/mypage">
+          <button
+            onClick={() =>
+              window.open('http://localhost:3000/portfolio', '_blank')
+            }
+          >
+            완료
+          </button>
+        </Link>
       </div>
     </div>
   );
