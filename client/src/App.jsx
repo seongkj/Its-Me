@@ -5,10 +5,11 @@ import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import Mypage from './pages/Mypage/Mypage';
 import Main from './pages/Main/Main';
+import Portfolio from './pages/Portfolio/Portfolio';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import Themes from './pages/Themes/Themes';
-import Portfolio from './pages/Portfolio/Portfolio';
 import './App.css';
+import PdfComponent from './pages/Portfolio/PdfComponent';
 
 function App() {
   function PrivateRoute({ children }) {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/mypage" element={<Mypage />} />
             <Route path="/themes" element={<Themes />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/pdfComponent" element={<PdfComponent />} />
           </Route>
         </Routes>
       </Router>

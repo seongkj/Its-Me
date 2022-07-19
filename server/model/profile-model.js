@@ -41,7 +41,9 @@ export async function remove(profileIdx) {
       'DELETE FROM profile WHERE profile_idx=?',
       profileIdx,
       (err, result) => {
-        return err ? reject(err) : resolve(profileIdx);
+        return result.affectedRows == 0
+          ? resolve({ error: 'error' })
+          : resolve({ result: `${profileIdx} 삭제 완료` });
       }
     );
   });

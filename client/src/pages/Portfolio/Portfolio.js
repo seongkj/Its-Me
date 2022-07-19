@@ -1,11 +1,9 @@
 import React from 'react';
 import './Portfolio.css';
-import Header from '../../components/Header';
 
-function Portfolio() {
-  return (
-    <div className="Portfolio">
-      <Header />
+class Portfolio extends React.Component{
+  render(){
+    return(
       <div className="PortfolioWrap">
         <div className="PortUserInfo">
           <div className="PortImgWrap">
@@ -103,10 +101,10 @@ function Portfolio() {
             </div>
           </div>
         </div>
-        <hr className='MainHr'></hr>
       </div>
-    </div>
-  );
+
+    );
+  }
 }
 
 export default Portfolio;
