@@ -64,13 +64,13 @@ export async function create(userInfo) {
   });
 }
 
-export async function setPassword(userIdx, pw) {
+export async function setPassword(email, pw) {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE user SET pw = ? WHERE user_idx= ?',
-      [pw, userIdx],
+      'UPDATE user SET pw = ? WHERE email = ?',
+      [pw, email],
       (err, result) => {
-        return err ? reject(err) : resolve({ user_idx: userIdx });
+        return err ? reject(err) : resolve({ email });
       }
     );
   });

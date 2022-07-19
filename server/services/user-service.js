@@ -24,12 +24,12 @@ export async function setUser(userIdx, userInfo) {
   return await userModel.update(userIdx, userInfo);
 }
 
-export async function resetPassword(userIdx, pw) {
+export async function resetPassword(email, pw) {
   const hashedPassword = await bcrypt.hash(pw, 10);
-  return await userModel.setPassword(userIdx, hashedPassword);
+  return await userModel.setPassword(email, hashedPassword);
 }
 
-export async function updatePassword(idx, pw) {
+export async function updatePassword(email, pw) {
   const hashedPassword = await bcrypt.hash(pw, 10);
-  return userModel.setPassword(idx, hashedPassword);
+  return userModel.setPassword(email, hashedPassword);
 }
