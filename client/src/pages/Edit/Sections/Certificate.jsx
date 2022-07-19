@@ -31,19 +31,33 @@ function Certificate() {
       certificateName,
       certificateOrg,
     };
-    setCertificates(certificates.concat(certificate));
+    if (certificateDate === '') {
+      alert('취득일을 등록해주세요');
+    } else if (certificateName === '') {
+      alert('자격증 명을 등록해주세요');
+    } else if (certificateOrg === '') {
+      alert('발급기관을 등록해주세요');
+    } else if (
+      certificateDate !== '' &&
+      certificateName !== '' &&
+      certificateOrg !== ''
+    ) {
+      setCertificates(certificates.concat(certificate));
 
-    setInputs({
-      certificateDate: '',
-      certificateName: '',
-      certificateOrg: '',
-    });
-    nextId.current += 1;
+      setInputs({
+        certificateDate: '',
+        certificateName: '',
+        certificateOrg: '',
+      });
+      nextId.current += 1;
+    }
   };
 
   // 삭제
   const onRemove = (id) => {
-    setCertificates(certificates.filter((certificate) => certificate.id !== id));
+    setCertificates(
+      certificates.filter((certificate) => certificate.id !== id),
+    );
   };
 
   return (
