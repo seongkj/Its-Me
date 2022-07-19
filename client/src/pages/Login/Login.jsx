@@ -10,7 +10,6 @@ import {
   Box,
   Typography,
   Container,
-  Alert,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -71,7 +70,15 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          marginTop: 6,
+          border: 'solid 1px #bdbdbd',
+          borderRadius: '10px',
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{

@@ -1,15 +1,28 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import React, { useState } from 'react';
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  FormHelperText,
+  Alert,
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+import styled from 'styled-components';
+
+const FormHelperTexts = styled(FormHelperText)`
+  width: 100%;
+  padding-left: 16px;
+  font-weight: 700 !important;
+  color: #d32f2f !important;
+`;
 
 function Copyright(props) {
   return (
@@ -32,18 +45,45 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function ResetPassword() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const [email, setEmail] = useState('');
+  const [resetError, setResetError] = useState('');
+  const [isError, setIsError] = useState(false);
+
+  const onChangeEmail = (e) => setEmail(e.target.value);
+
+  const onHandlePost = async (data) => {
+    axios
+      .post('http://localhost:3001/users/reset-password', data)
+      .then((res) => {
+        console.log(res, '성공');
+        setResetError(`${email} 로 초기화된 비밀번호를 발송했습니다`);
+      })
+      .catch((err) => {
+        console.log(err);
+        setResetError('계정 정보를 찾을 수 없습니다');
+        setIsError(true);
+      });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      email: email,
+    };
+
+    if (email) onHandlePost(data);
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          marginTop: 6,
+          border: 'solid 1px #bdbdbd',
+          borderRadius: '10px',
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -57,10 +97,10 @@ export default function ResetPassword() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            비밀번호 재설정
+            비밀번호 초기화
           </Typography>
           <Typography component="h1" variant="h6" sx={{ mt: 3 }}>
-            비밀번호를 재설정하려면 아래에 계정 정보를 입력하세요.
+            비밀번호를 초기화하려면 아래에 계정 정보를 입력하세요.
           </Typography>
           <Box
             component="form"
@@ -77,41 +117,33 @@ export default function ResetPassword() {
                   label="이메일"
                   name="email"
                   autoComplete="email"
+                  sx={{ width: '394px' }}
+                  value={email}
+                  onChange={onChangeEmail}
                 />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
+                {resetError !== '' &&
+                  (isError ? (
+                    <Alert sx={{ mt: 3 }} severity="error">
+                      {<strong>{resetError}</strong>}
+                    </Alert>
+                  ) : (
+                    <Alert sx={{ mt: 3 }} severity="success">
+                      {<strong>{resetError}</strong>}
+                    </Alert>
+                  ))}
+                <Button
+                  type="submit"
                   fullWidth
-                  id="fullName"
-                  label="이름"
-                  name="fullName"
-                  autoComplete="fullName"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="mobile"
-                  label="연락처"
-                  type="text"
-                  id="mobile"
-                  autoComplete="tel-national"
-                />
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  확인
+                </Button>
               </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              확인
-            </Button>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

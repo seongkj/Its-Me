@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import EtcEducationList from './EtcEducationList';
+import axios from 'axios';
 
 function EtcEducation() {
   const [inputs, setInputs] = useState({
@@ -35,6 +36,22 @@ function EtcEducation() {
       note,
     };
     setEtcEducations(etcEducations.concat(etcEducation));
+
+    const data = {
+      title: title,
+      organization: organization,
+      start_date: openDate,
+      end_date: closeDate,
+      comment: note,
+      portfolio_idx: 1, // 나중에 확인 필요
+    };
+
+    if (title && organization && openDate) {
+      axios
+        .post('http://localhost:3001/etc_educations', data)
+        .then((res) => console.log(res, '성공'))
+        .catch((err) => console.log(err, '실패'));
+    }
 
     setInputs({
       openDate: '',
