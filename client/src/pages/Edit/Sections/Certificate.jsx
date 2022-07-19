@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useRef } from 'react';
 import CertificateList from './CertificateList';
+import axios from 'axios';
 
 function Certificate() {
   const [inputs, setInputs] = useState({
@@ -44,6 +45,20 @@ function Certificate() {
     ) {
       setCertificates(certificates.concat(certificate));
 
+      const data = {
+        title: certificateName,
+        organization: certificateOrg,
+        acquisition_date: certificateDate,
+        portfolio_idx: 1,
+      };
+
+      if (certificateName && certificateDate && certificateOrg) {
+        axios
+          .post('http://localhost:3001/certificates', data)
+          .then((res) => console.log(res, '성공'))
+          .catch((err) => console.log(err, '실패'));
+      }
+
       setInputs({
         certificateDate: '',
         certificateName: '',
@@ -80,7 +95,7 @@ function Certificate() {
         type="text"
         name="certificateOrg"
         value={certificateOrg}
-        placeholder="발행처"
+        placeholder="발급기관"
         onChange={onChange}
       />
       <button onClick={onCreate}>등록</button>
