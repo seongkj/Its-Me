@@ -40,7 +40,9 @@ export async function remove(languageIdx) {
       'DELETE FROM language WHERE language_idx=?',
       languageIdx,
       (err, result) => {
-        return err ? reject(err) : resolve(languageIdx);
+        return result.affectedRows == 0
+          ? resolve({ error: 'error' })
+          : resolve({ result: `${languageIdx} 삭제 완료` });
       }
     );
   });
