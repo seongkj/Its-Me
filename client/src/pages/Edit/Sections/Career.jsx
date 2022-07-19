@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import CareerList from './CareerList';
+import axios from 'axios';
 
 function Career() {
   const [inputs, setInputs] = useState({
@@ -35,6 +36,22 @@ function Career() {
       comment,
     };
     setCareers(careers.concat(career));
+
+    const data = {
+      company: company,
+      start_date: startDate,
+      end_date: endDate,
+      position: position,
+      comment: comment,
+      portfolio_idx: 1, // 나중에 확인 필요
+    };
+
+    if (company && startDate && position) {
+      axios
+        .post('http://localhost:3001/careers', data)
+        .then((res) => console.log(res, '성공'))
+        .catch((err) => console.log(err, '실패'));
+    }
 
     setInputs({
       startDate: '',
