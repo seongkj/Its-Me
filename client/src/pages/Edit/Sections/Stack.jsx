@@ -11,7 +11,6 @@ function Stack() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -27,14 +26,12 @@ function Stack() {
     await axios
       .post('http://localhost:3001/skills', newData)
       .then((res) => {
-        console.log(res.data);
         setStack([
           ...stack,
           { skill_idx: `${res.data.data.skill_idx}`, name: `${addstack}` },
         ]);
       })
       .catch((err) => console.log(err));
-    // setStack([...stack, addstack]);
     setAddStack('');
   }
 
