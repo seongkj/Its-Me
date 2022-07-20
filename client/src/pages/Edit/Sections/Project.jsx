@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import TextareaAutosize from 'react-textarea-autosize';
 import axios from 'axios';
-import ProjectList from './ProjectList';
+// import ProjectList from './ProjectList';
 
 const autoGrow = (e) => {
   e.style.height = '5px';
@@ -14,15 +14,33 @@ const autoGrow = (e) => {
 
 const Project = ({ ownerData, setOwnerData }) => {
   const [inputs, setInputs] = useState({
-    thumbnail: '',
+    img: '',
     title: '',
     start_date: '',
     end_date: '',
     comment: '',
     link: '',
   });
+  const nextId = useRef(0);
+  const [state, setState] = useState('');
+  const [websites, setWebsites] = useState([]);
+  const [imgFile, setImgFile] = useState('');
 
-  const { thumbnail, title, start_date, end_date, comment, link } = inputs;
+  const { img, title, start_date, end_date, comment, link } = inputs;
+
+  const getWebsite = async () => {
+    await fetch(`http://localhost:3001/portfolios/1`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const webs = data.data.website;
+        setWebsites(webs);
+      });
+  };
+  useEffect(() => {
+    getWebsite();
+  }, []);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -32,21 +50,20 @@ const Project = ({ ownerData, setOwnerData }) => {
     });
   };
 
-  // 등록
-  const nextId = useRef(0);
-  const [projects, setProjects] = useState([]);
+  // 이미지 미리보기
+  const previewImg = (e) => {
+    const reader = new FileReader();
+    const img = e.target.files[0];
+    setImgFile(img);
+    reader.readAsDataURL(img);
+    reader.onload = function (e) {
+      setState(e.target.result);
+    };
+  };
 
+  // 등록
   const onCreate = (e) => {
     e.preventDefault();
-    const project = {
-      id: nextId.current,
-      thumbnail,
-      title,
-      start_date,
-      end_date,
-      comment,
-      link,
-    };
     if (title === '') {
       alert('타이틀을 등록해주세요');
     } else if (start_date === '') {
@@ -55,63 +72,104 @@ const Project = ({ ownerData, setOwnerData }) => {
       alert('완료일을 등록해주세요');
     } else if (comment === '') {
       alert('상세 설명을 등록해주세요');
+    } else if (imgFile === '') {
+      alert('썸네일을 등록해주세요');
     } else if (
       title !== '' &&
       start_date !== '' &&
       end_date !== '' &&
       comment !== ''
     ) {
-      setProjects(projects.concat(project));
       setInputs({
-        thumbnail: '',
+        img: '',
         title: '',
         start_date: '',
         end_date: '',
         comment: '',
         link: '',
       });
+      setState('');
+
+      var files = document.getElementById('Upload');
+      files.reset();
       nextId.current += 1;
+
+      // post
+      const img = document.querySelector('#img').files[0];
+      const formData = new FormData();
+      formData.append('img', imgFile);
+      formData.append('title', title);
+      formData.append('link', link);
+      formData.append('comment', comment);
+      formData.append('start_date', start_date);
+      formData.append('end_date', end_date);
+      formData.append('portfolio_idx', 1);
+
+      axios
+        .post('http://localhost:3001/websites', formData)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+
+      getWebsite();
     }
-  };
-
-  // 이미지 업로드
-  const [img, setImg] = useState('');
-
-  const formSubmit = (e) => {
-    const img = e.target.files[0];
-    const formData = new FormData();
-    formData.append('file', img);
-
-    axios
-      .post('http://localhost:3001/websites/1', formData)
-      .then((res) => {
-        setImg(res.data.location);
-        alert('성공');
-      })
-      .catch((err) => {
-        alert('실패');
-      });
   };
 
   // 삭제
   const onRemove = (id) => {
-    setProjects(projects.filter((project) => project.id !== id));
+    axios
+      .delete(`http://localhost:3001/websites/${id}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
+    getWebsite();
   };
+
+  // 목록 출력
+  function ProjectList() {
+    return (
+      <div>
+        {websites?.map((e) => {
+          return (
+            <div key={e.website_idx}>
+              <div className="ProjectWrap1">
+                <img src={e.thumbnail} alt="" name="thumbnail" />
+              </div>
+              <div className="ProjectWrap2">
+                <h3>{e.title}</h3>
+                <div className="date">
+                  {e.start_date}
+                  {e.end_date}
+                </div>
+                <p>{e.comment}</p>
+                <p>
+                  <FontAwesomeIcon icon={faLink} />
+                  <a href={e.link} target="_blank">
+                    {e.link}
+                  </a>
+                </p>
+              </div>
+              <button onClick={() => onRemove(e.website_idx)}>삭제</button>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <div>
       <div className="ProjectWrap">
-        {/* <button type="button" className="AddSlider">
-          +
-        </button> */}
-        <form>
+        <form id="Upload" method="post">
           <div className="ProjectWrap1">
-            <img src={img} alt="" name="thumbnail" value={thumbnail} />
+            <img src={state} alt="" name="thumbnail" />
             <input
               type="file"
               accept="image/*"
+              name="img"
               id="img"
-              onChange={formSubmit}
+              value={img}
+              onChange={previewImg}
+              style={{ position: 'absolute', left: '0', top: '0' }}
             />
           </div>
           <div className="ProjectWrap2">
@@ -164,7 +222,7 @@ const Project = ({ ownerData, setOwnerData }) => {
           <button onClick={onCreate}>등록</button>
         </form>
       </div>
-      <ProjectList projects={projects} onRemove={onRemove} />
+      <ProjectList />
     </div>
   );
 };

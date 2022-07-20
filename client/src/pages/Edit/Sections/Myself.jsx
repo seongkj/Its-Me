@@ -10,19 +10,39 @@ function Myself() {
   } = useForm();
 
   const [mySelf, setMySelf] = useState('');
+  const [newMySelf, setNewMySelf] = useState();
 
   function mySelfChange(e) {
-    console.log(e.target.value);
     setMySelf(e.target.value);
   }
 
-  async function postIntroduce() {
+  // 한 줄 소개 GET
+  const getStack = async () => {
+    await axios.get(`http://localhost:3001/portfolios/1`).then((res) => {
+      setNewMySelf(res.data.data.introduce[0].comment);
+    });
+  };
+  useEffect(() => {
+    getStack();
+  }, []);
+
+  // 한 줄 소개 POST
+  async function postIntroduce(data) {
     const newData = {
-      comment: '한 줄 소개 입니다.',
+      comment: data.comment,
       portfolio_idx: 1,
     };
+    setNewMySelf(data.comment);
+    // await axios
+    //   .post('http://localhost:3001/introduces', newData)
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err));
+  }
+
+  // 한 줄 소개 delete
+  async function removeIntroduce(delIdx) {
     await axios
-      .post('http://localhost:3001/introduces', newData)
+      .delete(`http://localhost:3001/introduces/${delIdx.introduces_idx}`)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   }
@@ -37,6 +57,7 @@ function Myself() {
         ></textarea>
         {errors.comment && <div>{errors.comment.message}</div>}
         <button type="submit">등록</button>
+        {newMySelf ? <div>한 줄 소개 : {newMySelf}</div> : null}
       </form>
     </div>
   );

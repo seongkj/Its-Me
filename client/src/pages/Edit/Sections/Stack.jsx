@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
@@ -17,15 +17,28 @@ function Stack() {
   const [addstack, setAddStack] = useState('');
   const [stack, setStack] = useState([]);
 
+  //기술 스택 GET
+  const getStack = async () => {
+    await axios.get(`http://localhost:3001/portfolios/1`).then((res) => {
+      console.log(res.data.data.skill);
+      setStack(res.data.data.skill);
+    });
+  };
+  useEffect(() => {
+    getStack();
+  }, []);
+
   //기술 스택 POST
   async function postStack(data) {
+    console.log(data);
     const newData = {
-      name: 'css',
+      name: data.name,
       portfolio_idx: 1,
     };
     await axios
       .post('http://localhost:3001/skills', newData)
       .then((res) => {
+        console.log(res);
         setStack([
           ...stack,
           { skill_idx: `${res.data.data.skill_idx}`, name: `${addstack}` },
