@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 
 import './Education.css';
 
@@ -11,17 +12,17 @@ function Education() {
     formState: { errors },
   } = useForm();
 
+  const { portfolio_idx } = useParams();
+
   //학력 POST
   async function onSubmit(data) {
     const newData = {
-      school: 'zzz',
-      status: 'xxx',
-      major: 'ccc',
-      graduate_date: '2022-07-15',
-      portfolio_idx: 1,
+      school: data.school,
+      status: data.status,
+      major: data.major,
+      graduate_date: data.graduate_date,
+      portfolio_idx: portfolio_idx,
     };
-    console.log(data);
-    console.log(newData);
     await axios
       .post('http://localhost:3001/educations', newData)
       .then((res) => console.log(res))
