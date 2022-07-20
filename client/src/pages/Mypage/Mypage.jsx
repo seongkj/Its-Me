@@ -16,17 +16,10 @@ const datas = userInfo.map((data) => {
 });
 
 const Mypage = () => {
-  const token = localStorage.getItem('token') || '';
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPhone, setUserPhone] = useState('');
   const [userImg, setUserImg] = useState('');
-  const [portfolios, setPortfolios] = useState([
-    {
-      url: '/test',
-      destcription: `새로운 포트폴리오`,
-    },
-  ]);
 
   // 저장 되어있던 포트폴리오 GET
   const [getPofol, setGetPofol] = useState([]);
@@ -51,13 +44,15 @@ const Mypage = () => {
     const getData = props.data;
     return (
       <div className="PfWrap">
-        <Link to={`/edit/${getData.portfolio_idx}`} className="LinkTitle">
+        <Link to={`/portfolio/${getData.portfolio_idx}`} className="LinkTitle">
           {getData.title}
         </Link>
         <div className="Btns">
-          <button type="button" className="Modify">
-            수정
-          </button>
+          <Link to={`/edit/${getData.portfolio_idx}`}>
+            <button type="button" className="Modify">
+              수정
+            </button>
+          </Link>
           <button
             type="button"
             id={getData.portfolio_idx}
@@ -79,9 +74,7 @@ const Mypage = () => {
       user_idx: localStorage.getItem('userIdx'),
     };
     if (getPofol.length < 3) {
-      console.log('생성가능');
       postPortfolios(newPofol).then((res) => {
-        console.log(res);
         setGetPofol([...getPofol, res]);
       });
     } else alert('포트폴리오 작성은 최대 3개까지 가능합니다.');
