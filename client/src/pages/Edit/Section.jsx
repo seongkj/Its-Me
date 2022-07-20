@@ -14,12 +14,6 @@ import './Section.css';
 function Section(prop) {
   const { sectionName } = prop;
 
-  const [displaySection, setDisplaySection] = useState({ display: 'block' });
-  const [display, toggleDisplay] = useReducer(
-    (val) => (val === 'block' ? 'none' : 'block'),
-    'block',
-  );
-
   return (
     <div className="SectionComponent">
       <div className="SectionComponentTitle">

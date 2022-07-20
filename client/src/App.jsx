@@ -29,7 +29,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/resetPassword" element={<ResetPassword />} />
           <Route element={<PrivateRoute />}>
-            <Route path="/edit" element={<Edit />} />
+            <Route path="/edit/:portfolio_idx" element={<Edit />} />
             <Route path="/mypage" element={<Mypage />} />
             <Route path="/themes" element={<Themes />} />
             <Route path="/portfolio" element={<Portfolio />} />
