@@ -9,20 +9,11 @@ import {
   Box,
   Typography,
   Container,
-  FormHelperText,
   Alert,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-import styled from 'styled-components';
-
-const FormHelperTexts = styled(FormHelperText)`
-  width: 100%;
-  padding-left: 16px;
-  font-weight: 700 !important;
-  color: #d32f2f !important;
-`;
 
 function Copyright(props) {
   return (
@@ -56,10 +47,10 @@ export default function ResetPassword() {
       .post('http://localhost:3001/users/reset-password', data)
       .then((res) => {
         console.log(res, '성공');
-        setResetError(`${email} 로 초기화된 비밀번호를 발송했습니다`);
+        setResetError(`${email} 로 임시 비밀번호를 발송했습니다`);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err, '실패');
         setResetError('계정 정보를 찾을 수 없습니다');
         setIsError(true);
       });
