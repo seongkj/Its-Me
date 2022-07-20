@@ -118,7 +118,7 @@ function Edit() {
         <Link to="/mypage">
           <button
             onClick={() =>
-              window.open('http://localhost:3000/portfolio', '_blank')
+              window.open('http://localhost:3000/PdfComponent', '_blank')
             }
           >
             완료
