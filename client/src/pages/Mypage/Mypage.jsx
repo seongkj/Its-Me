@@ -88,11 +88,6 @@ const Mypage = () => {
     });
   };
 
-  //test 버튼 함수
-  async function test() {
-    console.log(getPofol);
-  }
-
   return (
     <div className="Mypage">
       <Header />
@@ -126,9 +121,6 @@ const Mypage = () => {
             ))}
             <button type="button" className="MorePf" onClick={postPofol}>
               +
-            </button>
-            <button type="putton" onClick={test}>
-              test버튼
             </button>
           </div>
         </div>
