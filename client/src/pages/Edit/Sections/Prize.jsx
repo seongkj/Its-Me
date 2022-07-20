@@ -1,7 +1,6 @@
-import React from 'react';
-import { useState, useRef } from 'react';
-import PrizeList from './PrizeList';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+// import PrizeList from './PrizeList';
 
 function Prize() {
   const [inputs, setInputs] = useState({
@@ -9,7 +8,25 @@ function Prize() {
     prizeDate: '',
   });
 
+  const nextId = useRef(0);
+  const [state, setState] = useState('');
+  const [prizes, setPrizes] = useState([]);
+
   const { prizeName, prizeDate } = inputs;
+
+  const getPrize = async () => {
+    await fetch(`http://localhost:3001/portfolios/1`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const prize = data.data.award;
+        setPrizes(prize);
+      });
+  };
+  useEffect(() => {
+    getPrize();
+  }, []);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -19,24 +36,22 @@ function Prize() {
     });
   };
 
-  const [prizes, setPrizes] = useState([]);
-
-  const nextId = useRef(0);
-
   // 등록
-  const onCreate = () => {
-    const prize = {
-      id: nextId.current,
-      prizeName,
-      prizeDate,
-    };
+  const onCreate = (e) => {
+    e.preventDefault();
 
     if (prizeDate === '') {
       alert('수상일을 등록해주세요');
     } else if (prizeName === '') {
       alert('수상 내역을 등록해주세요');
     } else if (prizeDate !== '' && prizeName !== '') {
-      setPrizes(prizes.concat(prize));
+      setInputs({
+        prizeName: '',
+        prizeDate: '',
+      });
+      setState('');
+
+      nextId.current += 1;
 
       const data = {
         title: prizeName,
@@ -44,44 +59,60 @@ function Prize() {
         portfolio_idx: 1,
       };
 
-      if (prizeName && prizeDate) {
-        axios
-          .post('http://localhost:3001/awards', data)
-          .then((res) => console.log(res, '성공'))
-          .catch((err) => console.log(err, '실패'));
-      }
+      axios
+        .post('http://localhost:3001/awards', data)
+        .then((res) => getPrize())
+        .catch((err) => console.log(err, '실패'));
 
-      setInputs({
-        prizeName: '',
-        prizeDate: '',
-      });
-      nextId.current += 1;
     }
   };
 
   // 삭제
-  const onRemove = (id) => {
-    setPrizes(prizes.filter((prize) => prize.id !== id));
-  };
+  async function removePrize(delPrize) {
+    await axios
+      .delete(`http://localhost:3001/awards/${delPrize.award_idx}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+    const deletPrize = prizes.filter((el) => el !== delPrize);
+    setPrizes(deletPrize);
+  }
+
+  //목록
+  function PrizeList() {
+    return (
+      <div>
+        {prizes?.map((e) => {
+          return (
+            <div key={e.award_idx}>
+              <span>{e.award_date}</span> <span>{e.title}</span>
+              <button onClick={() => removePrize(e)}>삭제</button>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <div>
-      <input
-        type="date"
-        name="prizeDate"
-        value={prizeDate}
-        placeholder="수상일"
-        onChange={onChange}
-      />
-      <input
-        type="text"
-        name="prizeName"
-        value={prizeName}
-        placeholder="수상 내역 입력"
-        onChange={onChange}
-      />
-      <button onClick={onCreate}>등록</button>
-      <PrizeList prizes={prizes} onRemove={onRemove} />
+      <div className="PrizeWrap">
+        <input
+          type="date"
+          name="prizeDate"
+          value={prizeDate}
+          placeholder="수상일"
+          onChange={onChange}
+        />
+        <input
+          type="text"
+          name="prizeName"
+          value={prizeName}
+          placeholder="수상 내역 입력"
+          onChange={onChange}
+        />
+        <button onClick={onCreate}>등록</button>
+      </div>
+      <PrizeList />
     </div>
   );
 }
