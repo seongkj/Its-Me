@@ -146,7 +146,6 @@ function SectionChoiceButton(prop) {
 
   //세션 컴포넌트 삭제
   const removeSectionTitle = (clickedTitle) => {
-    console.log('삭제 실행');
     const deleteSection = sectionButton.filter(
       (el) => el.name !== clickedTitle,
     );
@@ -154,10 +153,13 @@ function SectionChoiceButton(prop) {
   };
 
   const onChangeColor = (event) => {
-    changeColor();
-    const check = { id: event.target.id, name: event.target.innerHTML };
+    const check = sectionButton.filter(
+      (el) => el.name === event.target.innerHTML,
+    );
 
-    if (sectionButton.includes(check) === false) {
+    changeColor();
+
+    if (check.length !== 1) {
       addSectionTitle(event.target.innerHTML);
     } else {
       removeSectionTitle(event.target.innerHTML);
