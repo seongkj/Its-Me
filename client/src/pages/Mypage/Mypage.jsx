@@ -4,6 +4,8 @@ import './Mypage.css';
 import userInfo from '../../assets/mypage.json';
 import Header from '../../components/Header';
 
+import { getPortfolio, getPortfolios, postPortfolios } from '../../utils/api';
+
 const datas = userInfo.map((data) => {
   return data;
 });
@@ -21,6 +23,15 @@ const Mypage = () => {
     },
   ]);
 
+  // 저장 되어있던 포트폴리오
+  const [getPofol, setGetPofol] = useState([]);
+  useEffect(() => {
+    getPortfolios().then((res) => {
+      console.log(res);
+      setGetPofol(res);
+    });
+  }, []);
+
   useEffect(() => {
     for (let i = 0; i < datas.length; i++) {
       if (datas[i].name === '홍길동') {
@@ -32,25 +43,16 @@ const Mypage = () => {
     }
   }, []);
 
-  console.log(userName);
-
   const PortLists = (props) => {
-    const handleCopyPort = (e) => {
-      e.preventDefault();
-      alert('복사ㅏㅏㅏㅏ');
-    };
-    const portList = props.data.map((e) => {
+    const portList = props.data.map((e, i) => {
       return (
-        <div className="PfWrap">
+        <div key={i} className="PfWrap">
           <Link to={e.url} className="LinkTitle">
             {e.destcription}
           </Link>
           <div className="Btns">
             <button type="button" className="Modify">
               수정
-            </button>
-            <button type="button" className="Copy" onClick={handleCopyPort}>
-              복사
             </button>
           </div>
         </div>
@@ -60,7 +62,6 @@ const Mypage = () => {
   };
 
   const handleMorePort = (e) => {
-    e.preventDefault();
     if (portfolios.length < 3) {
       setPortfolios([
         ...portfolios,
@@ -100,7 +101,10 @@ const Mypage = () => {
         <div className="Portfolios">
           <h2>포트폴리오</h2>
           <div className="Pf">
-            <PortLists data={portfolios} />
+            {getPofol.map((el, i) => (
+              <PortLists key={i} data={portfolios} />
+            ))}
+            {/* <PortLists data={portfolios} /> */}
             <button type="button" className="MorePf" onClick={handleMorePort}>
               +
             </button>
