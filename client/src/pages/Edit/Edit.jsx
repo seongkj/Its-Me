@@ -34,17 +34,9 @@ function Edit() {
   const [displaySection, setDisplaySection] = useState({ display: 'flex' });
   const [displayDesign, setDisplayDesign] = useState({ display: 'none' });
 
-  // 세션 순서 정렬
-  // useEffect(() => {
-  //   const sectionSort = sectionButton;
-  //   console.log(sectionSort);
-  //   sectionSort.sort((a, b) => a.id - b.id);
-  // }, [sectionButton]);
-
   // 테스트 버튼
   const test = () => {
     getPortfolio(1).then((res) => console.log(res));
-    // deletePortfolios(39).then((res) => console.log(res));
   };
 
   const test2 = () => {
