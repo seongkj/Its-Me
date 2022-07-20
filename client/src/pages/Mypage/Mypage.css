@@ -1,6 +1,120 @@
 .Mypage {
   margin: 0 auto;
 }
+.Mypage .ProfilePopup {
+  position: fixed;
+  margin-top: -100px;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+.Mypage .ProfilePopup .wrap {
+  width: 700px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 20px;
+}
+.Mypage .ProfilePopup .wrap .Buttons {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+.Mypage .ProfilePopup .wrap .Buttons::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.Mypage .ProfilePopup .wrap .Buttons button {
+  float: right;
+  margin-left: 10px;
+  line-height: 30px;
+  padding: 0 20px;
+  background-color: #aaa;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.Mypage .ProfilePopup .wrap .Buttons button:first-child {
+  background-color: var(--main-color);
+}
+.Mypage .ProfilePopup .wrap .ImgWrap {
+  width: 40%;
+  display: inline-block;
+  border-right: 1px solid #ddd;
+  vertical-align: middle;
+  padding: 30px;
+}
+.Mypage .ProfilePopup .wrap p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.Mypage .ProfilePopup .wrap .ImgWrap .InputWrap {
+  overflow: hidden;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+}
+.Mypage .ProfilePopup .wrap .ImgWrap .InputWrap img {
+  width: 100%;
+  height: 100%;
+}
+.Mypage .ProfilePopup .wrap .ImgWrap .InputWrap label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  text-align: center;
+  line-height: 180px;
+  transition: 0.2s;
+  border-radius: 100%;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 5rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.Mypage .ProfilePopup .wrap .ImgWrap .InputWrap label:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.Mypage .ProfilePopup .wrap .ImgWrap input[type='file'] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.Mypage .ProfilePopup .wrap .TxtWrap {
+  padding-left: 40px;
+  width: 60%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.Mypage .ProfilePopup .wrap .TxtWrap > div {
+  margin-bottom: 20px;
+}
+.Mypage .ProfilePopup .wrap .TxtWrap p {
+  margin-bottom: 10px;
+}
+.Mypage .ProfilePopup .wrap .TxtWrap input {
+  display: block;
+  width: 80%;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #ccc;
+}
 .MypageWrap {
   width: 1200px;
   margin: 100px auto 0 auto;
@@ -10,7 +124,25 @@
 .UserInfo {
   padding: 30px 50px;
   background-color: #f1f1f1;
-  border-radius: 30px;
+  border-radius: 20px;
+  position: relative;
+}
+.UserInfo .ProfileEdit {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  background-color: var(--main-color);
+  color: white;
+  border: 0;
+  border-radius: 15px;
+  height: 30px;
+  padding: 0 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 600;
+}
+.UserInfo .ProfileEdit:hover {
+  background-color: rgb(162, 78, 187);
 }
 .UserInfo .ImgWrap {
   width: 150px;
@@ -20,6 +152,7 @@
   display: inline-block;
   vertical-align: middle;
   box-sizing: content-box;
+  background-color: white;
 }
 .UserInfo .ImgWrap img {
   width: 100%;
