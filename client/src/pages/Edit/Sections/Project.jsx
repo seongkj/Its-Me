@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './Project.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
@@ -26,10 +26,12 @@ const Project = ({ ownerData, setOwnerData }) => {
   const [websites, setWebsites] = useState([]);
   const [imgFile, setImgFile] = useState('');
 
+  const { portfolio_idx } = useParams();
+
   const { img, title, start_date, end_date, comment, link } = inputs;
 
   const getWebsite = async () => {
-    await fetch(`http://localhost:3001/portfolios/1`, {
+    await fetch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
       method: 'GET',
     })
       .then((res) => res.json())
@@ -95,7 +97,7 @@ const Project = ({ ownerData, setOwnerData }) => {
       nextId.current += 1;
 
       // post
-      const img = document.querySelector('#img').files[0];
+      // const img = document.querySelector('#img').files[0];
       const formData = new FormData();
       formData.append('img', imgFile);
       formData.append('title', title);
@@ -103,14 +105,12 @@ const Project = ({ ownerData, setOwnerData }) => {
       formData.append('comment', comment);
       formData.append('start_date', start_date);
       formData.append('end_date', end_date);
-      formData.append('portfolio_idx', 1);
+      formData.append('portfolio_idx', portfolio_idx);
 
       axios
         .post('http://localhost:3001/websites', formData)
-        .then((res) => console.log(res))
+        .then((res) => getWebsite())
         .catch((err) => console.log(err));
-
-      getWebsite();
     }
   };
 
