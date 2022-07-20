@@ -5,7 +5,9 @@ import { CustomError } from '../middlewares/customError.js';
 export async function findUserById(userIdx) {
   return await userModel.findById(userIdx);
 }
-
+export async function findUserByEmail(email) {
+  return await userModel.findByEmail(email);
+}
 export async function deleteUser(userIdx, pw, email) {
   const userById = await userModel.findByEmail(email);
   if (!userById) {

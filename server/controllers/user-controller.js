@@ -1,5 +1,6 @@
 import * as userService from '../services/user-service.js';
 import sendMailer from '../config/email-config.js';
+import { CustomError } from '../middlewares/customError.js';
 
 export async function getUser(req, res, next) {
   try {
@@ -62,13 +63,13 @@ export async function resetPassword(req, res, next) {
       throw new CustomError(400, '이메일을 입력해주세요.');
     }
     const email = req.body.email;
-    const user = await userService.findUserById(email);
+
+    const user = await userService.findUserByEmail(email);
     if (!user) {
       throw new CustomError(404, '해당 유저가 존재하지 않습니다.');
     }
     const randomPassword = generaeRandomPassword();
     const currentUser = await userService.resetPassword(email, randomPassword);
-    console.log(randomPassword);
     await sendMailer(email, randomPassword);
     res.status(200).send({
       status: 200,
