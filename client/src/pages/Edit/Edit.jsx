@@ -34,30 +34,12 @@ function Edit() {
   const [displaySection, setDisplaySection] = useState({ display: 'flex' });
   const [displayDesign, setDisplayDesign] = useState({ display: 'none' });
 
-  //edit 페이지에 왔을 때 포트폴리오생성? 새로고침 할 때마다 포트폴리오를 생성해서 일단 보류 아래
-  function postPofol() {
-    const newData = {
-      template: 1,
-      title: '자기소개서 제목',
-      user_idx: localStorage.getItem('userIdx'),
-    };
-    console.log(newData);
-    postPortfolios(newData).then((res) => {
-      console.log(res);
-    });
-  }
-  useEffect(() => {
-    // console.log('asdf');
-    // postPofol();
-  }, []);
-  //edit 페이지에 왔을 때 포트폴리오생성? 새로고침 할 때마다 포트폴리오를 생성해서 일단 보류 위
-
   // 세션 순서 정렬
-  useEffect(() => {
-    const sectionSort = sectionButton;
-    console.log(sectionSort);
-    sectionSort.sort((a, b) => a.id - b.id);
-  }, [sectionButton]);
+  // useEffect(() => {
+  //   const sectionSort = sectionButton;
+  //   console.log(sectionSort);
+  //   sectionSort.sort((a, b) => a.id - b.id);
+  // }, [sectionButton]);
 
   // 테스트 버튼
   const test = () => {
@@ -67,9 +49,9 @@ function Edit() {
 
   const test2 = () => {
     console.log(sectionButton);
-    getPortfolios().then((res) => {
-      console.log(res);
-    });
+    // getPortfolios().then((res) => {
+    //   console.log(res);
+    // });
   };
 
   return (
@@ -157,7 +139,9 @@ function SectionChoiceButton(prop) {
 
   //세션 컴포넌트 추가
   const addSectionTitle = (clickedTitle) => {
-    setSectionButton([...sectionButton, { id: id, name: clickedTitle }]);
+    const sortData = [...sectionButton, { id: id, name: clickedTitle }];
+    sortData.sort((a, b) => a.id - b.id);
+    setSectionButton(sortData);
   };
 
   //세션 컴포넌트 삭제
