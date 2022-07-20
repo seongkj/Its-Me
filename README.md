@@ -49,4 +49,4 @@ https://www.figma.com/file/eAAo0mHJzeVxdQinTSGbHJ/2차프로젝트-10팀?node-id
 |   박세령  |  프론트엔드   |    |
 |   성경주  |  프론트엔드   |    |
 |   오승준  |  백엔드  |    |
-|   황시원  |  백엔드  |  유저, auth, DB 설계 및 생성 |
+|   황시원  |  백엔드  |  유저 관리 api, 로그인/회원가입/비밀번호 재설정 api, DB 설계 및 생성 |
