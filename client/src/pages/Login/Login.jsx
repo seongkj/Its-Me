@@ -10,6 +10,7 @@ import {
   Box,
   Typography,
   Container,
+  Alert,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -50,7 +51,6 @@ export default function SignIn() {
       .then((res) => {
         console.log(res, '성공');
         localStorage.setItem('token', res.data.data.token);
-        localStorage.setItem('userIdx', res.data.data.user_idx);
         navigate('/');
       })
       .catch((err) => {
@@ -66,6 +66,8 @@ export default function SignIn() {
       pw: pw,
     };
 
+    if (!email) setLoginError('이메일을 입력해주세요');
+    if (email && !pw) setLoginError('비밀번호를 입력해주세요');
     if (email && pw) onHandlePost(data);
   };
 
@@ -125,6 +127,11 @@ export default function SignIn() {
               value={pw}
               onChange={onChangePw}
             />
+            {loginError !== '' && (
+              <Alert sx={{ mt: 3 }} severity="error">
+                {<strong>{loginError}</strong>}
+              </Alert>
+            )}
             <Button
               type="submit"
               fullWidth
