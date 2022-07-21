@@ -94,7 +94,7 @@ function Language() {
         {languages?.map((e) => {
           return (
             <div key={e.language_idx}>
-              <span>{e.acquisition_date}</span>
+              <span>{e.acquisition_date.substr(0, 10)}</span>
               <span>{e.name}</span>
               <span>{e.level}</span>
               <button onClick={() => removeLang(e)}>삭제</button>

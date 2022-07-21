@@ -93,7 +93,7 @@ function Certificate() {
         {certificates?.map((e) => {
           return (
             <div key={e.certificate_idx}>
-              <span>{e.acquisition_date}</span>
+              <span>{e.acquisition_date.substr(0, 10)}</span>
               <span>{e.title}</span>
               <span>{e.organization}</span>
               <button onClick={() => onRemove(e.certificate_idx)}>삭제</button>

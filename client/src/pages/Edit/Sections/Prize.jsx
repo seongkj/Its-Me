@@ -65,7 +65,6 @@ function Prize() {
         .post('http://localhost:3001/awards', data)
         .then((res) => getPrize())
         .catch((err) => console.log(err, '실패'));
-
     }
   };
 
@@ -86,7 +85,7 @@ function Prize() {
         {prizes?.map((e) => {
           return (
             <div key={e.award_idx}>
-              <span>{e.award_date}</span> <span>{e.title}</span>
+              <span>{e.award_date.substr(0, 10)}</span> <span>{e.title}</span>
               <button onClick={() => removePrize(e)}>삭제</button>
             </div>
           );
