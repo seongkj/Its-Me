@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 // import LanguageList from './LanguageList';
+import './Language.css';
 
 function Language() {
   const [inputs, setInputs] = useState({
@@ -93,11 +94,13 @@ function Language() {
       <div>
         {languages?.map((e) => {
           return (
-            <div key={e.language_idx}>
-              <span>{e.acquisition_date}</span>
-              <span>{e.name}</span>
-              <span>{e.level}</span>
-              <button onClick={() => removeLang(e)}>삭제</button>
+            <div key={e.language_idx} className="LangList">
+              <p>{e.acquisition_date.substr(0, 10)}</p>
+              <p>외국어명 : {e.name}</p>
+              <p>점수 : {e.level}점</p>
+              <button onClick={() => removeLang(e)} className="DeleteBtn">
+                삭제
+              </button>
             </div>
           );
         })}

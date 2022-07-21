@@ -127,7 +127,7 @@ const Project = ({ ownerData, setOwnerData }) => {
   // 목록 출력
   function ProjectList() {
     return (
-      <div>
+      <div className="ProjectList">
         {websites?.map((e) => {
           return (
             <div key={e.website_idx}>
@@ -137,18 +137,23 @@ const Project = ({ ownerData, setOwnerData }) => {
               <div className="ProjectWrap2">
                 <h3>{e.title}</h3>
                 <div className="date">
-                  {e.start_date}
-                  {e.end_date}
+                  <span>{e.start_date.substr(0, 10)} ~ </span>
+                  <span>{e.end_date.substr(0, 10)}</span>
                 </div>
-                <p>{e.comment}</p>
-                <p>
+                <p className="CommentWrap">{e.comment}</p>
+                <p className="LinkWrap">
                   <FontAwesomeIcon icon={faLink} />
                   <a href={e.link} target="_blank">
                     {e.link}
                   </a>
                 </p>
               </div>
-              <button onClick={() => onRemove(e.website_idx)}>삭제</button>
+              <button
+                onClick={() => onRemove(e.website_idx)}
+                className="DeleteBtn"
+              >
+                삭제
+              </button>
             </div>
           );
         })}
@@ -162,11 +167,12 @@ const Project = ({ ownerData, setOwnerData }) => {
         <form id="Upload" method="post">
           <div className="ProjectWrap1">
             <img src={state} alt="" name="thumbnail" />
+            <label htmlFor="ImgInput">+</label>
             <input
               type="file"
               accept="image/*"
               name="img"
-              id="img"
+              id="ImgInput"
               value={img}
               onChange={previewImg}
               style={{ position: 'absolute', left: '0', top: '0' }}

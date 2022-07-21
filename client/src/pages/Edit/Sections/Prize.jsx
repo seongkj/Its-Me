@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 // import PrizeList from './PrizeList';
+import './Prize.css';
 
 function Prize() {
   const [inputs, setInputs] = useState({
@@ -65,7 +66,6 @@ function Prize() {
         .post('http://localhost:3001/awards', data)
         .then((res) => getPrize())
         .catch((err) => console.log(err, '실패'));
-
     }
   };
 
@@ -82,12 +82,14 @@ function Prize() {
   //목록
   function PrizeList() {
     return (
-      <div>
+      <div className="PrizeList">
         {prizes?.map((e) => {
           return (
             <div key={e.award_idx}>
-              <span>{e.award_date}</span> <span>{e.title}</span>
-              <button onClick={() => removePrize(e)}>삭제</button>
+              <span>{e.award_date.substr(0, 10)}</span> <span>{e.title}</span>
+              <button onClick={() => removePrize(e)} className="DeleteBtn">
+                삭제
+              </button>
             </div>
           );
         })}

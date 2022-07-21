@@ -1,0 +1,38 @@
+.EtcEduInput {
+  margin-top: 0 !important;
+  border: none !important;
+  padding-top: 0 !important;
+}
+.EtcEduInput > div {
+  margin-top: 0 !important;
+  margin-bottom: 10px;
+}
+.EtcEduInput input {
+  margin-right: 10px;
+}
+.EtcEduInput::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.SectionComponentContent .EtcEduInput button {
+  margin-left: 0;
+}
+.EtcEduList {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+.EtcEduList > div {
+  margin-bottom: 10px;
+}
+.EtcEduList > div span {
+  font-size: 0.8rem;
+  color: #999;
+}
+.EtcEduList > P {
+  line-height: 1.7rem;
+}
+.EtcEduList .DeleteBtn {
+  display: block;
+}

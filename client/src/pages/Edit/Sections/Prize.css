@@ -1,0 +1,21 @@
+.PrizeList > div {
+  margin-bottom: 20px;
+}
+.PrizeList > div span:first-child {
+  color: #999;
+  margin-right: 10px;
+}
+.SectionComponent .PrizeList > div .DeleteBtn {
+  margin-top: 0;
+  margin-left: 15px;
+  vertical-align: middle;
+}
+
+.PrizeWrap input:first-child {
+  margin-right: 10px;
+}
+.SectionComponentContent .PrizeWrap {
+  padding-top: 0;
+  margin-top: 0;
+  border-top: none;
+}

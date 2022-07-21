@@ -1,0 +1,32 @@
+.CertifInput .CertificateWrap {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0;
+}
+.CertifInput .CertificateWrap input {
+  margin-right: 10px;
+}
+.CertifInput .CertificateWrap input:nth-child(3) {
+  margin-right: 0;
+}
+
+.CertifInput .CertifList div {
+  margin-bottom: 20px;
+}
+.CertifInput .CertifList div .DeleteBtn {
+  margin-top: 10px;
+}
+.CertifInput .CertifList div .Date {
+  color: #999;
+  margin-bottom: 10px;
+  display: block;
+}
+.CertifInput .CertifList div p {
+  line-height: 1.7rem;
+}
+
+.CertifList > div {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
