@@ -33,7 +33,10 @@ function App() {
             <Route path="/mypage" element={<Mypage />} />
             <Route path="/themes" element={<Themes />} />
             <Route path="/portfolio/:portfolio_idx" element={<Portfolio />} />
-            <Route path="/pdfComponent" element={<PdfComponent />} />
+            <Route
+              path="/pdfComponent/:portfolio_idx"
+              element={<PdfComponent />}
+            />
           </Route>
         </Routes>
       </Router>
