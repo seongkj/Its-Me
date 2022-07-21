@@ -3,8 +3,11 @@ import React from 'react';
 function Prize({ prize, onRemove }) {
   return (
     <div>
-      <span>{prize.prizeDate}</span> <span>{prize.prizeName}</span>
-      <button onClick={() => onRemove(prize.id)}>삭제</button>
+      <span>{prize.prizeDate.substr(0, 10)}</span>{' '}
+      <span>{prize.prizeName}</span>
+      <button onClick={() => onRemove(prize.id)} className="DeleteBtn">
+        삭제
+      </button>
     </div>
   );
 }

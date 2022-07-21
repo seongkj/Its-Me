@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 //import CertificateList from './CertificateList';
+import './Certificate.css';
 
 function Certificate() {
   const [inputs, setInputs] = useState({
@@ -83,20 +84,24 @@ function Certificate() {
       .delete(`http://localhost:3001/certificates/${id}`)
       .then((res) => getCertificate())
       .catch((err) => console.log(err));
-
   };
 
   //목록
   function CertificateList() {
     return (
-      <div>
+      <div className="CertifList">
         {certificates?.map((e) => {
           return (
             <div key={e.certificate_idx}>
-              <span>{e.acquisition_date.substr(0, 10)}</span>
-              <span>{e.title}</span>
-              <span>{e.organization}</span>
-              <button onClick={() => onRemove(e.certificate_idx)}>삭제</button>
+              <span className="Date">{e.acquisition_date.substr(0, 10)}</span>
+              <p>자격증 명 : {e.title}</p>
+              <p>발급 기관 : {e.organization}</p>
+              <button
+                onClick={() => onRemove(e.certificate_idx)}
+                className="DeleteBtn"
+              >
+                삭제
+              </button>
             </div>
           );
         })}
@@ -105,7 +110,7 @@ function Certificate() {
   }
 
   return (
-    <div>
+    <div className="CertifInput">
       <div className="CertificateWrap">
         <input
           type="date"

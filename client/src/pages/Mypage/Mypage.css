@@ -1,9 +1,20 @@
+@font-face {
+  font-family: 'LeferiPoint-WhiteA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 .Mypage {
   margin: 0 auto;
+  border-top: 3px solid var(--main-color);
+  margin-top: 10vh;
+  /* background-color: #f3f3f3; */
+  min-height: 90vh;
 }
 .Mypage .ProfilePopup {
   position: fixed;
-  margin-top: -100px;
+  margin-top: -10vh;
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
@@ -117,21 +128,24 @@
 }
 .MypageWrap {
   width: 1200px;
-  margin: 100px auto 0 auto;
+  margin: 50px auto 0 auto;
   position: relative;
 }
 
 .UserInfo {
-  padding: 30px 50px;
-  background-color: #f1f1f1;
+  padding: 50px;
+  background-color: white;
   border-radius: 20px;
   position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  font-family: 'LeferiPoint-WhiteA';
+  font-weight: bold;
 }
 .UserInfo .ProfileEdit {
   position: absolute;
   right: 15px;
   bottom: 15px;
-  background-color: var(--main-color);
+  background-color: var(--main2-color);
   color: white;
   border: 0;
   border-radius: 15px;
@@ -142,7 +156,7 @@
   font-weight: 600;
 }
 .UserInfo .ProfileEdit:hover {
-  background-color: rgb(162, 78, 187);
+  background-color: var(--error-color);
 }
 .UserInfo .ImgWrap {
   width: 150px;
@@ -152,7 +166,8 @@
   display: inline-block;
   vertical-align: middle;
   box-sizing: content-box;
-  background-color: white;
+  background-color: #ddd;
+  border: 1px solid #ddd;
 }
 .UserInfo .ImgWrap img {
   width: 100%;
@@ -177,8 +192,11 @@
 }
 
 .Portfolios {
-  margin: 50px auto 0 auto;
+  margin: 30px auto 0 auto;
   height: 300px;
+  border-top: 2px solid #ddd;
+  padding-top: 30px;
+  font-family: 'LeferiPoint-WhiteA';
 }
 .Portfolios h2 {
   font-size: 1.5rem;
@@ -186,7 +204,6 @@
   width: 15%;
   font-weight: bold;
   vertical-align: top;
-  border-right: 1px solid #ddd;
   height: 100%;
 }
 .Portfolios .Pf {
@@ -197,9 +214,9 @@
 }
 .Portfolios .Pf .PfWrap {
   width: 100%;
-  background-color: rgb(227, 240, 255);
-  border-radius: 5px;
-  padding: 15px 20px;
+  background-color: var(--main-color);
+  border-radius: 10px;
+  padding: 20px;
   margin-bottom: 20px;
 }
 .Portfolios .Pf .PfWrap::after {
@@ -214,11 +231,11 @@
   /* float: left; */
   /* width: calc(100% - 105px); */
   line-height: 30px;
-  color: rgb(52, 77, 124);
+  color: white;
 }
 
 .Portfolios .Pf .PfWrap a:hover {
-  color: rgb(86, 158, 216);
+  color: rgb(148, 198, 240);
 }
 
 .Portfolios .Pf .PfWrap .Btns {
@@ -244,12 +261,18 @@
   width: 50px;
   height: 50px;
   border-radius: 100%;
-  border: 3px solid #ddd;
-  background-color: white;
+  border: 3px solid #aaa;
   font-size: 2.7rem;
-  color: #ccc;
+  color: #aaa;
   line-height: 40px;
   cursor: pointer;
   display: block;
   margin: 30px auto 0 auto;
+  transition: 0.2s;
+  background-color: rgba(0, 0, 0, 0);
+}
+.MorePf:hover {
+  border-color: var(--error-color);
+  background-color: var(--error-color);
+  color: white;
 }

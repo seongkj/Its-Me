@@ -1,35 +1,55 @@
+@font-face {
+  font-family: 'LeferiPoint-WhiteA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 .Edit {
-  display: flex;
+  /* display: flex; */
+  background-color: #f3f3f3;
+  min-height: 100vh;
+  margin-top: 10vh;
+  position: fixed;
 }
 .OptionBar {
   position: fixed;
   display: flex;
+  border-top: 2px solid var(--main-color);
 }
 /* edit-bar 부분 */
 .EditBar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: yellowgreen;
+  background-color: var(--main-color);
   height: 100vh;
   width: 90px;
 }
 
 .EditOption button {
   border: none;
-  background-color: beige;
-  border-radius: 1rem;
+  background-color: white;
+  border-radius: 100%;
   height: 4.5rem;
+  line-height: 4.8rem;
   width: 4.5rem;
   margin-top: 10px;
   cursor: pointer;
+  transition: 0.1s;
+  font-size: 1rem;
+  font-family: 'LeferiPoint-WhiteA';
+  font-weight: bold;
+}
+.EditOption button:hover {
+  background-color: white;
 }
 
 /* section-bar 부분 */
-.SectionBar, .DesignBar {
-  background-color: beige;
+.SectionBar {
+  background-color: white;
   height: 100vh;
-  width: 200px;
+  width: 300px;
 }
 .SectionBar ul {
   display: flex;
@@ -45,24 +65,90 @@
 .SectionButton, .DesignButton {
   border: none;
   border-radius: 5px;
-  background-color: pink;
-  width: 170px;
-  height: 35px;
+  background-color: #ddd;
+  width: 80%;
+  height: 40px;
   cursor: pointer;
   font-size: 1rem;
   text-align: start;
+  transition: 0.1s;
+  font-weight: 600;
+  color: #666;
+  padding: 10px;
+  font-weight: bold;
+  font-family: 'LeferiPoint-WhiteA';
 }
-.SectionButton.Toggle, .DesignButton.Toggle {
-  background-color: plum;
+.SectionButton:hover {
+  background-color: var(--sub2-color);
+  color: white;
+}
+.SectionButton.Toggle {
+  background-color: var(--main-color);
+  color: white;
 }
 
 /* section info 부분 */
-.SectionInfo, .DesignInfo {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
+.SectionInfo {
+  /* display: flex; */
+  background-color: #f3f3f3;
   flex-direction: column;
   align-items: center;
+  padding: 50px 0;
+  width: calc(100% - 390px);
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  justify-content: center;
+  margin-top: 10vh;
+  border-top: 2px solid var(--main-color);
+  overflow-y: scroll;
+}
+.SectionInfo > a {
+  display: block;
+  width: 100px;
   margin: 0 auto;
-  margin-top: 30px;
+  text-align: center;
+}
+.SectionInfo > a button {
+  background-color: var(--main2-color);
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 20px;
+  line-height: 40px;
+  padding: 0 30px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-family: 'LeferiPoint-WhiteA';
+}
+.SectionInfo > a button:hover {
+  background-color: var(--sub2-color);
+}
+
+.DisplayDesign li {
+  background-color: #ccc;
+  width: 80%;
+  height: 150px;
+  margin: 0 auto;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+.DisplayDesign li.Toggle {
+  border: 3px solid var(--error-color);
+}
+.TopBtn {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  background-color: #ccc;
+  width: 6vh;
+  height: 6vh;
+  line-height: 6vh;
+  border-radius: 100%;
+  border: 0;
+  cursor: pointer;
+  color: #555;
 }

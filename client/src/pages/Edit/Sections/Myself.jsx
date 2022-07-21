@@ -82,7 +82,9 @@ function Myself() {
         {errors.comment && <div>{errors.comment.message}</div>}
         <button type="submit">{newMySelf.length >= 1 ? '수정' : '등록'}</button>
         {newMySelf.map((el, i) => (
-          <div key={i}>한 줄 소개 : {el.comment}</div>
+          <div key={i} style={{ marginTop: '20px', fontWeight: 'bold' }}>
+            한 줄 소개 : {el.comment}
+          </div>
         ))}
       </form>
     </div>

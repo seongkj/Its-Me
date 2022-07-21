@@ -43,12 +43,17 @@ const EtcEducationList = () => {
 };
 const EtcEducation = ({ etc_education, onRemove }) => {
   return (
-    <div>
-      <span>{etc_education.start_date}</span>{' '}
-      <span>{etc_education.end_date}</span>{' '}
-      <span>{etc_education.organization}</span>{' '}
-      <span>{etc_education.title}</span> <span>{etc_education.comment}</span>
-      <button onClick={() => onRemove(etc_education.etc_education_idx)}>
+    <div className="EtcEduList">
+      <div>
+        <span>{etc_education.start_date.substr(0, 10)} ~ </span>{' '}
+        <span>{etc_education.end_date.substr(0, 10)}</span>{' '}
+      </div>
+      <p>기관 : {etc_education.organization}</p>{' '}
+      <p>활동명: {etc_education.title}</p> <p>{etc_education.comment}</p>
+      <button
+        onClick={() => onRemove(etc_education.etc_education_idx)}
+        className="DeleteBtn"
+      >
         삭제
       </button>
     </div>
