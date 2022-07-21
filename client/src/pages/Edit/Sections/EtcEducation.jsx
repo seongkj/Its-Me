@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import EtcEducationList from './EtcEducationList';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function EtcEducation() {
+  const { portfolio_idx } = useParams();
   const [inputs, setInputs] = useState({
     openDate: '',
     closeDate: '',
@@ -21,29 +23,15 @@ function EtcEducation() {
     });
   };
 
-  const [etcEducations, setEtcEducations] = useState([]);
-
-  const nextId = useRef(0);
-
-  // 등록
+  // post
   const onCreate = () => {
-    const etcEducation = {
-      id: nextId.current,
-      openDate,
-      closeDate,
-      title,
-      organization,
-      note,
-    };
-    setEtcEducations(etcEducations.concat(etcEducation));
-
     const data = {
       title: title,
       organization: organization,
       start_date: openDate,
       end_date: closeDate,
       comment: note,
-      portfolio_idx: 1, // 나중에 확인 필요
+      portfolio_idx: portfolio_idx,
     };
 
     if (title && organization && openDate) {
@@ -60,14 +48,6 @@ function EtcEducation() {
       organization: '',
       note: '',
     });
-    nextId.current += 1;
-  };
-
-  // 삭제
-  const onRemove = (id) => {
-    setEtcEducations(
-      etcEducations.filter((etcEducation) => etcEducation.id !== id),
-    );
   };
 
   return (
@@ -108,7 +88,7 @@ function EtcEducation() {
         onChange={onChange}
       />
       <button onClick={onCreate}>등록</button>
-      <EtcEducationList etcEducations={etcEducations} onRemove={onRemove} />
+      <EtcEducationList />
     </div>
   );
 }

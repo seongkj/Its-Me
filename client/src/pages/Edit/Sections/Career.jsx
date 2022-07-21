@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import CareerList from './CareerList';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function Career() {
+  const { portfolio_idx } = useParams();
   const [inputs, setInputs] = useState({
     startDate: '',
     endDate: '',
@@ -21,29 +23,15 @@ function Career() {
     });
   };
 
-  const [careers, setCareers] = useState([]);
-
-  const nextId = useRef(0);
-
-  // 등록
+  // post
   const onCreate = () => {
-    const career = {
-      id: nextId.current,
-      startDate,
-      endDate,
-      company,
-      position,
-      comment,
-    };
-    setCareers(careers.concat(career));
-
     const data = {
       company: company,
       start_date: startDate,
       end_date: endDate,
       position: position,
       comment: comment,
-      portfolio_idx: 1, // 나중에 확인 필요
+      portfolio_idx: portfolio_idx,
     };
 
     if (company && startDate && position) {
@@ -52,7 +40,6 @@ function Career() {
         .then((res) => console.log(res, '성공'))
         .catch((err) => console.log(err, '실패'));
     }
-
     setInputs({
       startDate: '',
       endDate: '',
@@ -60,12 +47,6 @@ function Career() {
       position: '',
       comment: '',
     });
-    nextId.current += 1;
-  };
-
-  // 삭제
-  const onRemove = (id) => {
-    setCareers(careers.filter((career) => career.id !== id));
   };
 
   return (
@@ -106,7 +87,7 @@ function Career() {
         onChange={onChange}
       />
       <button onClick={onCreate}>등록</button>
-      <CareerList careers={careers} onRemove={onRemove} />
+      <CareerList />
     </div>
   );
 }
