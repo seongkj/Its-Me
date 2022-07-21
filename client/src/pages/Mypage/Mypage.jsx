@@ -132,7 +132,7 @@ const Mypage = () => {
     formData.append('name', name);
     formData.append('phone', phone);
     formData.append('user_idx', getUserIdx);
-    formData.append('profile_img', imgFile);
+    formData.append('img', imgFile);
 
     axios
       .patch(`http://localhost:3001/users/${getUserIdx}`, formData, {
