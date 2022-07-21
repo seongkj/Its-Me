@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 // import PrizeList from './PrizeList';
 
@@ -11,11 +12,12 @@ function Prize() {
   const nextId = useRef(0);
   const [state, setState] = useState('');
   const [prizes, setPrizes] = useState([]);
+  const { portfolio_idx } = useParams();
 
   const { prizeName, prizeDate } = inputs;
 
   const getPrize = async () => {
-    await fetch(`http://localhost:3001/portfolios/1`, {
+    await fetch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
       method: 'GET',
     })
       .then((res) => res.json())
@@ -56,7 +58,7 @@ function Prize() {
       const data = {
         title: prizeName,
         award_date: prizeDate,
-        portfolio_idx: 1,
+        portfolio_idx: portfolio_idx,
       };
 
       axios

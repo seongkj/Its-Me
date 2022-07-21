@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 // import LanguageList from './LanguageList';
 
@@ -11,12 +12,13 @@ function Language() {
 
   const nextId = useRef(0);
   const [state, setState] = useState('');
+  const { portfolio_idx } = useParams();
   const [languages, setLanguages] = useState([]);
 
   const { languageDate, languageName, languageScore } = inputs;
 
   const getLanguage = async () => {
-    await fetch(`http://localhost:3001/portfolios/1`, {
+    await fetch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
       method: 'GET',
     })
       .then((res) => res.json())
@@ -65,14 +67,13 @@ function Language() {
         name: languageName,
         level: languageScore,
         acquisition_date: languageDate,
-        portfolio_idx: 1,
+        portfolio_idx: portfolio_idx,
       };
 
       axios
         .post('http://localhost:3001/languages', data)
         .then((res) => getLanguage())
         .catch((err) => console.log(err, '실패'));
-
     }
   };
 
