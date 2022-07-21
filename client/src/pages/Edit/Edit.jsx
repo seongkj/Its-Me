@@ -3,27 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 
 import Section from './Section';
 
-import {
-  getPortfolio,
-  getPortfolios,
-  postPortfolios,
-  deletePortfolios,
-} from '../../utils/api';
+import { getPortfolio, sectionName } from '../../utils/api';
 
 import './Edit.css';
 
 // 포트폴리오 섹션 정보
-const sectionName = [
-  { id: 1, name: '한 줄 소개', isToggle: false },
-  { id: 2, name: '보유 기술 스택', isToggle: false },
-  { id: 3, name: '경력', isToggle: false },
-  { id: 4, name: '학력', isToggle: false },
-  { id: 5, name: '프로젝트/웹사이트', isToggle: false },
-  { id: 6, name: '교육 및 기타 이력', isToggle: false },
-  { id: 7, name: '수상', isToggle: false },
-  { id: 8, name: '시험 및 자격증', isToggle: false },
-  { id: 9, name: '외국어', isToggle: false },
-];
 
 function Edit() {
   const [sections, setSections] = useState(sectionName);
@@ -36,16 +20,54 @@ function Edit() {
 
   const { portfolio_idx } = useParams();
 
+  // 포트폴리오 GET (포폴을 수정할 때 기존에 사용했던 세션을 미리 열어두기 위함)
+  const getPofol = () => {
+    const getData = [];
+    getPortfolio(portfolio_idx).then((res) => {
+      if (res.introduce.length > 0) {
+        getData.push(sections[0]);
+      }
+      if (res.skill.length > 0) {
+        getData.push(sections[1]);
+      }
+      if (res.career.length > 0) {
+        getData.push(sections[2]);
+      }
+      if (res.education.length > 0) {
+        getData.push(sections[3]);
+      }
+      if (res.website.length > 0) {
+        getData.push(sections[4]);
+      }
+      if (res.etc_education.length > 0) {
+        getData.push(sections[5]);
+      }
+      if (res.award.length > 0) {
+        getData.push(sections[6]);
+      }
+      if (res.certificate.length > 0) {
+        getData.push(sections[7]);
+      }
+      if (res.language.length > 0) {
+        getData.push(sections[8]);
+      }
+      setSectionButton(getData);
+    });
+  };
+  useEffect(() => {
+    getPofol();
+  }, []);
+
   // 테스트 버튼
-  const test = async () => {
-    getPortfolio(1).then((res) => console.log(res));
+  const test = () => {
+    getPortfolio(portfolio_idx).then((res) => console.log(res));
   };
 
   const test2 = () => {
-    // console.log(sectionButton);
-    getPortfolios().then((res) => {
-      console.log(res);
-    });
+    console.log(sectionButton);
+    // getPortfolios().then((res) => {
+    //   console.log(res);
+    // });
   };
 
   return (
@@ -149,6 +171,7 @@ function SectionChoiceButton(prop) {
     setSectionButton(deleteSection);
   };
 
+  //섹션 요소 클릭 함수
   const onChangeColor = (event) => {
     const check = sectionButton.filter(
       (el) => el.name === event.target.innerHTML,
