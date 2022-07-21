@@ -31,7 +31,8 @@ export async function newCertificate(req, res, next) {
 export async function deleteCertificate(req, res, next) {
   try {
     const certificateIdx = req.params.certificate_idx;
-    const deletedcertificate = await certificateService.deletecertificate(
+    const deletedcertificate = await certificateService.deleteCertificate(
+      
       certificateIdx
     );
     res.status(200).send({
