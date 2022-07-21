@@ -45,3 +45,8 @@ export const sectionName = [
   { id: 8, name: '시험 및 자격증', isToggle: false },
   { id: 9, name: '외국어', isToggle: false },
 ];
+
+export const designName = [
+  { id: 1, name: '일반 모드', isToggle: false },
+  { id: 2, name: '다크 모드', isToggle: false },
+];

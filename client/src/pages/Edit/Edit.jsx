@@ -2,8 +2,9 @@ import React, { useState, useReducer, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import Section from './Section';
+import Design from './Design';
 
-import { getPortfolio, sectionName } from '../../utils/api';
+import { getPortfolio, sectionName, designName } from '../../utils/api';
 
 import './Edit.css';
 
@@ -11,12 +12,13 @@ import './Edit.css';
 
 function Edit() {
   const [sections, setSections] = useState(sectionName);
-  const [designs, setDesigns] = useState(['일반모드', '다크모드']);
+  const [designs, setDesigns] = useState(designName);
 
   const [sectionButton, setSectionButton] = useState([]);
+  const [designButton, setDesignButton] = useState([]);
 
   const [displaySection, setDisplaySection] = useState({ display: 'flex' });
-  const [displayDesign, setDisplayDesign] = useState({ display: 'none' });
+  const [displayDesign, setDisplayDesign] = useState({ display: 'flex' });
 
   const { portfolio_idx } = useParams();
 
@@ -118,11 +120,22 @@ function Edit() {
             ))}
           </ul>
 
-          <ul style={displayDesign}>
-            {designs.map((el, i) => (
-              <li key={i}>{el}</li>
-            ))}
-          </ul>
+          <div className="DesignBar">
+            <ul style={displayDesign}>
+              {designs.map((el, i) => (
+                <li key={i}>
+                  <DesignChoiceButton
+                    key={el.id}
+                    id={el.id}
+                    name={el.name}
+                    isToggle={el.isToggle}
+                    designButton={designButton}
+                    setDesignButton={setDesignButton}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -130,7 +143,6 @@ function Edit() {
         {sectionButton.map((el, i) => (
           <Section sectionName={el} key={i} />
         ))}
-
         <Link to="/mypage">
           <button
             onClick={() =>
@@ -143,6 +155,12 @@ function Edit() {
             완료
           </button>
         </Link>
+      </div>
+
+      <div className="DesignInfo" style={displayDesign}>
+        {designButton.map((el, i) => (
+          <Design designName={el} key={i} />
+        ))}
       </div>
     </div>
   );
@@ -192,6 +210,51 @@ function SectionChoiceButton(prop) {
       id={id}
       onClick={onChangeColor}
       className={clicked ? 'SectionButton Toggle' : 'SectionButton'}
+    >
+      {name}
+    </button>
+  );
+}
+
+// 디자인 요소 선택 버튼
+function DesignChoiceButton(prop) {
+  const { id, name, isToggle, designButton, setDesignButton } = prop;
+  const [clicked, setClicked] = useState(isToggle);
+
+  // 버튼 클릭 시 토글하여 색 변경, 섹션 컴포넌트 추가, 삭제
+  const changeColor = () => setClicked(!clicked);
+
+  const addDesign = (clickedTitle) => {
+    const sortData = [...designButton, { id: id, name: clickedTitle }];
+    sortData.sort((a, b) => a.id - b.id);
+    setDesignButton(sortData);
+  };
+
+  const removeDesign = (clickedTitle) => {
+    const deleteDesign = designButton.filter((el) => el.name !== clickedTitle);
+    setDesignButton(deleteDesign);
+  };
+
+  const onChangeColor = (event) => {
+    const check = designButton.filter(
+      (el) => el.name === event.target.innerHTML,
+    );
+
+    changeColor();
+
+    if (check.length !== 1) {
+      addDesign(event.target.innerHTML);
+    } else {
+      removeDesign(event.target.innerHTML);
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      id={id}
+      onClick={onChangeColor}
+      className={clicked ? 'DesignButton Toggle' : 'DesignButton'}
     >
       {name}
     </button>
