@@ -6,26 +6,26 @@
   --etc-color: #d9d9d9;
   --error-color: #ee6c4d;
 }
-hr {
+.MainHr {
   width: 100%;
-  margin: 3em auto;
+  margin: 1em auto;
 }
 
 .Portfolio {
   margin: 0 auto;
 }
 .PortfolioWrap {
-  width: 60%;
+  width: 65%;
   margin: 0 auto;
+  margin-top: 10vh;
 }
 .PortUserInfo {
-  width: fit-content;
-  align-items: center;
-  margin-top: 15vh;
+  display: flex;
+  flex-direction: row;
 }
 .PortUserInfo .PortImgWrap {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   border-radius: 100%;
   border: 10px solid rgb(196, 220, 255);
   overflow: hidden;
@@ -38,17 +38,15 @@ hr {
   height: 100%;
 }
 .PortUserInfo .PortTxtWrap {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 200px;
+  padding: 50px;
 }
 .PortUserInfo .PortTxtWrap p{
-  font-size: 1.3rem;
-  line-height: 2.8rem;
+  font-size: 1rem;
+  line-height: 2rem;
   font-weight: bold;
 }
 .PortUserInfo .PortTxtWrap p:first-child {
-  font-size: 4rem;
+  font-size: 2.5rem;
   margin-bottom: 5vh;
 }
 
@@ -58,7 +56,7 @@ hr {
 .PortMainTxt {
   font-size: 1.1rem;
   font-weight: bold;
-  margin-bottom: 5vh;
+  margin-bottom: 3vh;
 }
 
 .PortTxtWrap3 {
@@ -76,12 +74,12 @@ hr {
   text-align: center;
   margin-top: 2vh;
 }
-svg {
+.DashBoardSvg {
   width: 114px;
   height: 114px;
 }
 
-.bg {
+.DashBoardSvg .bg {
   fill: none;
   stroke-width: 10px;
   stroke: #bfbfbf;

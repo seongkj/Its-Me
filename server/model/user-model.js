@@ -1,10 +1,10 @@
 import db from './db.js';
 
-export async function findById(userId) {
+export async function findById(userIdx) {
   return new Promise((resolve, reject) => {
     db.query(
       'SELECT * FROM itsme.user WHERE user_idx = ?',
-      userId,
+      userIdx,
       (err, result) => {
         return err ? reject(err) : resolve(result);
       }
@@ -37,11 +37,17 @@ export async function update(userIdx, userInfo) {
     const { email, pw, name, phone, profile_img } = userInfo;
     db.query(
       'UPDATE user SET email=?, name=?, phone=?, profile_img=? WHERE user_idx =?',
-      [email, pw, name, phone, profile_img, userIdx],
+      [email, name, phone, profile_img, userIdx],
       (err, result) => {
         return err
           ? reject(err)
-          : resolve({ userIdx, email, name, phone, profile_img });
+          : resolve({
+              user_idx: Number(userIdx),
+              email,
+              name,
+              phone,
+              profile_img,
+            });
       }
     );
   });
@@ -64,13 +70,13 @@ export async function create(userInfo) {
   });
 }
 
-export async function setPassword(userIdx, pw) {
+export async function setPassword(email, pw) {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE user SET pw = ? WHERE user_idx= ?',
-      [pw, userIdx],
+      'UPDATE user SET pw = ? WHERE email = ?',
+      [pw, email],
       (err, result) => {
-        return err ? reject(err) : resolve({ user_idx: userIdx });
+        return err ? reject(err) : resolve({ email });
       }
     );
   });

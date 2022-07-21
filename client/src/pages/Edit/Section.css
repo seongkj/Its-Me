@@ -1,24 +1,24 @@
-.SectionComponent {
+.SectionComponent, .DesignComponent {
   background-color: aquamarine;
   border-radius: 5px;
   width: 50rem;
   /* margin: 30px 0; */
 }
 
-.SectionComponentTitle {
+.SectionComponentTitle, .DesignComponentTitle {
   display: flex;
   align-items: center;
   height: 3rem;
 }
-.SectionComponentTitle p {
+.SectionComponentTitle p, .DesignComponentTitle p {
   margin-left: 1rem;
 }
 
-.SectionHr {
+.SectionHr, .DesignHr {
   margin: 0;
 }
 
-.SectionComponentContent {
+.SectionComponentContent, .DesignComponentContent {
   display: flex;
   flex-direction: column;
 }

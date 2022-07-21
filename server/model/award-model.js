@@ -35,7 +35,9 @@ export async function newAward(awardInfo) {
 export async function remove(awardIdx) {
   return new Promise((resolve, reject) => {
     db.query('DELETE FROM award WHERE award_idx=?', awardIdx, (err, result) => {
-      return err ? reject(err) : resolve(awardIdx);
+      return result.affectedRows == 0
+        ? resolve({ error: 'error' })
+        : resolve({ result: `${awardIdx} 삭제 완료` });
     });
   });
 }

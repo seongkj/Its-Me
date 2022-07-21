@@ -40,7 +40,9 @@ export async function remove(educationIdx) {
       'DELETE FROM education WHERE education_idx=?',
       educationIdx,
       (err, result) => {
-        return err ? reject(err) : resolve(educationIdx);
+        return result.affectedRows == 0
+          ? resolve({ error: 'error' })
+          : resolve({ result: `${educationIdx} 삭제 완료` });
       }
     );
   });

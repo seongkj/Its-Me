@@ -2,7 +2,7 @@
   display: flex;
 }
 .OptionBar {
-  /* position: fixed; */
+  position: fixed;
   display: flex;
 }
 /* edit-bar 부분 */
@@ -14,12 +14,7 @@
   height: 100vh;
   width: 90px;
 }
-.EditOption {
-  /* width: 70px;
-  height: 70px;
-  border-radius: 1rem;
-  margin-top: 10px; */
-}
+
 .EditOption button {
   border: none;
   background-color: beige;
@@ -31,7 +26,7 @@
 }
 
 /* section-bar 부분 */
-.SectionBar {
+.SectionBar, .DesignBar {
   background-color: beige;
   height: 100vh;
   width: 200px;
@@ -47,7 +42,7 @@
 .SectionBar ul li {
 }
 
-.SectionButton {
+.SectionButton, .DesignButton {
   border: none;
   border-radius: 5px;
   background-color: pink;
@@ -57,12 +52,12 @@
   font-size: 1rem;
   text-align: start;
 }
-.SectionButton.Toggle {
+.SectionButton.Toggle, .DesignButton.Toggle {
   background-color: plum;
 }
 
 /* section info 부분 */
-.SectionInfo {
+.SectionInfo, .DesignInfo {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
   Button,
@@ -39,6 +40,7 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [loginError, setLoginError] = useState('');
+  const navigate = useNavigate();
 
   const onChangeEmail = (e) => setEmail(e.target.value);
   const onChangePw = (e) => setPw(e.target.value);
@@ -48,6 +50,8 @@ export default function SignIn() {
       .post('http://localhost:3001/auth/login', data)
       .then((res) => {
         console.log(res, '성공');
+        localStorage.setItem('token', res.data.data.token);
+        localStorage.setItem('userIdx', res.data.data.user_idx);
         navigate('/');
       })
       .catch((err) => {
@@ -63,12 +67,22 @@ export default function SignIn() {
       pw: pw,
     };
 
+    if (!email) setLoginError('이메일을 입력해주세요');
+    if (email && !pw) setLoginError('비밀번호를 입력해주세요');
     if (email && pw) onHandlePost(data);
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          marginTop: 6,
+          border: 'solid 1px #bdbdbd',
+          borderRadius: '10px',
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -114,6 +128,11 @@ export default function SignIn() {
               value={pw}
               onChange={onChangePw}
             />
+            {loginError !== '' && (
+              <Alert sx={{ mt: 3 }} severity="error">
+                {<strong>{loginError}</strong>}
+              </Alert>
+            )}
             <Button
               type="submit"
               fullWidth

@@ -24,25 +24,22 @@
   color: white;
   background-color: #104892;
 }
-.ProjectWrap input {
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
-}
 .ProjectWrap form {
-  max-width: 80%;
+  max-width: 100%;
   margin: 0 auto;
 }
 .ProjectWrap1 {
-  width: 100%;
-  height: 400px;
+  width: 40%;
+  height: 300px;
   position: relative;
   background-color: #ddd;
   cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
 }
 .ProjectWrap1 img {
   width: 100%;
   height: 100%;
-  display: none;
 }
 .ProjectWrap1 span {
   position: absolute;
@@ -51,16 +48,16 @@
   transform: translate(-50%, -50%);
 }
 .ProjectWrap2 {
-  margin-top: 20px;
+  padding-left: 30px;
+  width: 60%;
+  display: inline-block;
+  vertical-align: top;
 }
 .ProjectWrap2 > input {
   font-size: 1.3rem;
   line-height: 1.3rem;
   font-weight: 600;
   width: 100%;
-}
-.ProjectWrap2 > input::placeholder {
-  color: black;
 }
 .ProjectWrap2 .date {
   display: inline-block;
@@ -69,12 +66,33 @@
   color: #999;
   margin-top: 10px;
 }
+.ProjectWrap2 textarea {
+  margin-top: 10px;
+  min-height: 200px;
+}
+.ProjectWrap2 > p {
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #999;
+  width: 100%;
+}
+.ProjectWrap2 > p svg {
+  width: 20px;
+}
+.ProjectWrap2 > p span {
+  margin-left: 5px;
+}
+.ProjectWrap2 > p span input {
+  width: calc(100% - 35px);
+}
+/*
 .ProjectWrap2 .date input[type='date']::-webkit-inner-spin-button,
 .ProjectWrap2 .date input[type='date']::-webkit-calendar-picker-indicator {
   display: none;
   -webkit-appearance: none;
 }
-.ProjectWrap3 {
+ .ProjectWrap3 {
   margin-top: 20px;
 }
 .ProjectWrap3 textarea {
@@ -84,29 +102,21 @@
   min-height: 100px;
   resize: none;
 }
-.ProjectWrap3 textarea::placeholder {
+.ProjectWrap2 textarea::placeholder {
   color: black;
 }
-.ProjectWrap4 {
+.ProjectWrap2 {
   margin-bottom: 20px;
 }
-.ProjectWrap4 p {
+.ProjectWrap2 p {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   color: #999;
   width: 100%;
 }
-.ProjectWrap4 span {
+.ProjectWrap2 span {
   margin-left: 5px;
 }
-.ProjectWrap4 input {
+.ProjectWrap2 input {
   width: 95%;
-}
-
-/*슬라이드 컨트롤러*/
-.ProjectWrap .swiper {
-  /* overflow: visible; */
-}
-.swiper .swiper-button-next {
-  /* right: -20px; */
-}
+} */

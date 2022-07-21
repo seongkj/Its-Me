@@ -30,7 +30,6 @@ export async function deleteSkill(req, res, next) {
   try {
     const skillIdx = req.params.skill_idx;
     const deletedskill = await skillService.deleteSkill(skillIdx);
-    console.log(deletedskill);
     res.status(200).send({
       status: 200,
       message: '스킬 정보 삭제 완료',
