@@ -1,5 +1,5 @@
 import React, { useState, useReducer, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import Section from './Section';
 
@@ -27,12 +27,14 @@ const sectionName = [
 
 function Edit() {
   const [sections, setSections] = useState(sectionName);
-  const [designs, setDesigns] = useState([1, 2]);
+  const [designs, setDesigns] = useState(['일반모드', '다크모드']);
 
   const [sectionButton, setSectionButton] = useState([]);
 
   const [displaySection, setDisplaySection] = useState({ display: 'flex' });
   const [displayDesign, setDisplayDesign] = useState({ display: 'none' });
+
+  const { portfolio_idx } = useParams();
 
   // 테스트 버튼
   const test = async () => {
@@ -81,7 +83,7 @@ function Edit() {
         <div className="SectionBar">
           <ul style={displaySection}>
             {sections.map((el) => (
-              <li>
+              <li key={el.id}>
                 <SectionChoiceButton
                   key={el.id}
                   id={el.id}
@@ -95,8 +97,8 @@ function Edit() {
           </ul>
 
           <ul style={displayDesign}>
-            {designs.map((el) => (
-              <li>{el}</li>
+            {designs.map((el, i) => (
+              <li key={i}>{el}</li>
             ))}
           </ul>
         </div>
@@ -110,7 +112,10 @@ function Edit() {
         <Link to="/mypage">
           <button
             onClick={() =>
-              window.open('http://localhost:3000/PdfComponent', '_blank')
+              window.open(
+                `http://localhost:3000/PdfComponent/${portfolio_idx}`,
+                '_blank',
+              )
             }
           >
             완료

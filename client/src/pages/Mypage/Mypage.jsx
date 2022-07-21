@@ -41,7 +41,6 @@ const Mypage = () => {
   const [getPofol, setGetPofol] = useState([]);
   useEffect(() => {
     getPortfolios().then((res) => {
-      console.log(res);
       setGetPofol(res);
     });
   }, []);
@@ -185,7 +184,7 @@ const Mypage = () => {
               <p>프로필 이미지</p>
               <div className="InputWrap">
                 <img src={state} alt="" name="thumbnail" />
-                <label for="ImgInput">+</label>
+                <label htmlFor="ImgInput">+</label>
                 <input
                   type="file"
                   accept="image/*"
