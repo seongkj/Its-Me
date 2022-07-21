@@ -38,11 +38,14 @@ const CareerList = () => {
 
 const Career = ({ career, onRemove }) => {
   return (
-    <div>
-      <span>{career.start_date}</span>
-      <span>{career.end_date}</span> <span>{career.company}</span>
-      <span>{career.position}</span> <span>{career.comment}</span>
-      <button onClick={() => onRemove(career.career_idx)}>삭제</button>
+    <div className="CareerList">
+      <span>{career.start_date.substr(0, 10)} ~ </span>
+      <span> {career.end_date.substr(0, 10)}</span>{' '}
+      <span>회사명 : {career.company}</span>
+      <span>직무 : {career.position}</span> <span>{career.comment}</span>
+      <button onClick={() => onRemove(career.career_idx)} className="DeleteBtn">
+        삭제
+      </button>
     </div>
   );
 };

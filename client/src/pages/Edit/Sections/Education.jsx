@@ -89,7 +89,12 @@ function Education() {
             <div>학교 : {el.school}</div>
             <div>전공 : {el.major}</div>
             <div>졸업일(예정일) : {el.graduate_date.substr(0, 10)}</div>
-            <button type="button" id={el.education_idx} onClick={removeEdu}>
+            <button
+              type="button"
+              id={el.education_idx}
+              onClick={removeEdu}
+              className="DeleteBtn"
+            >
               삭제
             </button>
           </div>
