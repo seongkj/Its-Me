@@ -154,7 +154,12 @@ export async function update(portfolioIdx, portfolioInfo) {
   return new Promise((resolve, reject) => {
     db.query(
       'UPDATE portfolio SET template=?,title=?,user_idx=? WHERE portfolio_idx =?',
-      [portfolioInfo.template, portfolioInfo.title, portfolioInfo.user_idx],
+      [
+        portfolioInfo.template,
+        portfolioInfo.title,
+        portfolioInfo.user_idx,
+        portfolioIdx,
+      ],
       (err, result) => {
         return err ? reject(err) : resolve({ portfolioIdx, ...portfolioInfo });
       }
