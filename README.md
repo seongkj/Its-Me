@@ -70,10 +70,10 @@
 | ------ | ---------- | ----------------------------------------------------------------------- |
 | [김다윤](https://github.com/many-yun) | `FE` |                                                                         |
 | [김종한](https://github.com/longlive-jonghan) | `FE` | 로그인/회원가입/비밀번호 재설정 페이지 구현, 경력 및 교육이력 섹션 구현 |
-| [박세령](https://github.com/ssryoung) | `FE` |                                                                         |
+| [박세령](https://github.com/ssryoung) | `FE` | Main페이지 구현 / 포트폴리오를 `pdf` 파일 형태로 출력 /수상, 시험 및 자격증, 외국어 섹션 구현 |
 | [성경주](https://github.com/seongkj) | `FE` | edit페이지 포트폴리오 내용 생성, 수정, 삭제 구현 / 한 줄 소개, 기술 스택, 학력 섹션 구현  |
-| [오승준](https://github.com/tmdwns1521) | `BE`   |                                                                         |
-| [황시원](https://github.com/cone26) | `BE`   | 유저 관리 api, 로그인/회원가입/비밀번호 재설정 api, DB 설계 및 생성     |
+| [오승준](https://github.com/tmdwns1521) | `BE` |                                                                         |
+| [황시원](https://github.com/cone26) | `BE` | 유저 관리 api, 로그인/회원가입/비밀번호 재설정 api, DB 설계 및 생성 |
 
 
 
