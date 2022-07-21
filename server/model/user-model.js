@@ -37,11 +37,17 @@ export async function update(userIdx, userInfo) {
     const { email, pw, name, phone, profile_img } = userInfo;
     db.query(
       'UPDATE user SET email=?, name=?, phone=?, profile_img=? WHERE user_idx =?',
-      [email, pw, name, phone, profile_img, userIdx],
+      [email, name, phone, profile_img, userIdx],
       (err, result) => {
         return err
           ? reject(err)
-          : resolve({ userIdx, email, name, phone, profile_img });
+          : resolve({
+              user_idx: Number(userIdx),
+              email,
+              name,
+              phone,
+              profile_img,
+            });
       }
     );
   });
