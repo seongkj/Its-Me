@@ -37,6 +37,23 @@ const Mypage = () => {
 
   const { user_idx, profile_img, name, email, phone } = inputs;
 
+  // user 정보 get
+  const getUserInfo = () => {
+    axios
+      .get(`http://localhost:3001/users/${getUserIdx}`, {
+        headers: {
+          authorization: getToken,
+        },
+      })
+      .then((res) => {
+        setUserName(res.data.data[0].name);
+        setUserEmail(res.data.data[0].email);
+        setUserPhone(res.data.data[0].phone);
+        setUserImg(res.data.data[0].profile_img);
+      })
+      .catch((err) => console.log(err));
+  };
+
   // 저장 되어있던 포트폴리오 GET
   const [getPofol, setGetPofol] = useState([]);
   useEffect(() => {
@@ -45,28 +62,7 @@ const Mypage = () => {
     });
   }, []);
 
-  // axios
-  //   .get(`http://localhost:3001/portfolios`, {
-  //     headers: {
-  //       Authorization: `Bearer ${getToken}`,
-  //     },
-  //   })
-  //   .then((res) => console.log(res))
-  //   .catch((err) => console.log(err));
-
-  axios
-    .get(`http://localhost:3001/users/${getUserIdx}`, {
-      headers: {
-        authorization: getToken,
-      },
-    })
-    .then((res) => {
-      setUserName(res.data.data[0].name);
-      setUserEmail(res.data.data[0].email);
-      setUserPhone(res.data.data[0].phone);
-      setUserImg(res.data.data[0].profile_img);
-    })
-    .catch((err) => console.log(err));
+  getUserInfo();
 
   const PortLists = (props) => {
     const getData = props.data;
@@ -123,9 +119,37 @@ const Mypage = () => {
     };
   };
 
+  const UserInfo = () => {
+    return (
+      <div className="UserInfo">
+        <div className="ImgWrap">
+          <img src={userImg} alt="" />
+        </div>
+        <div className="TxtWrap">
+          <ul>
+            <li>
+              <span>이름</span>
+              {userName}
+            </li>
+            <li>
+              <span>이메일</span>
+              {userEmail}
+            </li>
+            <li>
+              <span>연락처</span>
+              {userPhone}
+            </li>
+          </ul>
+        </div>
+        <button type="button" className="ProfileEdit" onClick={openPopup}>
+          프로필 수정
+        </button>
+      </div>
+    );
+  };
+
   // 프로필 업데이트
   const patchProfile = () => {
-    console.log(email);
     const formData = new FormData();
     formData.append('email', email);
     formData.append('name', name);
@@ -139,7 +163,7 @@ const Mypage = () => {
           authorization: `Bearer ${getToken}`,
         },
       })
-      .then((res) => console.log(res))
+      .then((res) => getUserInfo())
       .catch((err) => console.log(err));
     document.querySelector('.ProfilePopup').style.display = 'none';
   };
@@ -214,30 +238,7 @@ const Mypage = () => {
       </div>
       <Header />
       <div className="MypageWrap">
-        <div className="UserInfo">
-          <div className="ImgWrap">
-            <img src={userImg} alt="" />
-          </div>
-          <div className="TxtWrap">
-            <ul>
-              <li>
-                <span>이름</span>
-                {userName}
-              </li>
-              <li>
-                <span>이메일</span>
-                {userEmail}
-              </li>
-              <li>
-                <span>연락처</span>
-                {userPhone}
-              </li>
-            </ul>
-          </div>
-          <button type="button" className="ProfileEdit" onClick={openPopup}>
-            프로필 수정
-          </button>
-        </div>
+        <UserInfo />
         <div className="Portfolios">
           <h2>포트폴리오</h2>
           <div className="Pf">
