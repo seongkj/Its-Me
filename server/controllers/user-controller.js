@@ -39,6 +39,15 @@ export async function deleteUser(req, res, next) {
 export async function updateUser(req, res, next) {
   try {
     const userIdx = req.params.user_idx;
+    let imageUrl = '';
+    let imageKey = '';
+    if (req.file) {
+      imageUrl = req.file.location;
+      imageKey = req.file.key;
+      req.body.profile_img = imageUrl;
+    } else {
+      req.body.profile_img = '';
+    }
     const updated = await userService.setUser(userIdx, req.body);
     res.status(201).send({
       status: 201,
