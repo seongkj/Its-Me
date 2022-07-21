@@ -19,7 +19,7 @@ function Section(prop) {
       <div className="SectionComponentTitle">
         <p>{sectionName.name}</p>
       </div>
-      <hr className="SectionHr" />
+      {/* <hr className="SectionHr" /> */}
       <div className="SectionComponentContent">
         {sectionName.name === '한 줄 소개' ? <Myself /> : null}
         {sectionName.name === '보유 기술 스택' ? <Stack /> : null}

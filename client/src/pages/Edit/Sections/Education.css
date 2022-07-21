@@ -1,4 +1,32 @@
 .Edu {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
+}
+.Edu > div > input {
+  margin-right: 10px;
+}
+.Edu > div select {
+  width: 200px;
+  height: 42px;
+  line-height: normal;
+  font-family: 'LeferiPoint-WhiteA';
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+.Edu button {
+  margin-top: 10px;
+}
+.Edu > input {
+  margin-top: 10px;
+}
+.Edu > input[type='date'] {
+  margin-left: 10px;
+}
+.EduList {
+  line-height: 1.7rem;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
 }

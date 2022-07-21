@@ -1,5 +1,6 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Header from '../../components/Header';
 
 import Section from './Section';
 
@@ -71,78 +72,74 @@ function Edit() {
   };
 
   return (
-    <div className="Edit">
-      <div className="OptionBar">
-        <div className="EditBar">
-          <div className="EditOption">
-            <button
-              type="button"
-              onClick={() => changeSection(setDisplaySection, setDisplayDesign)}
-            >
-              섹션 변경
-            </button>
+    <div>
+      <Header />
+      <div className="Edit">
+        <div className="OptionBar">
+          <div className="EditBar">
+            <div className="EditOption">
+              <button
+                type="button"
+                onClick={() =>
+                  changeSection(setDisplaySection, setDisplayDesign)
+                }
+              >
+                항목
+              </button>
+            </div>
+            <div className="EditOption">
+              <button
+                type="button"
+                onClick={() =>
+                  changeDesign(setDisplaySection, setDisplayDesign)
+                }
+              >
+                템플릿
+              </button>
+            </div>
           </div>
-          <div className="EditOption">
-            <button
-              type="button"
-              onClick={() => changeDesign(setDisplaySection, setDisplayDesign)}
-            >
-              디자인 변경
-            </button>
-          </div>
-          <div className="EditOption">
-            <button type="button" onClick={test}>
-              테스트버튼
-            </button>
-          </div>
-          <div className="EditOption">
-            <button type="button" onClick={test2}>
-              테스트버튼2
-            </button>
+          <div className="SectionBar">
+            <ul style={displaySection}>
+              {sections.map((el) => (
+                <li key={el.id}>
+                  <SectionChoiceButton
+                    key={el.id}
+                    id={el.id}
+                    name={el.name}
+                    isToggle={el.isToggle}
+                    sectionButton={sectionButton}
+                    setSectionButton={setSectionButton}
+                  />
+                </li>
+              ))}
+            </ul>
+            <ul style={displayDesign} className="DisplayDesign">
+              {designs.map((el, i) => (
+                <li key={i}>{el}</li>
+              ))}
+            </ul>
           </div>
         </div>
-
-        <div className="SectionBar">
-          <ul style={displaySection}>
-            {sections.map((el) => (
-              <li key={el.id}>
-                <SectionChoiceButton
-                  key={el.id}
-                  id={el.id}
-                  name={el.name}
-                  isToggle={el.isToggle}
-                  sectionButton={sectionButton}
-                  setSectionButton={setSectionButton}
-                />
-              </li>
-            ))}
-          </ul>
-
-          <ul style={displayDesign}>
-            {designs.map((el, i) => (
-              <li key={i}>{el}</li>
-            ))}
-          </ul>
+        <div className="SectionInfo">
+          {sectionButton.map((el, i) => (
+            <Section sectionName={el} key={i} />
+          ))}
+          <Link to="/mypage">
+            <button
+              onClick={() =>
+                window.open(
+                  `http://localhost:3000/PdfComponent/${portfolio_idx}`,
+                  '_blank',
+                )
+              }
+            >
+              완료
+            </button>
+          </Link>
         </div>
-      </div>
-
-      <div className="SectionInfo" style={displaySection}>
-        {sectionButton.map((el, i) => (
-          <Section sectionName={el} key={i} />
-        ))}
-
-        <Link to="/mypage">
-          <button
-            onClick={() =>
-              window.open(
-                `http://localhost:3000/PdfComponent/${portfolio_idx}`,
-                '_blank',
-              )
-            }
-          >
-            완료
-          </button>
-        </Link>
+        <button type="button" className="TopBtn">
+          TOP
+        </button>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CareerList from './CareerList';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import './Career.css';
 
 function Career() {
   const { portfolio_idx } = useParams();
@@ -50,21 +51,24 @@ function Career() {
   };
 
   return (
-    <div>
-      <input
-        type="date"
-        name="startDate"
-        value={startDate}
-        placeholder="입사일"
-        onChange={onChange}
-      />
-      <input
-        type="date"
-        name="endDate"
-        value={endDate}
-        placeholder="퇴사일"
-        onChange={onChange}
-      />
+    <div className="CareerInfo">
+      <div>
+        <input
+          type="date"
+          name="startDate"
+          value={startDate}
+          placeholder="입사일"
+          onChange={onChange}
+          style={{ marginRight: '10px' }}
+        />
+        <input
+          type="date"
+          name="endDate"
+          value={endDate}
+          placeholder="퇴사일"
+          onChange={onChange}
+        />
+      </div>
       <input
         type="text"
         name="company"

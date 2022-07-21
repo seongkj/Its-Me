@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import EtcEducationList from './EtcEducationList';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import './EtcEducationList.css';
 
 function EtcEducation() {
   const { portfolio_idx } = useParams();
@@ -52,42 +53,46 @@ function EtcEducation() {
 
   return (
     <div>
-      <input
-        type="date"
-        name="openDate"
-        value={openDate}
-        placeholder="시작일"
-        onChange={onChange}
-      />
-      <input
-        type="date"
-        name="closeDate"
-        value={closeDate}
-        placeholder="종료일"
-        onChange={onChange}
-      />
-      <input
-        type="text"
-        name="title"
-        value={title}
-        placeholder="활동명"
-        onChange={onChange}
-      />
-      <input
-        type="text"
-        name="organization"
-        value={organization}
-        placeholder="기관"
-        onChange={onChange}
-      />
-      <input
-        type="text"
-        name="note"
-        value={note}
-        placeholder="비고"
-        onChange={onChange}
-      />
-      <button onClick={onCreate}>등록</button>
+      <div className="EtcEduInput">
+        <div>
+          <input
+            type="date"
+            name="openDate"
+            value={openDate}
+            placeholder="시작일"
+            onChange={onChange}
+          />
+          <input
+            type="date"
+            name="closeDate"
+            value={closeDate}
+            placeholder="종료일"
+            onChange={onChange}
+          />
+        </div>
+        <input
+          type="text"
+          name="title"
+          value={title}
+          placeholder="활동명"
+          onChange={onChange}
+        />
+        <input
+          type="text"
+          name="organization"
+          value={organization}
+          placeholder="기관"
+          onChange={onChange}
+        />
+        <input
+          type="text"
+          name="note"
+          value={note}
+          placeholder="비고"
+          onChange={onChange}
+        />
+        <button onClick={onCreate}>등록</button>
+      </div>
       <EtcEducationList />
     </div>
   );
