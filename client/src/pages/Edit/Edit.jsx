@@ -18,8 +18,8 @@ const sectionName = [
   { id: 2, name: '보유 기술 스택', isToggle: false },
   { id: 3, name: '경력', isToggle: false },
   { id: 4, name: '학력', isToggle: false },
-  { id: 5, name: '교육 및 기타 이력', isToggle: false },
-  { id: 6, name: '프로젝트/웹사이트', isToggle: false },
+  { id: 5, name: '프로젝트/웹사이트', isToggle: false },
+  { id: 6, name: '교육 및 기타 이력', isToggle: false },
   { id: 7, name: '수상', isToggle: false },
   { id: 8, name: '시험 및 자격증', isToggle: false },
   { id: 9, name: '외국어', isToggle: false },
@@ -35,15 +35,15 @@ function Edit() {
   const [displayDesign, setDisplayDesign] = useState({ display: 'none' });
 
   // 테스트 버튼
-  const test = () => {
+  const test = async () => {
     getPortfolio(1).then((res) => console.log(res));
   };
 
   const test2 = () => {
-    console.log(sectionButton);
-    // getPortfolios().then((res) => {
-    //   console.log(res);
-    // });
+    // console.log(sectionButton);
+    getPortfolios().then((res) => {
+      console.log(res);
+    });
   };
 
   return (

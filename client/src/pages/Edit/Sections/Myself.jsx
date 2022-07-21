@@ -11,7 +11,9 @@ function Myself() {
   } = useForm();
 
   const [mySelf, setMySelf] = useState('');
-  const [newMySelf, setNewMySelf] = useState();
+  const [newMySelf, setNewMySelf] = useState([]);
+
+  const { portfolio_idx } = useParams();
 
   function mySelfChange(e) {
     setMySelf(e.target.value);
@@ -19,33 +21,54 @@ function Myself() {
 
   // 한 줄 소개 GET
   const getStack = async () => {
-    await axios.get(`http://localhost:3001/portfolios/1`).then((res) => {
-      setNewMySelf(res.data.data.introduce[0].comment);
-    });
+    await axios
+      .get(`http://localhost:3001/portfolios/${portfolio_idx}`)
+      .then((res) => {
+        setNewMySelf(res.data.data.introduce);
+      });
   };
   useEffect(() => {
     getStack();
   }, []);
 
-  // 한 줄 소개 POST
+  // 한 줄 소개 POST, PATCH
   async function postIntroduce(data) {
     const newData = {
       comment: data.comment,
-      portfolio_idx: 1,
+      portfolio_idx: portfolio_idx,
     };
-    setNewMySelf(data.comment);
-    // await axios
-    //   .post('http://localhost:3001/introduces', newData)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
-  }
-
-  // 한 줄 소개 delete
-  async function removeIntroduce(delIdx) {
-    await axios
-      .delete(`http://localhost:3001/introduces/${delIdx.introduces_idx}`)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    if (newMySelf.length >= 1) {
+      await axios
+        .patch(
+          `http://localhost:3001/introduces/${newMySelf[0].introduce_idx}`,
+          newData,
+        )
+        .then((res) => {
+          const newdata = res.data.data;
+          setNewMySelf([
+            {
+              introduce_idx: newdata.introduceIdx,
+              comment: newdata.comment,
+              portfolio_idx: newdata.portfolio_idx,
+            },
+          ]);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      await axios
+        .post('http://localhost:3001/introduces', newData)
+        .then((res) => {
+          const newdata = res.data.data;
+          setNewMySelf([
+            {
+              introduce_idx: newdata.introduceIdx,
+              comment: newdata.comment,
+              portfolio_idx: newdata.portfolio_idx,
+            },
+          ]);
+        })
+        .catch((err) => console.log(err));
+    }
   }
 
   return (
@@ -57,8 +80,10 @@ function Myself() {
           onChange={mySelfChange}
         ></textarea>
         {errors.comment && <div>{errors.comment.message}</div>}
-        <button type="submit">등록</button>
-        {newMySelf ? <div>한 줄 소개 : {newMySelf}</div> : null}
+        <button type="submit">{newMySelf.length >= 1 ? '수정' : '등록'}</button>
+        {newMySelf.map((el, i) => (
+          <div key={i}>한 줄 소개 : {el.comment}</div>
+        ))}
       </form>
     </div>
   );

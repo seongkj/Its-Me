@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 import './Education.css';
 
@@ -11,8 +11,21 @@ function Education() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [getEdu, setGetEdu] = useState([]);
 
   const { portfolio_idx } = useParams();
+
+  //학력 GET
+  const getEducations = async () => {
+    await axios
+      .get(`http://localhost:3001/portfolios/${portfolio_idx}`)
+      .then((res) => {
+        setGetEdu(res.data.data.education);
+      });
+  };
+  useEffect(() => {
+    getEducations();
+  }, []);
 
   //학력 POST
   async function onSubmit(data) {
@@ -25,8 +38,18 @@ function Education() {
     };
     await axios
       .post('http://localhost:3001/educations', newData)
-      .then((res) => console.log(res))
+      .then((res) => {
+        getEducations();
+      })
       .catch((err) => console.log(err));
+  }
+  //학력 delete
+  async function removeEdu() {
+    await axios
+      .delete(`http://localhost:3001/educations/${event.target.id}`)
+      .then((res) => {
+        getEducations();
+      });
   }
 
   return (
@@ -53,11 +76,25 @@ function Education() {
         {errors.major && <div>{errors.major.message}</div>}
         <input
           type="date"
-          {...register('graduate_date', { required: '날짜를 입력하세요.' })}
+          {...register('graduate_date', {
+            required: '졸업(예정)날짜를 입력하세요.',
+          })}
         />
         {errors.graduate_date && <div>{errors.graduate_date.message}</div>}
         <button type="submit">등록</button>
       </form>
+      <div>
+        {getEdu.map((el) => (
+          <div key={el.education_idx} className="EduList">
+            <div>학교 : {el.school}</div>
+            <div>전공 : {el.major}</div>
+            <div>졸업일(예정일) : {el.graduate_date.substr(0, 10)}</div>
+            <button type="button" id={el.education_idx} onClick={removeEdu}>
+              삭제
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
