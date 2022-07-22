@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "heroku-postbuild": "npx webpack"
+    "heroku-postbuild": "npm start"
   },
   "author": "",
   "license": "ISC",
