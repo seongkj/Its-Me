@@ -4,6 +4,8 @@ import { CustomError } from '../middlewares/customError.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import statusCode from '../utils/status-code.js';
+import responseMessage from '../utils/response-message.js';
 
 dotenv.config();
 
@@ -12,7 +14,7 @@ export async function createUser(userInfo) {
   // id 중복 확인
   const userById = await userModel.findByEmail(userInfo.email);
   if (userById) {
-    throw new CustomError(400, '이미 가입된 이메일입니다.');
+    throw new CustomError(statusCode.BAD_REQUEST, responseMessage.ALREADY_ID);
   }
   const hashedPassword = await bcrypt.hash(userInfo.pw, 10);
   userInfo.pw = hashedPassword;
@@ -27,13 +29,13 @@ export async function login(userInfo) {
   // id확인
   const userById = await userModel.findByEmail(email);
   if (!userById) {
-    throw new CustomError(404, '해당 유저가 존재하지 않습니다.');
+    throw new CustomError(statusCode.NOT_FOUND, responseMessage.NO_USER);
   }
   //정보 확인
   const pwHashed = userById.pw;
   const isPasswordCorrect = await bcrypt.compare(pw, pwHashed);
   if (!isPasswordCorrect) {
-    throw new CustomError(400, '이메일 혹은 비밀번호가 일치하지 않습니다.');
+    throw new CustomError(statusCode.BAD_REQUEST, responseMessage.MISS_MATCH);
   }
   // 토큰
   const user_idx = userById.user_idx;
