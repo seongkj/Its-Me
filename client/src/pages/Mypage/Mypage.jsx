@@ -68,7 +68,10 @@ const Mypage = () => {
     const getData = props.data;
     return (
       <div className="PfWrap">
-        <Link to={`/portfolio/${getData.portfolio_idx}`} className="LinkTitle">
+        <Link
+          to={`/PdfComponent/${getData.portfolio_idx}`}
+          className="LinkTitle"
+        >
           {getData.title}
         </Link>
         <div className="Btns">
