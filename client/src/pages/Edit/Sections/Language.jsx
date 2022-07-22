@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-// import LanguageList from './LanguageList';
+
 import './Language.css';
 
 function Language() {

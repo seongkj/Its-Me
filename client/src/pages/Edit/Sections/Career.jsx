@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import CareerList from './CareerList';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+
 import './Career.css';
 
 function Career() {

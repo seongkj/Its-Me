@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import EtcEducationList from './EtcEducationList';
+
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './EtcEducationList.css';
@@ -81,7 +81,7 @@ function EtcEducation() {
     setEtcEdu(deletEtcEdu);
   }
 
-  function EtcEducationListtt() {
+  function EtcEducationList() {
     return (
       <div>
         {etcEdu?.map((el) => {
@@ -145,7 +145,7 @@ function EtcEducation() {
         />
         <button onClick={onCreate}>등록</button>
       </div>
-      <EtcEducationListtt />
+      <EtcEducationList />
     </div>
   );
 }
