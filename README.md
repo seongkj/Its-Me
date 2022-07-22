@@ -48,7 +48,7 @@
 
 |포트폴리오 조회 페이지|
 |--|
-|![portfolio](/uploads/d5d8b89582cd768a0dabf6f0431a0e23/portfolio.png)|
+|![portfolio](/uploads/1c002e8aaed0a73c1ebdaafc05c1b043/portfolio.png)|
 <br>
 
 ## 🚗  프로젝트만의 차별점, 기대 효과
