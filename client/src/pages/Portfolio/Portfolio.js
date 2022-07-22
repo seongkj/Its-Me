@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { createElement, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './Portfolio.css';
 
@@ -72,6 +72,8 @@ const Portfolio = () => {
 
   const { userName, userEmail, userPhone, userImg } = userInfo;
   const { comment } = introduce;
+
+  createElement('');
 
   // skill
   const [...skills] = skill;
@@ -287,8 +289,8 @@ const Portfolio = () => {
             <p>수상내역</p>
           </div>
           <div className="PortTxtWrap3">
-            <p>{awardList[0]}</p>
             <p>{getDateList[0]}</p>
+            <p>{awardList[0]}</p>
           </div>
         </div>
       </div>
