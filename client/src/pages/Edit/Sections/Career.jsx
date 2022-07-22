@@ -18,6 +18,7 @@ function Career() {
 
   const { startDate, endDate, company, position, comment } = inputs;
 
+  //정보 불러오기
   const getCareerList = async () => {
     await fetch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
       method: 'GET',

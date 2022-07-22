@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import EtcEducationList from './EtcEducationList';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -6,6 +6,8 @@ import './EtcEducationList.css';
 
 function EtcEducation() {
   const { portfolio_idx } = useParams();
+  const [etcEdu, setEtcEdu] = useState([]);
+
   const [inputs, setInputs] = useState({
     openDate: '',
     closeDate: '',
@@ -15,6 +17,21 @@ function EtcEducation() {
   });
 
   const { openDate, closeDate, title, organization, note } = inputs;
+
+  // 정보 불러오기
+  const getEtcEduList = async () => {
+    await fetch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const care = data.data.etc_education;
+        setEtcEdu(care);
+      });
+  };
+  useEffect(() => {
+    getEtcEduList();
+  }, []);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -38,7 +55,7 @@ function EtcEducation() {
     if (title && organization && openDate) {
       axios
         .post('http://localhost:3001/etc_educations', data)
-        .then((res) => console.log(res, '성공'))
+        .then((res) => getEtcEduList())
         .catch((err) => console.log(err, '실패'));
     }
 
@@ -50,6 +67,41 @@ function EtcEducation() {
       note: '',
     });
   };
+
+  // 삭제
+  async function removeEtcEdu(delEtcEdu) {
+    console.log(delEtcEdu);
+    await axios
+      .delete(
+        `http://localhost:3001/etc_educations/${delEtcEdu.etc_education_idx}`,
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+    const deletEtcEdu = etcEdu.filter((el) => el !== delEtcEdu);
+    setEtcEdu(deletEtcEdu);
+  }
+
+  function EtcEducationListtt() {
+    return (
+      <div>
+        {etcEdu?.map((el) => {
+          return (
+            <div key={el.etc_education_idx} className="EtcEduList">
+              <div>
+                <span>{el.start_date.substr(0, 10)} ~ </span>{' '}
+                <span>{el.end_date.substr(0, 10)}</span>{' '}
+              </div>
+              <p>기관 : {el.organization}</p> <p>활동명: {el.title}</p>{' '}
+              <p>{el.comment}</p>
+              <button onClick={() => removeEtcEdu(el)} className="DeleteBtn">
+                삭제
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -93,7 +145,7 @@ function EtcEducation() {
         />
         <button onClick={onCreate}>등록</button>
       </div>
-      <EtcEducationList />
+      <EtcEducationListtt />
     </div>
   );
 }
