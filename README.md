@@ -21,25 +21,38 @@
 - 서브 기능
   1. 프로젝트 관련 이미지 저장
   2. 계정 비밀번호 분실시 임시 비밀번호 발급
-  3.
-|로그인|
-|--|
-|<img width="956" alt="로그인" src="https://user-images.githubusercontent.com/72402014/169438358-629ed697-a4bf-4a21-bdd8-c0094d264fba.png">|
 
 |메인페이지|
 |--|
-|<img width="955" alt="메인" src="https://user-images.githubusercontent.com/72402014/169438392-cb4121c7-7f1b-445d-a59e-fc9ad883df76.png">|
+|![main](/uploads/fc807939cb2b01601c4e4ea806a89dcb/main.png)|
+
+|회원가입|
+|--|
+|![signup](/uploads/6efb297550ad42d6c9230d974696ae1a/signup.png)|
+
+
+|로그인|
+|--|
+|![login](/uploads/8c59940333f64186867f4fe41f96979f/login.png)|
+
+
 
 |마이페이지|
 |--|
-|<img width="951" alt="마이" src="https://user-images.githubusercontent.com/72402014/169438415-fe3c1a43-731d-42ef-a2fd-da22dc181473.png">|
+|![mypage](/uploads/ac1cf9cbfa7338ab4e0471ee6114f6b3/mypage.png)|
 
+|포트폴리오 편집 페이지|
+|--|
+|![edit](/uploads/a62ab1db85a7d44951cd01b41c24ef1f/edit.png)|
+
+|포트폴리오 조회 페이지|
+|--|
+|![portfolio](/uploads/8bfe7c96ca4a1944198e3491cf306420/portfolio.png)|
 <br>
 
 ## 🚗  프로젝트만의 차별점, 기대 효과
 - 클릭 몇번으로 원하는 테마의 포트폴리오를 작성할 수 있다.
 - 타 플랫폼에 비해 용이한 사용법을 가지고 있어 유저들이 포트폴리오 본연의 내용에 집중할 수 있다.
-- 타 플랫폼에 비해 유저의 자유도가 높다.
 <br>
 
 ## 🛠️ 기술 스택
@@ -53,7 +66,7 @@
   <img src="https://img.shields.io/badge/Express-v2.0.15-000000?logo=Express"/>
 </p>
 
-`+ AWS S3, AWS RDS`
+`+ AWS S3`
 
 <br>
 
@@ -68,11 +81,11 @@
 
 | 이름   | 역할       | 구현 기능                                                               |
 | ------ | ---------- | ----------------------------------------------------------------------- |
-| [김다윤](https://github.com/many-yun) | `FE` |                                                                         |
+| [김다윤](https://github.com/many-yun) | `FE` | 마이페이지, edit페이지 프로젝트 섹션 구현, edit페이지/포트폴리오 페이지 css 적용, 이미지 업로드 구현 |
 | [김종한](https://github.com/longlive-jonghan) | `FE` | 로그인/회원가입/비밀번호 재설정 페이지 구현, 경력 및 교육이력 섹션 구현 |
 | [박세령](https://github.com/ssryoung) | `FE` | Main페이지 구현 / 포트폴리오를 `pdf` 파일 형태로 출력 /수상, 시험 및 자격증, 외국어 섹션 구현 |
 | [성경주](https://github.com/seongkj) | `FE` | edit페이지 포트폴리오 내용 생성, 수정, 삭제 구현 / 한 줄 소개, 기술 스택, 학력 섹션 구현  |
-| [오승준](https://github.com/tmdwns1521) | `BE` |                                                                         |
+| [오승준](https://github.com/tmdwns1521) | `BE` | section DB api, aws-s3 middleware, DB 설계 및 생성 |
 | [황시원](https://github.com/cone26) | `BE` | 유저 관리 api, 로그인/회원가입/비밀번호 재설정 api, DB 설계 및 생성 |
 
 
