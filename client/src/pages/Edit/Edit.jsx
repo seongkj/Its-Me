@@ -14,7 +14,7 @@ import './Edit.css';
 function Edit() {
   const [sections, setSections] = useState(sectionName);
   const [designs, setDesigns] = useState(designName);
-
+  const [clickedButtonIndex, setClickedButtonIndex] = useState(0);
   const [sectionButton, setSectionButton] = useState([]);
   const [designButton, setDesignButton] = useState([]);
 
@@ -57,6 +57,11 @@ function Edit() {
       setSectionButton(getData);
     });
   };
+
+  const onClickTempButton = (index) => {
+    setClickedButtonIndex(index);
+  }
+
   useEffect(() => {
     getPofol();
   }, []);
@@ -110,12 +115,15 @@ function Edit() {
                 {designs.map((el, i) => (
                   <li key={i}>
                     <DesignChoiceButton
+                      index={i}
                       key={el.id}
                       id={el.id}
                       name={el.name}
                       isToggle={el.isToggle}
+                      clickedButtonIndex={clickedButtonIndex}
                       designButton={designButton}
                       setDesignButton={setDesignButton}
+                      onClick={onClickTempButton}
                     />
                   </li>
                 ))}
@@ -204,15 +212,15 @@ function SectionChoiceButton(prop) {
 
 // 디자인 요소 선택 버튼
 function DesignChoiceButton(prop) {
-  const { id, name, isToggle, designButton, setDesignButton } = prop;
-  const [clicked, setClicked] = useState(isToggle);
+  const { index, clickedButtonIndex, id, name, isToggle, designButton, setDesignButton, onClick } = prop;
+  // const [clicked, setClicked] = useState(isToggle);
 
   // 버튼 클릭 시 토글하여 색 변경, 섹션 컴포넌트 추가, 삭제
   const changeColor = () => setClicked(!clicked);
 
   const addDesign = (clickedTitle) => {
-    const sortData = [...designButton, { id: id, name: clickedTitle }];
-    sortData.sort((a, b) => a.id - b.id);
+    const sortData = [{ id: id, name: clickedTitle }];
+    // sortData.sort((a, b) => a.id - b.id);
     setDesignButton(sortData);
   };
 
@@ -222,6 +230,7 @@ function DesignChoiceButton(prop) {
   };
 
   const onChangeColor = (event) => {
+    onClick(index);
     const check = designButton.filter(
       (el) => el.name === event.target.innerHTML,
     );
@@ -240,7 +249,7 @@ function DesignChoiceButton(prop) {
       type="button"
       id={id}
       onClick={onChangeColor}
-      className={clicked ? 'DesignButton Toggle' : 'DesignButton'}
+      className={index === clickedButtonIndex ? 'DesignButton Toggle' : 'DesignButton'}
     >
       {name}
     </button>
