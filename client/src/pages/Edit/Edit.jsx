@@ -33,7 +33,7 @@ function Edit() {
   const getUserIdx = window.localStorage.getItem('userIdx');
   const getToken = window.localStorage.getItem('token');
 
-  const [sections, setSections] = useState(sectionName);
+  const [sections, setSections] = useState([]);
   const [designs, setDesigns] = useState(designName);
   const [clickedButtonIndex, setClickedButtonIndex] = useState(0);
   const [sectionButton, setSectionButton] = useState([]);

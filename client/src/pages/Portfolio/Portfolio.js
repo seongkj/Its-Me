@@ -117,7 +117,7 @@ export const Portfolio = React.forwardRef((props, ref) => {
               <div className="PortImgWrap">
                 <img src={e.profile_img} />
               </div>
-              <div class="PortTxtWrap">
+              <div className="PortTxtWrap">
                 <p>{e.name}</p>
                 <p>
                   <FontAwesomeIcon icon={faEnvelope} />
