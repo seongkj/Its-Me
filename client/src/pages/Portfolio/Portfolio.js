@@ -169,6 +169,7 @@ const Portfolio = () => {
     langGetDateList.push(el.acquisition_date);
     levelList.push(el.level);
   }
+
   return (
     <div className="PortfolioWrap">
       <div className="PortUserInfo">
@@ -176,10 +177,10 @@ const Portfolio = () => {
         <div className="PortTxtWrap">
           <p>{userName}</p>
           <p>{userEmail}</p>
-          <p>{`${userPhone.slice(0, 3)}-${userPhone.slice(
+          <p>{`${userPhone.substr(0, 3)}-${userPhone.substr(
             3,
             7,
-          )}-${userPhone.slice(7)}`}</p>
+          )}-${userPhone.substr(7)}`}</p>
         </div>
       </div>
       <hr className="MainHr"></hr>
@@ -210,8 +211,8 @@ const Portfolio = () => {
             <p>직무</p>
           </div>
           <div className="PortTxtWrap3">
-            <p>{startDateList[0].slice(0, 10)}</p>
-            <p>{endDateList[0].slice(0, 10)}</p>
+            <p>{startDateList[0]}</p>
+            <p>{endDateList[0]}</p>
             <p>{companyList[0]}</p>
             <p>{positionList[0]}</p>
           </div>
@@ -231,7 +232,7 @@ const Portfolio = () => {
             <p>{schoolList[0]}</p>
             <p>{statusList[0]}</p>
             <p>{majorList[0]}</p>
-            <p>{graduateDateList[0].slice(0, 10)}</p>
+            <p>{graduateDateList[0]}</p>
           </div>
         </div>
       </div>
@@ -248,8 +249,8 @@ const Portfolio = () => {
           </div>
           <div className="PortTxtWrap3">
             <div className="PortTxtWrap3">
-              <p>{firstDateList[0].slice(0, 10)}</p>
-              <p>{lastDateList[0].slice(0, 10)}</p>
+              <p>{firstDateList[0]}</p>
+              <p>{lastDateList[0]}</p>
               <p>{titleList[0]}</p>
               <p>{commentList[0]}</p>
               <p>{linkList[0]}</p>
@@ -269,8 +270,8 @@ const Portfolio = () => {
             <p>비고</p>
           </div>
           <div className="PortTxtWrap3">
-            <p>{openDateList[0].slice(0, 10)}</p>
-            <p>{closeDateList[0].slice(0, 10)}</p>
+            <p>{openDateList[0]}</p>
+            <p>{closeDateList[0]}</p>
             <p>{etcTitleList[0]}</p>
             <p>{organizationList[0]}</p>
             <p>{etcCommentList[0]}</p>
@@ -287,7 +288,7 @@ const Portfolio = () => {
           </div>
           <div className="PortTxtWrap3">
             <p>{awardList[0]}</p>
-            <p>{getDateList[0].slice(0, 10)}</p>
+            <p>{getDateList[0]}</p>
           </div>
         </div>
       </div>
@@ -301,7 +302,7 @@ const Portfolio = () => {
             <p>발급기관</p>
           </div>
           <div className="PortTxtWrap3">
-            <p>{grantDateList[0].slice(0, 10)}</p>
+            <p>{grantDateList[0]}</p>
             <p>{certificateList[0]}</p>
             <p>{grantList[0]}</p>
           </div>
@@ -317,7 +318,7 @@ const Portfolio = () => {
             <p>점수</p>
           </div>
           <div className="PortTxtWrap3">
-            <p>{langGetDateList[0].slice(0, 10)}</p>
+            <p>{langGetDateList[0]}</p>
             <p>{languageList[0]}</p>
             <p>{levelList[0]}</p>
           </div>
