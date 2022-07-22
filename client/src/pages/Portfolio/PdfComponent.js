@@ -1,25 +1,25 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 
 import Portfolio from './Portfolio';
 
-class PdfComponent extends React.Component {
-  render() {
-    return (
-      <div>
-        <ReactToPrint
-          content={() => this.componentRef}
-          trigger={() => (
-            <button className="btn btn-primary" style={styles.button}>
-              PDF로 저장
-            </button>
-          )}
-        />
-        <Portfolio ref={(response) => (this.componentRef = response)} />
-      </div>
-    );
-  }
-}
+const PdfComponent = () => {
+  const componentRef = useRef();
+
+  return (
+    <div>
+      <ReactToPrint
+        content={() => componentRef.current}
+        trigger={() => (
+          <button className="btn btn-primary" style={styles.button}>
+            PDF로 저장
+          </button>
+        )}
+      />
+      <Portfolio ref={componentRef} />
+    </div>
+  );
+};
 
 const styles = {
   button: {
