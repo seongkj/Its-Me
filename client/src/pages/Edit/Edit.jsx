@@ -12,8 +12,7 @@ import './Edit.css';
 // 포트폴리오 섹션 정보
 
 function Edit() {
-
-  const [theme, setTheme] = useState('first-theme');
+  const [theme, setTheme] = useState('day-theme');
 
   const changeTheme = (theme) => {
     console.log('changeTheme----------', theme);
@@ -105,14 +104,13 @@ function Edit() {
       setSections(toggleData);
     });
   };
+  useEffect(() => {
+    getPofol();
+  }, []);
 
   const onClickTempButton = (index) => {
     setClickedButtonIndex(index);
   }
-
-  useEffect(() => {
-    getPofol();
-  }, []);
 
   return (
     <div className={getThemeToLocalStorage()}>
@@ -138,7 +136,7 @@ function Edit() {
                   changeDesign(setDisplaySection, setDisplayDesign)
                 }
                 className="SecBtn"
-                element={<themes onClick={changeTheme}/>}
+                element={<themes onClick={changeTheme} />}
               >
                 템플릿
               </button>
@@ -261,8 +259,16 @@ function SectionChoiceButton(prop) {
 
 // 디자인 요소 선택 버튼
 function DesignChoiceButton(prop) {
-  const { index, clickedButtonIndex, id, name, isToggle, designButton, setDesignButton, onClick } = prop;
-
+  const {
+    index,
+    clickedButtonIndex,
+    id,
+    name,
+    isToggle,
+    designButton,
+    setDesignButton,
+    onClick,
+  } = prop;
 
   const addDesign = (clickedTitle) => {
     const sortData = [{ id: id, name: clickedTitle }];
@@ -292,7 +298,9 @@ function DesignChoiceButton(prop) {
       type="button"
       id={id}
       onClick={onChangeColor}
-      className={index === clickedButtonIndex ? 'DesignButton Toggle' : 'DesignButton'}
+      className={
+        index === clickedButtonIndex ? 'DesignButton Toggle' : 'DesignButton'
+      }
     >
       {name}
     </button>
