@@ -23,6 +23,7 @@
   margin: 0 auto;
   background-color: #181818;
   padding-bottom: 50px;
+  min-height: 100vh;
 }
 .second-theme > div {
   width: 60%;
