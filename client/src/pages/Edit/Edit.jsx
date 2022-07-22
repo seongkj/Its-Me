@@ -30,7 +30,7 @@ function Edit() {
 
   const getThemeToLocalStorage = () => window.localStorage.getItem('theme');
 
-  const [sections, setSections] = useState(sectionName);
+  const [sections, setSections] = useState([]);
   const [designs, setDesigns] = useState(designName);
   const [clickedButtonIndex, setClickedButtonIndex] = useState(0);
   const [sectionButton, setSectionButton] = useState([]);
