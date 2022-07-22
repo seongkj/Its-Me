@@ -31,10 +31,10 @@ export async function newCertificate(req, res, next) {
 export async function deleteCertificate(req, res, next) {
   try {
     const certificateIdx = req.params.certificate_idx;
-    const deletedcertificate = await certificateService.deletecertificate(
+    const deletedcertificate = await certificateService.deleteCertificate(
+      
       certificateIdx
     );
-    console.log(deletedcertificate);
     res.status(200).send({
       status: 200,
       message: '증명서 정보 삭제 완료',

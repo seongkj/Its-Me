@@ -1,101 +1,255 @@
-/* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import Header from '../../components/Header';
+import axios from 'axios';
+
 import Section from './Section';
+import Design from './Design';
+
+import { getPortfolio, sectionName, designName } from '../../utils/api';
 
 import './Edit.css';
 
 // 포트폴리오 섹션 정보
-const sectionName = [
-  { id: 1, name: '한 줄 소개', isToggle: false },
-  { id: 2, name: '보유 기술 스택', isToggle: false },
-  { id: 3, name: '경력', isToggle: false },
-  { id: 4, name: '학력', isToggle: false },
-  { id: 5, name: '교육 및 기타 이력', isToggle: false },
-  { id: 6, name: '프로젝트', isToggle: false },
-  { id: 7, name: '수상', isToggle: false },
-  { id: 8, name: '시험 및 자격증', isToggle: false },
-  { id: 9, name: '외국어', isToggle: false },
-  { id: 10, name: '포트폴리오/웹사이트', isToggle: false },
-];
 
 function Edit() {
-  const [sectionTitle, setSectionTitle] = useState(sectionName);
-  const [sectionButton, setSectionButton] = useState([]);
+  const [theme, setTheme] = useState('day-theme');
 
-  // 테스트 버튼
-  const test = () => {
-    console.log(sectionButton);
-    const qwer = sectionButton.filter((el) => el === '한 줄 소개');
-    console.log(qwer);
+  const changeTheme = (theme) => {
+    console.log('changeTheme----------', theme);
+    setTheme(theme);
   };
-  const test2 = () => {
-    console.log(sectionTitle);
+
+  const setThemeToLocalStorage = (theme) => {
+    window.localStorage.setItem('theme', theme);
+  };
+
+  useEffect(() => {
+    setThemeToLocalStorage(theme);
+    console.log('setThemeToLocalStorage----------', theme);
+  }, [theme]);
+
+  const getThemeToLocalStorage = () => window.localStorage.getItem('theme');
+  const getUserIdx = window.localStorage.getItem('userIdx');
+  const getToken = window.localStorage.getItem('token');
+
+  const [sections, setSections] = useState(sectionName);
+  const [designs, setDesigns] = useState(designName);
+  const [clickedButtonIndex, setClickedButtonIndex] = useState(0);
+  const [sectionButton, setSectionButton] = useState([]);
+  const [designButton, setDesignButton] = useState([]);
+  const [userPortTitle, setUserPortTitle] = useState('');
+
+  const [displaySection, setDisplaySection] = useState({ display: 'flex' });
+  const [displayDesign, setDisplayDesign] = useState({ display: 'none' });
+
+  const { portfolio_idx } = useParams();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/portfolios`, {
+        headers: {
+          Authorization: `Bearer ${getToken}`,
+        },
+      })
+      .then((res) => {
+        const datas = res.data.data;
+        datas.forEach((e) => {
+          if (e.portfolio_idx === Number(portfolio_idx)) {
+            setUserPortTitle(e.title);
+          }
+        });
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  // 포트폴리오 GET (포폴을 수정할 때 기존에 사용했던 세션을 미리 열어두기 위함)
+  const getPofol = () => {
+    const getData = [];
+    const toggleData = [];
+    getPortfolio(portfolio_idx).then((res) => {
+      if (res.introduce.length > 0) {
+        getData.push(sectionName[0]);
+        toggleData.push({ id: 1, name: '한 줄 소개', isToggle: true });
+      } else {
+        toggleData.push({ id: 1, name: '한 줄 소개', isToggle: false });
+      }
+      if (res.skill.length > 0) {
+        getData.push(sectionName[1]);
+        toggleData.push({ id: 2, name: '보유 기술 스택', isToggle: true });
+      } else {
+        toggleData.push({ id: 2, name: '보유 기술 스택', isToggle: false });
+      }
+      if (res.career.length > 0) {
+        getData.push(sectionName[2]);
+        toggleData.push({ id: 3, name: '경력', isToggle: true });
+      } else {
+        toggleData.push({ id: 3, name: '경력', isToggle: false });
+      }
+      if (res.education.length > 0) {
+        getData.push(sectionName[3]);
+        toggleData.push({ id: 4, name: '학력', isToggle: true });
+      } else {
+        toggleData.push({ id: 4, name: '학력', isToggle: false });
+      }
+      if (res.website.length > 0) {
+        getData.push(sectionName[4]);
+        toggleData.push({ id: 5, name: '프로젝트/웹사이트', isToggle: true });
+      } else {
+        toggleData.push({ id: 5, name: '프로젝트/웹사이트', isToggle: false });
+      }
+      if (res.etc_education.length > 0) {
+        getData.push(sectionName[5]);
+        toggleData.push({ id: 6, name: '교육 및 기타 이력', isToggle: true });
+      } else {
+        toggleData.push({ id: 6, name: '교육 및 기타 이력', isToggle: false });
+      }
+      if (res.award.length > 0) {
+        getData.push(sectionName[6]);
+        toggleData.push({ id: 7, name: '수상', isToggle: true });
+      } else {
+        toggleData.push({ id: 7, name: '수상', isToggle: false });
+      }
+      if (res.certificate.length > 0) {
+        getData.push(sectionName[7]);
+        toggleData.push({ id: 8, name: '시험 및 자격증', isToggle: true });
+      } else {
+        toggleData.push({ id: 8, name: '시험 및 자격증', isToggle: false });
+      }
+      if (res.language.length > 0) {
+        getData.push(sectionName[8]);
+        toggleData.push({ id: 9, name: '외국어', isToggle: true });
+      } else {
+        toggleData.push({ id: 9, name: '외국어', isToggle: false });
+      }
+      setSectionButton(getData);
+      setSections(toggleData);
+    });
+  };
+  useEffect(() => {
+    getPofol();
+  }, []);
+
+  const onClickTempButton = (index) => {
+    setClickedButtonIndex(index);
+    if (index === 1) {
+      axios
+        .patch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
+          template: 1,
+          title: userPortTitle,
+          user_idx: getUserIdx,
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+      alert('다크 모드 템플릿이 적용되었습니다.');
+    } else {
+      axios
+        .patch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
+          template: 0,
+          title: userPortTitle,
+          user_idx: getUserIdx,
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+      alert('일반 모드 템플릿이 적용되었습니다.');
+    }
   };
 
   return (
-    <div className="Edit">
-      <div className="OptionBar">
-        <div className="EditBar">
-          <div className="EditOption">
-            <button type="button">섹션 추가</button>
+    <div className={getThemeToLocalStorage()}>
+      <Header />
+      <div className="Edit">
+        <div className="OptionBar">
+          <div className="EditBar">
+            <div className="EditOption">
+              <button
+                type="button"
+                onClick={() =>
+                  changeSection(setDisplaySection, setDisplayDesign)
+                }
+                className="FirstBtn Toggle"
+              >
+                항목
+              </button>
+            </div>
+            <div className="EditOption">
+              <button
+                type="button"
+                onClick={() =>
+                  changeDesign(setDisplaySection, setDisplayDesign)
+                }
+                className="SecBtn"
+                element={<themes onClick={changeTheme} />}
+              >
+                템플릿
+              </button>
+            </div>
           </div>
-          <div className="EditOption">
-            <button type="button">디자인 변경</button>
-          </div>
-          <div className="EditOption">
-            <button type="button" onClick={test}>
-              테스트버튼
-            </button>
-          </div>
-          <div className="EditOption">
-            <button type="button" onClick={test2}>
-              테스트버튼2
-            </button>
+          <div className="SectionBar">
+            <ul style={displaySection}>
+              {sections.map((el) => (
+                <li key={el.id}>
+                  <SectionChoiceButton
+                    key={el.id}
+                    id={el.id}
+                    name={el.name}
+                    isToggle={el.isToggle}
+                    sectionButton={sectionButton}
+                    setSectionButton={setSectionButton}
+                  />
+                </li>
+              ))}
+            </ul>
+            <div className="DesignBar">
+              <ul style={displayDesign}>
+                {/* <li className="DayBtn ThemeBtn" key="keyDay" onClick={checkTheme}>
+                  <img src="https://lingopolo.org/thai/sites/lingopolo.org.thai/files/styles/entry/public/images/2016/08/29/day-landscape-664923_1920.jpg" />
+                </li>
+                <li className="NightBtn ThemeBtn" key="keyNight">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/%D0%A1%D0%B2%D0%B5%D1%82_%D0%BE%D1%82_%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BD%D0%B8_-_panoramio.jpg/640px-%D0%A1%D0%B2%D0%B5%D1%82_%D0%BE%D1%82_%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BD%D0%B8_-_panoramio.jpg" />
+                </li> */}
+                {designs.map((el, i) => (
+                  <li key={i}>
+                    <DesignChoiceButton
+                      index={i}
+                      key={el.id}
+                      id={el.id}
+                      name={el.name}
+                      isToggle={el.isToggle}
+                      clickedButtonIndex={clickedButtonIndex}
+                      designButton={designButton}
+                      setDesignButton={setDesignButton}
+                      onClick={onClickTempButton}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-        <div className="SectionBar">
-          <ul>
-            {sectionTitle.map((el) => (
-              <li>
-                <SectionChoiceButton
-                  key={el.id}
-                  id={el.id}
-                  name={el.name}
-                  isToggle={el.isToggle}
-                  sectionButton={sectionButton}
-                  setSectionButton={setSectionButton}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="edit-option">
-          <button type="button" onClick={test2}>
-            테스트버튼2
+      </div>
+
+      <div className="SectionInfo">
+        {sectionButton.map((el, i) => (
+          <Section sectionName={el} key={i} />
+        ))}
+        <Link to="/mypage">
+          <button
+            onClick={() =>
+              window.open(
+                `http://localhost:3000/PdfComponent/${portfolio_idx}`,
+                '_blank',
+              )
+            }
+          >
+            완료
           </button>
-        </div>
+        </Link>
       </div>
-      <div className="section-bar">
-        <ul>
-          {/* fixme data는 변수의 이름으로 사용하기에는 너무 포괄적인 이름입니다. 다른 개발자가 봤을때에도 어떤 목적으로 선언한 데이터인지 알 수 있게끔 선언하는것이 좋습니다. */}
-          {data.map((el, index) => (
-            // fixme 리스트를 순환해서 컴포넌트를 리턴할 때에는 해당 컴포넌트에 key를 설정해주어야 합니다. 참고(https://ko.reactjs.org/docs/lists-and-keys.html)
-            <li>
-              <SectionChoiceButton
-                id={el.id}
-                name={el.name}
-                isToggle={el.isToggle}
-                sectionTitle={sectionTitle}
-                setSectionTitle={setSectionTitle}
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="section-info">
-        {sectionTitle.map((el) => (
-          // fixme 리스트를 순환해서 컴포넌트를 리턴할 때에는 해당 컴포넌트에 key를 설정해주어야 합니다. 참고(https://ko.reactjs.org/docs/lists-and-keys.html)
-          <Section sectionName={el} />
+
+      <div className="DesignInfo" style={displayDesign}>
+        {designButton.map((el, i) => (
+          <Design designName={el} key={i} />
         ))}
       </div>
     </div>
@@ -104,46 +258,39 @@ function Edit() {
 
 // 섹션 요소 선택 버튼
 function SectionChoiceButton(prop) {
-  const { id, name, isToggle, sectionTitle, setSectionTitle } = prop;
-  // fixme toggle은 Button의 색을 어떻게 보여줄지 구분하기 위한 변수로 쓰이지만 이름만 봤을때 무엇을 위한 변수인지 알 수 없습니다. clicked와 같은 변수명은 어떨까요?
-  const [toggle, setToggle] = useState(isToggle);
+  const { id, name, isToggle, sectionButton, setSectionButton } = prop;
+  const [clicked, setClicked] = useState(isToggle);
 
   // 버튼 클릭 시 토글하여 색 변경, 섹션 컴포넌트 추가, 삭제
-  /*
-  fixme 해당 함수는 색을 바꾸는 로직, 화면에 리스트를 추가하는 두가지 로직을 가지고 있습니다. 하지만 네이밍은 색만 바꿀거처럼 인식됩니다. 예시와 같이 함수가 하나의 로직만 처리할 수 있도록 쪼개고 네이밍을 명확히 해주면 인식하기 쉽습니다.
-  const changeColor = () => {
-    setToggle(!toggle);
-  }
+  const changeColor = () => setClicked(!clicked);
 
+  //세션 컴포넌트 추가
   const addSectionTitle = (clickedTitle) => {
-    setSectionTitle([...sectionTitle, clickedTitle]);
-  }
+    const sortData = [...sectionButton, { id: id, name: clickedTitle }];
+    sortData.sort((a, b) => a.id - b.id);
+    setSectionButton(sortData);
+  };
 
+  //세션 컴포넌트 삭제
   const removeSectionTitle = (clickedTitle) => {
-    const deleteSection = sectionTitle.filter(
-        (el) => el !== clickedTitle,
+    const deleteSection = sectionButton.filter(
+      (el) => el.name !== clickedTitle,
     );
-    setSectionTitle(deleteSection);
-  }
+    setSectionButton(deleteSection);
+  };
 
+  //섹션 요소 클릭 함수
   const onChangeColor = (event) => {
-    changeColor();
-    if (sectionTitle.includes(event.target.innerHTML) === false) {
-      addSectionTitle();
-    } else {
-      removeSectionTitle();
-    }
-   */
+    const check = sectionButton.filter(
+      (el) => el.name === event.target.innerHTML,
+    );
 
-  const onChangeColor = (event) => {
     changeColor();
-    if (sectionButton.includes(event.target.innerHTML) === false) {
+
+    if (check.length !== 1) {
       addSectionTitle(event.target.innerHTML);
     } else {
-      const deleteSection = sectionTitle.filter(
-          (el) => el !== clickedTitle,
-      );
-      setSectionTitle(deleteSection);
+      removeSectionTitle(event.target.innerHTML);
     }
   };
 
@@ -152,11 +299,80 @@ function SectionChoiceButton(prop) {
       type="button"
       id={id}
       onClick={onChangeColor}
-      // className={toggle ? 'section-button toggle' : 'section-button'}
-      className={toggle ? 'section-button toggle' : 'section-button'}
+      className={clicked ? 'SectionButton Toggle' : 'SectionButton'}
     >
       {name}
     </button>
   );
 }
+
+// 디자인 요소 선택 버튼
+function DesignChoiceButton(prop) {
+  const {
+    index,
+    clickedButtonIndex,
+    id,
+    name,
+    isToggle,
+    designButton,
+    setDesignButton,
+    onClick,
+  } = prop;
+
+  const addDesign = (clickedTitle) => {
+    const sortData = [{ id: id, name: clickedTitle }];
+    setDesignButton(sortData);
+  };
+
+  const removeDesign = (clickedTitle) => {
+    const deleteDesign = designButton.filter((el) => el.name !== clickedTitle);
+    setDesignButton(deleteDesign);
+  };
+
+  const onChangeColor = (event) => {
+    onClick(index);
+    const check = designButton.filter(
+      (el) => el.name === event.target.innerHTML,
+    );
+
+    if (check.length !== 1) {
+      addDesign(event.target.innerHTML);
+    } else {
+      removeDesign(event.target.innerHTML);
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      id={id}
+      onClick={onChangeColor}
+      className={
+        index === clickedButtonIndex ? 'DesignButton Toggle' : 'DesignButton'
+      }
+    >
+      {name}
+    </button>
+  );
+}
+
+//섹션 변경
+function changeSection(setDisplaySection, setDisplayDesign) {
+  setDisplaySection({ display: 'flex' });
+  setDisplayDesign({ display: 'none' });
+  const firstBtn = document.querySelector('.FirstBtn');
+  const secBtn = document.querySelector('.SecBtn');
+  firstBtn.classList.add('Toggle');
+  secBtn.classList.remove('Toggle');
+}
+//디자인 변경
+function changeDesign(setDisplaySection, setDisplayDesign) {
+  setDisplaySection({ display: 'none' });
+  setDisplayDesign({ display: 'flex' });
+  const firstBtn = document.querySelector('.FirstBtn');
+  const secBtn = document.querySelector('.SecBtn');
+  firstBtn.classList.remove('Toggle');
+  secBtn.classList.add('Toggle');
+}
+
 export default Edit;

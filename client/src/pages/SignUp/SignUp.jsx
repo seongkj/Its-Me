@@ -14,13 +14,10 @@ import {
   FormHelperText,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-// fixme 아래와 같이 import 하면 코드가 더 깔끔합니다.
-// import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import styled from 'styled-components';
+import Header from '../../components/Header';
 
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
@@ -47,7 +44,6 @@ function Copyright(props) {
   );
 }
 
-// fixme theme은 모든 페이지에 적용하는것이 앱이 통일성 있어보일거같습니다.
 const theme = createTheme();
 
 export default function SignUp() {
@@ -91,8 +87,15 @@ export default function SignUp() {
       profile_img: null,
     };
 
-    if (pw !== confirmPw) setPwError('비밀번호가 일치하지 않습니다.');
-    else setPwError('');
+    if (!name) setSignupError('이름을 입력해주세요');
+    if (name && !email) setSignupError('이메일을 입력해주세요');
+    if (name && email && !pw) setSignupError('비밀번호를 입력해주세요');
+
+    if (pw !== confirmPw) setSignupError('비밀번호가 일치하지 않습니다');
+
+    if (name && email && pw === confirmPw && pw.length > 0 && !phone)
+      setSignupError('연락처를 입력해주세요');
+    else setSignupError('입력한 정보를 다시 확인해주세요');
 
     if (pw.length >= 6 && pw === confirmPw) {
       onHandlePost(data);
@@ -101,7 +104,16 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Header />
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          marginTop: 10,
+          border: 'solid 1px #bdbdbd',
+          borderRadius: '10px',
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -212,7 +224,7 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

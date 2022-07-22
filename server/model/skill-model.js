@@ -34,7 +34,9 @@ export async function newSkill(skillInfo) {
 export async function remove(skillIdx) {
   return new Promise((resolve, reject) => {
     db.query('DELETE FROM skill WHERE skill_idx=?', skillIdx, (err, result) => {
-      return err ? reject(err) : resolve(skillIdx);
+      return result.affectedRows == 0
+        ? resolve({ error: 'error' })
+        : resolve({ result: `${skillIdx} 삭제 완료` });
     });
   });
 }

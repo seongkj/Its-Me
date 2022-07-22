@@ -1,45 +1,202 @@
+@font-face {
+  font-family: 'LeferiPoint-WhiteA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 .Mypage {
   margin: 0 auto;
+  border-top: 3px solid var(--main-color);
+  margin-top: 10vh;
+  /* background-color: #f3f3f3; */
+  min-height: 90vh;
+}
+.Mypage .ProfilePopup {
+  position: fixed;
+  margin-top: -10vh;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+.Mypage .ProfilePopup .wrap {
+  width: 700px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 20px;
+}
+.Mypage .ProfilePopup .wrap .Buttons {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+.Mypage .ProfilePopup .wrap .Buttons::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.Mypage .ProfilePopup .wrap .Buttons button {
+  float: right;
+  margin-left: 10px;
+  line-height: 30px;
+  padding: 0 20px;
+  background-color: #aaa;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.Mypage .ProfilePopup .wrap .Buttons button:first-child {
+  background-color: var(--main-color);
+}
+.Mypage .ProfilePopup .wrap .ImgWrap {
+  width: 40%;
+  display: inline-block;
+  border-right: 1px solid #ddd;
+  vertical-align: middle;
+  padding: 30px;
+}
+.Mypage .ProfilePopup .wrap p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.Mypage .ProfilePopup .wrap .ImgWrap .InputWrap {
+  overflow: hidden;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+}
+.Mypage .ProfilePopup .wrap .ImgWrap .InputWrap img {
+  width: 100%;
+  height: 100%;
+}
+.Mypage .ProfilePopup .wrap .ImgWrap .InputWrap label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  text-align: center;
+  line-height: 180px;
+  transition: 0.2s;
+  border-radius: 100%;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 5rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.Mypage .ProfilePopup .wrap .ImgWrap .InputWrap label:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.Mypage .ProfilePopup .wrap .ImgWrap input[type='file'] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.Mypage .ProfilePopup .wrap .TxtWrap {
+  padding-left: 40px;
+  width: 60%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.Mypage .ProfilePopup .wrap .TxtWrap > div {
+  margin-bottom: 20px;
+}
+.Mypage .ProfilePopup .wrap .TxtWrap p {
+  margin-bottom: 10px;
+}
+.Mypage .ProfilePopup .wrap .TxtWrap input {
+  display: block;
+  width: 80%;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #ccc;
 }
 .MypageWrap {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 1200px;
+  margin: 50px auto 0 auto;
   position: relative;
 }
 
 .UserInfo {
-  padding: 30px 100px;
-  border: 5px solid #e5e5e5;
-  border-radius: 30px;
+  padding: 50px;
+  background-color: white;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  font-family: 'LeferiPoint-WhiteA';
+  font-weight: bold;
+}
+.UserInfo .ProfileEdit {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  background-color: var(--main2-color);
+  color: white;
+  border: 0;
+  border-radius: 15px;
+  height: 30px;
+  padding: 0 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 600;
+}
+.UserInfo .ProfileEdit:hover {
+  background-color: var(--error-color);
 }
 .UserInfo .ImgWrap {
   width: 150px;
   height: 150px;
   border-radius: 100%;
-  border: 10px solid rgb(196, 220, 255);
   overflow: hidden;
   display: inline-block;
   vertical-align: middle;
   box-sizing: content-box;
+  background-color: #ddd;
+  border: 1px solid #ddd;
 }
 .UserInfo .ImgWrap img {
   width: 100%;
   height: 100%;
 }
 .UserInfo .TxtWrap {
+  border-left: 1px solid #ccc;
+  padding-left: 50px;
   display: inline-block;
   vertical-align: middle;
   margin-left: 50px;
+  width: calc(100% - 250px);
 }
 .UserInfo .TxtWrap ul {
   font-size: 1.2rem;
-  line-height: 2rem;
+  line-height: 2.5rem;
   font-weight: bold;
+}
+.UserInfo .TxtWrap span {
+  width: 100px;
+  display: inline-block;
 }
 
 .Portfolios {
-  margin: 50px auto 0 auto;
+  margin: 30px auto 0 auto;
   height: 300px;
+  border-top: 2px solid #ddd;
+  padding-top: 30px;
+  font-family: 'LeferiPoint-WhiteA';
 }
 .Portfolios h2 {
   font-size: 1.5rem;
@@ -47,7 +204,6 @@
   width: 15%;
   font-weight: bold;
   vertical-align: top;
-  border-right: 1px solid #ddd;
   height: 100%;
 }
 .Portfolios .Pf {
@@ -58,9 +214,9 @@
 }
 .Portfolios .Pf .PfWrap {
   width: 100%;
-  background-color: rgb(227, 240, 255);
-  border-radius: 5px;
-  padding: 15px 20px;
+  background-color: var(--main-color);
+  border-radius: 10px;
+  padding: 20px;
   margin-bottom: 20px;
 }
 .Portfolios .Pf .PfWrap::after {
@@ -75,11 +231,11 @@
   /* float: left; */
   /* width: calc(100% - 105px); */
   line-height: 30px;
-  color: rgb(52, 77, 124);
+  color: white;
 }
 
 .Portfolios .Pf .PfWrap a:hover {
-  color: rgb(86, 158, 216);
+  color: rgb(148, 198, 240);
 }
 
 .Portfolios .Pf .PfWrap .Btns {
@@ -105,12 +261,18 @@
   width: 50px;
   height: 50px;
   border-radius: 100%;
-  border: 3px solid #ddd;
-  background-color: white;
+  border: 3px solid #aaa;
   font-size: 2.7rem;
-  color: #ccc;
+  color: #aaa;
   line-height: 40px;
   cursor: pointer;
   display: block;
   margin: 30px auto 0 auto;
+  transition: 0.2s;
+  background-color: rgba(0, 0, 0, 0);
+}
+.MorePf:hover {
+  border-color: var(--error-color);
+  background-color: var(--error-color);
+  color: white;
 }

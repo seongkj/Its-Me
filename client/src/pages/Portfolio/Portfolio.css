@@ -6,138 +6,304 @@
   --etc-color: #d9d9d9;
   --error-color: #ee6c4d;
 }
-hr {
-  width: 100%;
-  margin: 3em auto;
+@font-face {
+  font-family: 'LeferiPoint-WhiteA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+.MainHr {
+  width: 0%;
+  /* margin: 1em auto; */
 }
 
-.Portfolio {
+.first-theme {
+  width: 100%;
   margin: 0 auto;
 }
-.PortfolioWrap {
+.first-theme > div {
   width: 60%;
   margin: 0 auto;
+  font-family: 'LeferiPoint-WhiteA';
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+  padding: 50px 0;
 }
-.PortUserInfo {
-  width: fit-content;
-  align-items: center;
-  margin-top: 15vh;
+.first-theme > div:last-child {
+  border-bottom: 0;
+  padding-bottom: 100px;
 }
-.PortUserInfo .PortImgWrap {
-  width: 300px;
-  height: 300px;
-  border-radius: 100%;
-  border: 10px solid rgb(196, 220, 255);
+.first-theme .PortUserInfo {
+  flex-direction: row;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--main-color);
+  color: white;
+  width: 100%;
+  padding: 50px 17.5%;
+  justify-items: center;
+  border-bottom: 0;
   overflow: hidden;
-  display: inline-block;
+  position: relative;
+}
+.first-theme .PortUserInfo .PortImgWrap {
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+  overflow: hidden;
   vertical-align: middle;
   box-sizing: content-box;
+  margin: 0 auto;
 }
-.PortUserInfo .PortImgWrap img {
+.first-theme .PortUserInfo .PortImgWrap img {
   width: 100%;
   height: 100%;
 }
-.PortUserInfo .PortTxtWrap {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 200px;
+.first-theme .PortUserInfo .PortTxtWrap {
+  margin: 0 auto;
+  padding-top: 3vh;
+  text-align: center;
+  position: relative;
 }
-.PortUserInfo .PortTxtWrap p{
-  font-size: 1.3rem;
-  line-height: 2.8rem;
+.first-theme .PortUserInfo .PortTxtWrap p {
+  font-size: 1rem;
+  line-height: 2rem;
   font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  /* margin-right: 10px; */
+  padding: 0.5vh 0;
+  border-radius: 5vh;
 }
-.PortUserInfo .PortTxtWrap p:first-child {
-  font-size: 4rem;
-  margin-bottom: 5vh;
+.first-theme .PortUserInfo .PortTxtWrap p:first-child {
+  width: 100%;
+  font-size: 2.5rem;
+  margin-bottom: 2vh;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0);
+  margin-right: 0;
+  padding-bottom: 30px;
+}
+.first-theme .PortUserInfo .PortTxtWrap p:first-child::after {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 2px;
+  background-color: white;
+  position: absolute;
+  left: calc(50% - 15px);
+  bottom: 0;
+}
+.first-theme .PortUserInfo .PortTxtWrap p svg {
+  margin-right: 10px;
 }
 
-.PortTxtWrap2 {
+.first-theme .PortTxtWrap2 {
   line-height: 2rem;
 }
-.PortMainTxt {
-  font-size: 1.1rem;
+.first-theme .PortTxtWrap3 {
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #eee;
+}
+.first-theme .PortTxtWrap3:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.first-theme .PortMainTxt {
+  font-size: 1.7rem;
   font-weight: bold;
-  margin-bottom: 5vh;
+  margin-bottom: 3vh;
+}
+.first-theme .DateTxt {
+  color: #999;
+  font-size: 0.8rem;
 }
 
-.PortTxtWrap3 {
+.first-theme .SkillWrap > span {
+  margin-right: 20px;
+  background-color: #e3e3e3;
+  line-height: 3vh;
+  display: inline-block;
+  padding: 5px 15px 0 15px;
+  border-radius: 1.5vh;
+}
+
+.first-theme .WebWrap .PortTxtWrap3 {
+}
+.first-theme .WebWrap .PortTxtWrap3 .WebImg {
+  width: 40%;
+  height: 300px;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.first-theme .WebWrap .PortTxtWrap3 .WebImg img {
+  width: 100%;
+  height: 100%;
+}
+.first-theme .WebWrap .PortTxtWrap3 .WebText {
+  display: inline-block;
+  width: 60%;
+  vertical-align: top;
+  padding-left: 40px;
+}
+.first-theme .WebWrap .PortTxtWrap3 .WebText .Title {
+  font-size: 1.3rem;
+}
+.first-theme .WebWrap .PortTxtWrap3 .WebText .DateTxt {
+  margin-bottom: 1.5vh;
+  padding-bottom: 1vh;
+  border-bottom: 1px solid #ddd;
+}
+.first-theme .WebWrap .PortTxtWrap3 .WebText .Link {
+  margin-top: 10px;
+}
+.first-theme .WebWrap .PortTxtWrap3 .WebText .Link svg {
+  color: #aaa;
+  margin-right: 10px;
+}
+.first-theme .WebWrap .PortTxtWrap3 .WebText .Link a {
+  color: var(--sub2-color);
+  vertical-align: middle;
+}
+
+.first-theme .AwardWrap span {
+  margin-right: 20px;
+}
+
+.first-theme .MainBG2 {
+  animation: theme 21s linear infinite;
+  height: 0;
+  width: 100% !important;
+  padding: 0 !important;
+  /* position: fixed;
+  left: 0;
+  top: 0; */
+}
+.first-theme .MainBG2:after,
+.first-theme .MainBG2:before {
+  content: '';
+  display: block;
+  position: absolute;
+  /* z-index: -1; */
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  width: 100vmax;
+  height: 100vmax;
+  background: rgba(255, 255, 255, 0.03);
+  animation: background1 90s linear infinite;
+}
+.first-theme .MainBG2:after {
+  left: 15vw;
+}
+.first-theme .MainBG2:before {
+  right: 15vw;
+  animation-delay: -30s;
+  animation-direction: reverse;
+}
+@keyframes theme {
+  0% {
+    background: #2395ff;
+  }
+  16% {
+    background: #9682f7;
+  }
+  33% {
+    background: var(--sub-color);
+  }
+  50% {
+    background: var(--sub2-color);
+  }
+  66% {
+    background: rgba(37, 21, 255, 0.75);
+  }
+  83% {
+    background: var(--sub2-color);
+  }
+  100% {
+    background: #2395ff;
+  }
+}
+@keyframes background1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* .Title {
+  display: none;
+} */
+/* 
+.MainContainer {
   display: flex;
-  flex-direction: row;
-  gap: 5vw;
-}
-
-.DashBoard {
-  display: flex;
-  gap: 5vw;
-}
-
-.DashTxt {
+  flex-direction: column;
+  gap: 5vh;
   text-align: center;
-  margin-top: 2vh;
-}
-svg {
-  width: 114px;
-  height: 114px;
-}
-
-.bg {
-  fill: none;
-  stroke-width: 10px;
-  stroke: #bfbfbf;
+  align-items: center;
+  top: 50%;
+  transform: translate(0%, 50%);
+  color: white;
 }
 
-[class^="meter-"] {
-  fill: none;
-  stroke-width: 10px;
-  stroke-linecap: round;
-  transform: rotate(-90deg);
-  transform-origin: 50% 50%;
-  
+.MainText {
+  font-family: 'yg-jalnan';
+  color: white;
+  font-size: 13rem;
 }
 
-.meter-1 {
-  stroke-dasharray: 360;
-  stroke-dashoffset: 100;
-  stroke: var(--main-color);
-  animation: progress-1 1s ease-out;
-}
-.meter-2 {
-  stroke:  var(--sub-color);
-  stroke-dasharray: 360;
-  stroke-dashoffset: 160;
-  animation: progress-2 .75s ease-out;
-}
-.meter-3 {
-  stroke:  var(--sub2-color);
-  stroke-dasharray: 360;
-  stroke-dashoffset: 250;
-  animation: progress-3 .5s ease-out;
+.SubText {
+  font-family: 'KoPubDotumMedium';
+  letter-spacing: 1px;
+  font-size: 2.5rem;
 }
 
-@keyframes progress-1 {
-    from {
-        stroke-dashoffset: 360;
-    }
-    to {
-        stroke-dashoffset: 100;
-    }
+.MadeBtn {
+  font-family: 'KoPubDotumMedium';
+  cursor: pointer;
+  position: relative;
+  padding: 15px 40px;
+  color: var(--main-color);
+  background: white;
+  font-size: 1.7rem;
+  font-weight: bold;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: all 1s;
 }
-
-@keyframes progress-2 {
-  from {
-    stroke-dashoffset: 360;
-  }
-  to {
-    stroke-dashoffset: 160;
-  }
+.MadeBtn:after,
+.MadeBtn:before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  border: 0px solid #fff;
+  transition: all 1s;
 }
-
-@keyframes progress-3 {
-  from {
-    stroke-dashoffset: 360;
-  }
-  to {
-    stroke-dashoffset: 250;
-  }
+.MadeBtn:after {
+  top: -1px;
+  left: -1px;
+  border-top: 4px solid var(--main-color);
+  border-left: 4px solid var(--main-color);
 }
+.MadeBtn:before {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 4px solid var(--main-color);
+  border-right: 4px solid var(--main-color);
+}
+.MadeBtn:hover {
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.MadeBtn:hover:before,
+.MadeBtn:hover:after {
+  width: 100%;
+  height: 100%;
+} */
