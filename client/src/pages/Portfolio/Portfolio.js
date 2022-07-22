@@ -8,7 +8,7 @@ import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { faMobileScreen } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
-const Portfolio = () => {
+export const Portfolio = React.forwardRef((props, ref) => {
   const [skill, setSkill] = useState([]);
   const [career, setCareer] = useState([]);
   const [education, setEducation] = useState([]);
@@ -65,7 +65,7 @@ const Portfolio = () => {
   }, []);
 
   return (
-    <div className="PortfolioWrap first-theme">
+    <div ref={ref} className="PortfolioWrap first-theme">
       <div className="PortUserInfo">
         <div className="MainBG2"></div>
         {userInfo.map((e) => {
@@ -74,7 +74,7 @@ const Portfolio = () => {
               <div className="PortImgWrap">
                 <img src={e.profile_img} />
               </div>
-              <div class="PortTxtWrap">
+              <div className="PortTxtWrap">
                 <p>{e.name}</p>
                 <p>
                   <FontAwesomeIcon icon={faEnvelope} />
@@ -259,6 +259,6 @@ const Portfolio = () => {
       ) : null}
     </div>
   );
-};
+});
 
 export default Portfolio;
