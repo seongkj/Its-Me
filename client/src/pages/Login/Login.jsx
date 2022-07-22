@@ -15,6 +15,7 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import Header from '../../components/Header';
 
 function Copyright(props) {
   return (
@@ -74,11 +75,12 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Header />
       <Container
         component="main"
         maxWidth="xs"
         sx={{
-          marginTop: 6,
+          marginTop: 14,
           border: 'solid 1px #bdbdbd',
           borderRadius: '10px',
         }}
