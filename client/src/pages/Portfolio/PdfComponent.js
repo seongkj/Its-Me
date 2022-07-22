@@ -12,11 +12,9 @@ class PdfComponent extends React.Component {
         <ReactToPrint
           content={() => this.componentRef}
           trigger={() => (
-            <pdfbutton>
-              <button className="btn btn-primary" style={styles.button}>
-                PDF로 저장
-              </button>
-            </pdfbutton>
+            <button className="btn btn-primary" style={styles.button}>
+              PDF로 저장
+            </button>
           )}
         />
         <Portfolio ref={(response) => (this.componentRef = response)} />
