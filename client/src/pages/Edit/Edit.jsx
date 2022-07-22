@@ -233,14 +233,10 @@ function SectionChoiceButton(prop) {
 // 디자인 요소 선택 버튼
 function DesignChoiceButton(prop) {
   const { index, clickedButtonIndex, id, name, isToggle, designButton, setDesignButton, onClick } = prop;
-  // const [clicked, setClicked] = useState(isToggle);
 
-  // 버튼 클릭 시 토글하여 색 변경, 섹션 컴포넌트 추가, 삭제
-  const changeColor = () => setClicked(!clicked);
 
   const addDesign = (clickedTitle) => {
     const sortData = [{ id: id, name: clickedTitle }];
-    // sortData.sort((a, b) => a.id - b.id);
     setDesignButton(sortData);
   };
 
@@ -254,8 +250,6 @@ function DesignChoiceButton(prop) {
     const check = designButton.filter(
       (el) => el.name === event.target.innerHTML,
     );
-
-    changeColor();
 
     if (check.length !== 1) {
       addDesign(event.target.innerHTML);
