@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Mypage.css';
-import userInfo from '../../assets/mypage.json';
 import Header from '../../components/Header';
 import axios from 'axios';
 import {
@@ -10,10 +9,6 @@ import {
   postPortfolios,
   deletePortfolios,
 } from '../../utils/api';
-
-const datas = userInfo.map((data) => {
-  return data;
-});
 
 const Mypage = () => {
   const [userName, setUserName] = useState('');
@@ -68,7 +63,10 @@ const Mypage = () => {
     const getData = props.data;
     return (
       <div className="PfWrap">
-        <Link to={`/portfolio/${getData.portfolio_idx}`} className="LinkTitle">
+        <Link
+          to={`/PdfComponent/${getData.portfolio_idx}`}
+          className="LinkTitle"
+        >
           {getData.title}
         </Link>
         <div className="Btns">
