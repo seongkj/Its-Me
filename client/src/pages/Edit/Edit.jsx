@@ -100,27 +100,6 @@ function Edit() {
               </button>
             </div>
           </div>
-          <div className="SectionBar">
-            <ul style={displaySection}>
-              {sections.map((el) => (
-                <li key={el.id}>
-                  <SectionChoiceButton
-                    key={el.id}
-                    id={el.id}
-                    name={el.name}
-                    isToggle={el.isToggle}
-                    sectionButton={sectionButton}
-                    setSectionButton={setSectionButton}
-                  />
-                </li>
-              ))}
-            </ul>
-            <ul style={displayDesign} className="DisplayDesign">
-              {designs.map((el, i) => (
-                <li key={i}>{el}</li>
-              ))}
-            </ul>
-          </div>
         </div>
         <div className="SectionInfo">
           {sectionButton.map((el, i) => (
