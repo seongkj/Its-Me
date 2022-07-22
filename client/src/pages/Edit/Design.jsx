@@ -12,7 +12,6 @@ function Design(prop) {
       <div className="DesignComponentTitle">
         <p>{designName.name}</p>
       </div>
-      <hr className="DesignHr" />
       <div className="DesignComponentContent">
         {designName.name === '일반 모드' ? <Day /> : null}
         {designName.name === '다크 모드' ? <Night /> : null}
