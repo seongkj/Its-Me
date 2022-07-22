@@ -39,15 +39,16 @@
 
 |마이페이지|
 |--|
-|![mypage](/uploads/ac1cf9cbfa7338ab4e0471ee6114f6b3/mypage.png)|
+|![mypage](/uploads/a32ad9af84c832595053fe665f4219ee/mypage.png)|
+
 
 |포트폴리오 편집 페이지|
 |--|
-|![edit](/uploads/a62ab1db85a7d44951cd01b41c24ef1f/edit.png)|
+|![edit](/uploads/21ad7696ea93a2589cd8106035edcf50/edit.png)|
 
 |포트폴리오 조회 페이지|
 |--|
-|![portfolio](/uploads/8bfe7c96ca4a1944198e3491cf306420/portfolio.png)|
+|![portfolio](/uploads/1c002e8aaed0a73c1ebdaafc05c1b043/portfolio.png)|
 <br>
 
 ## 🚗  프로젝트만의 차별점, 기대 효과
