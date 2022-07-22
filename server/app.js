@@ -18,7 +18,7 @@ import languageRoute from './routes/language-router.js';
 import portfolioRoute from './routes/portfolio-router.js';
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 import morgan from 'morgan';
 app.use(morgan('dev'));
 

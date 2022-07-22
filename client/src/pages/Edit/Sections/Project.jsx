@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import TextareaAutosize from 'react-textarea-autosize';
 import axios from 'axios';
-// import ProjectList from './ProjectList';
 
 const autoGrow = (e) => {
   e.style.height = '5px';
