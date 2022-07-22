@@ -19,7 +19,7 @@ function Edit() {
   const [designButton, setDesignButton] = useState([]);
 
   const [displaySection, setDisplaySection] = useState({ display: 'flex' });
-  const [displayDesign, setDisplayDesign] = useState({ display: 'flex' });
+  const [displayDesign, setDisplayDesign] = useState({ display: 'none' });
 
   const { portfolio_idx } = useParams();
 
@@ -100,61 +100,42 @@ function Edit() {
               </button>
             </div>
           </div>
-        </div>
-        <div className="SectionInfo">
-          {sectionButton.map((el, i) => (
-            <Section sectionName={el} key={i} />
-          ))}
-          <Link to="/mypage">
-            <button
-              onClick={() =>
-                window.open(
-                  `http://localhost:3000/PdfComponent/${portfolio_idx}`,
-                  '_blank',
-                )
-              }
-            >
-              완료
-            </button>
-          </Link>
-        </div>
-
-        <div className="SectionBar">
-          <ul style={displaySection}>
-            {sections.map((el) => (
-              <li key={el.id}>
-                <SectionChoiceButton
-                  key={el.id}
-                  id={el.id}
-                  name={el.name}
-                  isToggle={el.isToggle}
-                  sectionButton={sectionButton}
-                  setSectionButton={setSectionButton}
-                />
-              </li>
-            ))}
-          </ul>
-
-          <div className="DesignBar">
-            <ul style={displayDesign}>
-              {designs.map((el, i) => (
-                <li key={i}>
-                  <DesignChoiceButton
+          <div className="SectionBar">
+            <ul style={displaySection}>
+              {sections.map((el) => (
+                <li key={el.id}>
+                  <SectionChoiceButton
                     key={el.id}
                     id={el.id}
                     name={el.name}
                     isToggle={el.isToggle}
-                    designButton={designButton}
-                    setDesignButton={setDesignButton}
+                    sectionButton={sectionButton}
+                    setSectionButton={setSectionButton}
                   />
                 </li>
               ))}
             </ul>
+            <div className="DesignBar">
+              <ul style={displayDesign}>
+                {designs.map((el, i) => (
+                  <li key={i}>
+                    <DesignChoiceButton
+                      key={el.id}
+                      id={el.id}
+                      name={el.name}
+                      isToggle={el.isToggle}
+                      designButton={designButton}
+                      setDesignButton={setDesignButton}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="SectionInfo" style={displaySection}>
+      <div className="SectionInfo">
         {sectionButton.map((el, i) => (
           <Section sectionName={el} key={i} />
         ))}
