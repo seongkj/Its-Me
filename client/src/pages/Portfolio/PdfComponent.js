@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactToPrint from 'react-to-print';
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import { Button } from "react-bootstrap"
 
 import Portfolio from './Portfolio';
 
