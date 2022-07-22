@@ -12,6 +12,25 @@ import './Edit.css';
 // 포트폴리오 섹션 정보
 
 function Edit() {
+
+  const [theme, setTheme] = useState('first-theme');
+
+  const changeTheme = (theme) => {
+    console.log('changeTheme----------', theme);
+    setTheme(theme);
+  };
+
+  const setThemeToLocalStorage = (theme) => {
+    window.localStorage.setItem('theme', theme);
+  };
+
+  useEffect(() => {
+    setThemeToLocalStorage(theme);
+    console.log('setThemeToLocalStorage----------', theme);
+  }, [theme]);
+
+  const getThemeToLocalStorage = () => window.localStorage.getItem('theme');
+
   const [sections, setSections] = useState(sectionName);
   const [designs, setDesigns] = useState(designName);
   const [clickedButtonIndex, setClickedButtonIndex] = useState(0);
@@ -67,7 +86,7 @@ function Edit() {
   }, []);
 
   return (
-    <div>
+    <div className={getThemeToLocalStorage()}>
       <Header />
       <div className="Edit">
         <div className="OptionBar">
@@ -90,6 +109,7 @@ function Edit() {
                   changeDesign(setDisplaySection, setDisplayDesign)
                 }
                 className="SecBtn"
+                element={<themes onClick={changeTheme}/>}
               >
                 템플릿
               </button>

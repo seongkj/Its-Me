@@ -2,8 +2,12 @@ import axios from 'axios';
 import React, { createElement, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './Portfolio.css';
+import './Portfolio_Day.css';
+import './Portfolio_Night.css';
 
 const Portfolio = () => {
+  
+
   const [userInfo, setUserInfo] = useState({
     userName: '',
     userEmail: '',
