@@ -64,8 +64,6 @@
   text-align: center;
   margin-top: 10px;
 }
-.SectionBar ul li {
-}
 
 .SectionButton,
 .DesignButton {
@@ -84,17 +82,20 @@
   font-weight: bold;
   font-family: 'LeferiPoint-WhiteA';
 }
-.SectionButton:hover, .DesignButton:hover {
+.SectionButton:hover,
+.DesignButton:hover {
   background-color: var(--sub2-color);
   color: white;
 }
-.SectionButton.Toggle, .DesignButton.Toggle {
+.SectionButton.Toggle,
+.DesignButton.Toggle {
   background-color: var(--main-color);
   color: white;
 }
 
 /* section info 부분 */
-.SectionInfo, .DesignInfo {
+.SectionInfo,
+.DesignInfo {
   /* display: flex; */
   background-color: #f3f3f3;
   flex-direction: column;

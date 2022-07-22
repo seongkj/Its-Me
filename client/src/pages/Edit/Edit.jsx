@@ -45,35 +45,64 @@ function Edit() {
   // 포트폴리오 GET (포폴을 수정할 때 기존에 사용했던 세션을 미리 열어두기 위함)
   const getPofol = () => {
     const getData = [];
+    const toggleData = [];
     getPortfolio(portfolio_idx).then((res) => {
       if (res.introduce.length > 0) {
-        getData.push(sections[0]);
+        getData.push(sectionName[0]);
+        toggleData.push({ id: 1, name: '한 줄 소개', isToggle: true });
+      } else {
+        toggleData.push({ id: 1, name: '한 줄 소개', isToggle: false });
       }
       if (res.skill.length > 0) {
-        getData.push(sections[1]);
+        getData.push(sectionName[1]);
+        toggleData.push({ id: 2, name: '보유 기술 스택', isToggle: true });
+      } else {
+        toggleData.push({ id: 2, name: '보유 기술 스택', isToggle: false });
       }
       if (res.career.length > 0) {
-        getData.push(sections[2]);
+        getData.push(sectionName[2]);
+        toggleData.push({ id: 3, name: '경력', isToggle: true });
+      } else {
+        toggleData.push({ id: 3, name: '경력', isToggle: false });
       }
       if (res.education.length > 0) {
-        getData.push(sections[3]);
+        getData.push(sectionName[3]);
+        toggleData.push({ id: 4, name: '학력', isToggle: true });
+      } else {
+        toggleData.push({ id: 4, name: '학력', isToggle: false });
       }
       if (res.website.length > 0) {
-        getData.push(sections[4]);
+        getData.push(sectionName[4]);
+        toggleData.push({ id: 5, name: '프로젝트/웹사이트', isToggle: true });
+      } else {
+        toggleData.push({ id: 5, name: '프로젝트/웹사이트', isToggle: false });
       }
       if (res.etc_education.length > 0) {
-        getData.push(sections[5]);
+        getData.push(sectionName[5]);
+        toggleData.push({ id: 6, name: '교육 및 기타 이력', isToggle: true });
+      } else {
+        toggleData.push({ id: 6, name: '교육 및 기타 이력', isToggle: false });
       }
       if (res.award.length > 0) {
-        getData.push(sections[6]);
+        getData.push(sectionName[6]);
+        toggleData.push({ id: 7, name: '수상', isToggle: true });
+      } else {
+        toggleData.push({ id: 7, name: '수상', isToggle: false });
       }
       if (res.certificate.length > 0) {
-        getData.push(sections[7]);
+        getData.push(sectionName[7]);
+        toggleData.push({ id: 8, name: '시험 및 자격증', isToggle: true });
+      } else {
+        toggleData.push({ id: 8, name: '시험 및 자격증', isToggle: false });
       }
       if (res.language.length > 0) {
-        getData.push(sections[8]);
+        getData.push(sectionName[8]);
+        toggleData.push({ id: 9, name: '외국어', isToggle: true });
+      } else {
+        toggleData.push({ id: 9, name: '외국어', isToggle: false });
       }
       setSectionButton(getData);
+      setSections(toggleData);
     });
   };
 
