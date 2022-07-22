@@ -73,6 +73,14 @@ function Edit() {
     // });
   };
 
+  const changeBtnColor = () => {};
+  const changeBtnColor2 = () => {
+    const firstBtn = document.querySelector('.FirstBtn');
+    const secBtn = document.querySelector('.SecBtn');
+    firstBtn.classList.remove = 'Toggle';
+    secBtn.classList.add('Toggle');
+  };
+
   return (
     <div>
       <Header />
@@ -85,6 +93,7 @@ function Edit() {
                 onClick={() =>
                   changeSection(setDisplaySection, setDisplayDesign)
                 }
+                className="FirstBtn Toggle"
               >
                 항목
               </button>
@@ -95,6 +104,7 @@ function Edit() {
                 onClick={() =>
                   changeDesign(setDisplaySection, setDisplayDesign)
                 }
+                className="SecBtn"
               >
                 템플릿
               </button>
@@ -261,11 +271,19 @@ function DesignChoiceButton(prop) {
 function changeSection(setDisplaySection, setDisplayDesign) {
   setDisplaySection({ display: 'flex' });
   setDisplayDesign({ display: 'none' });
+  const firstBtn = document.querySelector('.FirstBtn');
+  const secBtn = document.querySelector('.SecBtn');
+  firstBtn.classList.add('Toggle');
+  secBtn.classList.remove('Toggle');
 }
 //디자인 변경
 function changeDesign(setDisplaySection, setDisplayDesign) {
   setDisplaySection({ display: 'none' });
   setDisplayDesign({ display: 'flex' });
+  const firstBtn = document.querySelector('.FirstBtn');
+  const secBtn = document.querySelector('.SecBtn');
+  firstBtn.classList.remove('Toggle');
+  secBtn.classList.add('Toggle');
 }
 
 export default Edit;
