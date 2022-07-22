@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CareerList from './CareerList';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -6,6 +6,8 @@ import './Career.css';
 
 function Career() {
   const { portfolio_idx } = useParams();
+  const [career, setCareer] = useState([]);
+
   const [inputs, setInputs] = useState({
     startDate: '',
     endDate: '',
@@ -15,6 +17,20 @@ function Career() {
   });
 
   const { startDate, endDate, company, position, comment } = inputs;
+
+  const getCareerList = async () => {
+    await fetch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const care = data.data.career;
+        setCareer(care);
+      });
+  };
+  useEffect(() => {
+    getCareerList();
+  }, []);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -38,7 +54,7 @@ function Career() {
     if (company && startDate && position) {
       axios
         .post('http://localhost:3001/careers', data)
-        .then((res) => console.log(res, '성공'))
+        .then((res) => getCareerList())
         .catch((err) => console.log(err, '실패'));
     }
     setInputs({
@@ -49,6 +65,36 @@ function Career() {
       comment: '',
     });
   };
+
+  // 삭제
+  async function removeCareer(delCareer) {
+    await axios
+      .delete(`http://localhost:3001/careers/${delCareer.career_idx}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+    const deletCareer = career.filter((el) => el !== delCareer);
+    setCareer(deletCareer);
+  }
+
+  function CareerList() {
+    return (
+      <div>
+        {career?.map((el) => {
+          return (
+            <div key={el.career_idx} className="CareerList">
+              <span>{el.start_date.substr(0, 10)} ~ </span>
+              <span> {el.end_date.substr(0, 10)}</span>{' '}
+              <span>회사명 : {el.company}</span>
+              <span>직무 : {el.position}</span> <span>{el.comment}</span>
+              <button onClick={() => removeCareer(el)} className="DeleteBtn">
+                삭제
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <div className="CareerInfo">
