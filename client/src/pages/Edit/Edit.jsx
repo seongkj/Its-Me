@@ -61,26 +61,6 @@ function Edit() {
     getPofol();
   }, []);
 
-  // 테스트 버튼
-  const test = () => {
-    getPortfolio(portfolio_idx).then((res) => console.log(res));
-  };
-
-  const test2 = () => {
-    console.log(sectionButton);
-    // getPortfolios().then((res) => {
-    //   console.log(res);
-    // });
-  };
-
-  const changeBtnColor = () => {};
-  const changeBtnColor2 = () => {
-    const firstBtn = document.querySelector('.FirstBtn');
-    const secBtn = document.querySelector('.SecBtn');
-    firstBtn.classList.remove = 'Toggle';
-    secBtn.classList.add('Toggle');
-  };
-
   return (
     <div>
       <Header />

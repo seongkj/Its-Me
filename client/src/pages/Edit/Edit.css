@@ -42,7 +42,12 @@
   font-weight: bold;
 }
 .EditOption button:hover {
-  background-color: white;
+  background-color: var(--error-color);
+  color: white;
+}
+.EditOption button.Toggle {
+  background-color: var(--error-color);
+  color: white;
 }
 
 /* section-bar 부분 */
@@ -62,7 +67,8 @@
 .SectionBar ul li {
 }
 
-.SectionButton, .DesignButton {
+.SectionButton,
+.DesignButton {
   border: none;
   border-radius: 5px;
   background-color: #ddd;
