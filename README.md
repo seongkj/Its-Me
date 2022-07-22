@@ -21,19 +21,33 @@
 - 서브 기능
   1. 프로젝트 관련 이미지 저장
   2. 계정 비밀번호 분실시 임시 비밀번호 발급
-  3.
-|로그인|
-|--|
-|<img width="956" alt="로그인" src="https://user-images.githubusercontent.com/72402014/169438358-629ed697-a4bf-4a21-bdd8-c0094d264fba.png">|
 
 |메인페이지|
 |--|
-|<img width="955" alt="메인" src="https://user-images.githubusercontent.com/72402014/169438392-cb4121c7-7f1b-445d-a59e-fc9ad883df76.png">|
+|![main](/uploads/fc807939cb2b01601c4e4ea806a89dcb/main.png)|
+
+|회원가입|
+|--|
+|![signup](/uploads/6efb297550ad42d6c9230d974696ae1a/signup.png)|
+
+
+|로그인|
+|--|
+|![login](/uploads/8c59940333f64186867f4fe41f96979f/login.png)|
+
+
 
 |마이페이지|
 |--|
-|<img width="951" alt="마이" src="https://user-images.githubusercontent.com/72402014/169438415-fe3c1a43-731d-42ef-a2fd-da22dc181473.png">|
+|![mypage](/uploads/ac1cf9cbfa7338ab4e0471ee6114f6b3/mypage.png)|
 
+|포트폴리오 편집 페이지|
+|--|
+|![edit](/uploads/a62ab1db85a7d44951cd01b41c24ef1f/edit.png)|
+
+|포트폴리오 조회 페이지|
+|--|
+|![portfolio](/uploads/8bfe7c96ca4a1944198e3491cf306420/portfolio.png)|
 <br>
 
 ## 🚗  프로젝트만의 차별점, 기대 효과
@@ -53,7 +67,7 @@
   <img src="https://img.shields.io/badge/Express-v2.0.15-000000?logo=Express"/>
 </p>
 
-`+ AWS S3, AWS RDS`
+`+ AWS S3`
 
 <br>
 
