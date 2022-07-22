@@ -18,14 +18,11 @@
   /* margin: 1em auto; */
 }
 
-.Portfolio {
-  margin: 0 auto;
-}
-.PortfolioWrap {
+.first-theme {
   width: 100%;
   margin: 0 auto;
 }
-.PortfolioWrap > div {
+.first-theme > div {
   width: 60%;
   margin: 0 auto;
   font-family: 'LeferiPoint-WhiteA';
@@ -33,11 +30,11 @@
   border-bottom: 2px solid #ddd;
   padding: 50px 0;
 }
-.PortfolioWrap > div:last-child {
+.first-theme > div:last-child {
   border-bottom: 0;
   padding-bottom: 100px;
 }
-.PortfolioWrap .PortUserInfo {
+.first-theme .PortUserInfo {
   flex-direction: row;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: var(--main-color);
@@ -46,8 +43,10 @@
   padding: 50px 17.5%;
   justify-items: center;
   border-bottom: 0;
+  overflow: hidden;
+  position: relative;
 }
-.PortUserInfo .PortImgWrap {
+.first-theme .PortUserInfo .PortImgWrap {
   width: 250px;
   height: 250px;
   border-radius: 100%;
@@ -56,16 +55,17 @@
   box-sizing: content-box;
   margin: 0 auto;
 }
-.PortUserInfo .PortImgWrap img {
+.first-theme .PortUserInfo .PortImgWrap img {
   width: 100%;
   height: 100%;
 }
-.PortUserInfo .PortTxtWrap {
+.first-theme .PortUserInfo .PortTxtWrap {
   margin: 0 auto;
   padding-top: 3vh;
   text-align: center;
+  position: relative;
 }
-.PortUserInfo .PortTxtWrap p {
+.first-theme .PortUserInfo .PortTxtWrap p {
   font-size: 1rem;
   line-height: 2rem;
   font-weight: bold;
@@ -76,7 +76,7 @@
   padding: 0.5vh 0;
   border-radius: 5vh;
 }
-.PortUserInfo .PortTxtWrap p:first-child {
+.first-theme .PortUserInfo .PortTxtWrap p:first-child {
   width: 100%;
   font-size: 2.5rem;
   margin-bottom: 2vh;
@@ -85,7 +85,7 @@
   margin-right: 0;
   padding-bottom: 30px;
 }
-.PortUserInfo .PortTxtWrap p:first-child::after {
+.first-theme .PortUserInfo .PortTxtWrap p:first-child::after {
   content: '';
   display: block;
   width: 30px;
@@ -95,34 +95,34 @@
   left: calc(50% - 15px);
   bottom: 0;
 }
-.PortUserInfo .PortTxtWrap p svg {
+.first-theme .PortUserInfo .PortTxtWrap p svg {
   margin-right: 10px;
 }
 
-.PortTxtWrap2 {
+.first-theme .PortTxtWrap2 {
   line-height: 2rem;
 }
-.PortTxtWrap3 {
+.first-theme .PortTxtWrap3 {
   margin-bottom: 30px;
   padding-bottom: 30px;
   border-bottom: 1px solid #eee;
 }
-.PortTxtWrap3:last-child {
+.first-theme .PortTxtWrap3:last-child {
   margin-bottom: 0;
   padding-bottom: 0;
   border-bottom: 0;
 }
-.PortMainTxt {
+.first-theme .PortMainTxt {
   font-size: 1.7rem;
   font-weight: bold;
   margin-bottom: 3vh;
 }
-.DateTxt {
+.first-theme .DateTxt {
   color: #999;
   font-size: 0.8rem;
 }
 
-.SkillWrap > span {
+.first-theme .SkillWrap > span {
   margin-right: 20px;
   background-color: #e3e3e3;
   line-height: 3vh;
@@ -131,75 +131,76 @@
   border-radius: 1.5vh;
 }
 
-.WebWrap .PortTxtWrap3 {
+.first-theme .WebWrap .PortTxtWrap3 {
 }
-.WebWrap .PortTxtWrap3 .WebImg {
+.first-theme .WebWrap .PortTxtWrap3 .WebImg {
   width: 40%;
   height: 300px;
   display: inline-block;
   overflow: hidden;
   border-radius: 10px;
 }
-.WebWrap .PortTxtWrap3 .WebImg img {
+.first-theme .WebWrap .PortTxtWrap3 .WebImg img {
   width: 100%;
   height: 100%;
 }
-.WebWrap .PortTxtWrap3 .WebText {
+.first-theme .WebWrap .PortTxtWrap3 .WebText {
   display: inline-block;
   width: 60%;
   vertical-align: top;
   padding-left: 40px;
 }
-.WebWrap .PortTxtWrap3 .WebText .Title {
+.first-theme .WebWrap .PortTxtWrap3 .WebText .Title {
   font-size: 1.3rem;
 }
-.WebWrap .PortTxtWrap3 .WebText .DateTxt {
+.first-theme .WebWrap .PortTxtWrap3 .WebText .DateTxt {
   margin-bottom: 1.5vh;
   padding-bottom: 1vh;
   border-bottom: 1px solid #ddd;
 }
-.WebWrap .PortTxtWrap3 .WebText .Link {
+.first-theme .WebWrap .PortTxtWrap3 .WebText .Link {
   margin-top: 10px;
 }
-.WebWrap .PortTxtWrap3 .WebText .Link svg {
+.first-theme .WebWrap .PortTxtWrap3 .WebText .Link svg {
   color: #aaa;
   margin-right: 10px;
 }
-.WebWrap .PortTxtWrap3 .WebText .Link a {
+.first-theme .WebWrap .PortTxtWrap3 .WebText .Link a {
   color: var(--sub2-color);
   vertical-align: middle;
 }
 
-.AwardWrap span {
+.first-theme .AwardWrap span {
   margin-right: 20px;
 }
 
-.MainBG2 {
+.first-theme .MainBG2 {
   animation: theme 21s linear infinite;
-  height: 100vh;
-  width: 100%;
-  position: fixed;
+  height: 0;
+  width: 100% !important;
+  padding: 0 !important;
+  /* position: fixed;
   left: 0;
-  top: 0;
+  top: 0; */
 }
-.MainBG2:after,
-.MainBG2:before {
+.first-theme .MainBG2:after,
+.first-theme .MainBG2:before {
   content: '';
   display: block;
-  position: fixed;
+  position: absolute;
   /* z-index: -1; */
   top: 0;
   width: 100vw;
   height: 100vh;
   width: 100vmax;
   height: 100vmax;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
   animation: background1 90s linear infinite;
 }
-.MainBG2:after {
+.first-theme .MainBG2:after {
   left: 15vw;
 }
-.MainBG2:before {
+.first-theme .MainBG2:before {
   right: 15vw;
   animation-delay: -30s;
   animation-direction: reverse;
@@ -239,7 +240,7 @@
 /* .Title {
   display: none;
 } */
-
+/* 
 .MainContainer {
   display: flex;
   flex-direction: column;
@@ -305,4 +306,4 @@
 .MadeBtn:hover:after {
   width: 100%;
   height: 100%;
-}
+} */

@@ -17,6 +17,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import styled from 'styled-components';
+import Header from '../../components/Header';
 
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
@@ -103,11 +104,12 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Header />
       <Container
         component="main"
         maxWidth="xs"
         sx={{
-          marginTop: 6,
+          marginTop: 10,
           border: 'solid 1px #bdbdbd',
           borderRadius: '10px',
         }}
