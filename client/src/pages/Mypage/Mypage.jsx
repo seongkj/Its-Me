@@ -169,7 +169,7 @@ const Mypage = () => {
   //포트폴리오 생성 POST
   const postPofol = () => {
     const newPofol = {
-      template: 1,
+      template: 0,
       title: '포트폴리오',
       user_idx: localStorage.getItem('userIdx'),
     };

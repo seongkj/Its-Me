@@ -100,8 +100,8 @@ export const Portfolio = React.forwardRef((props, ref) => {
 
   useEffect(() => {
     userPortInfo == 1
-      ? setTemplateCss('first-theme')
-      : setTemplateCss('second-theme');
+      ? setTemplateCss('second-theme')
+      : setTemplateCss('first-theme');
   }, [userPortInfo]);
 
   console.log(userPortInfo);
