@@ -2,6 +2,9 @@
   max-width: 100%;
   margin: 0 auto;
   position: relative;
+  margin-top: 0 !important;
+  border: none !important;
+  padding-top: 0 !important;
 }
 .ProjectWrap .AddSlider {
   position: absolute;
@@ -24,43 +27,73 @@
   color: white;
   background-color: #104892;
 }
-.ProjectWrap input {
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
-}
 .ProjectWrap form {
-  max-width: 80%;
+  max-width: 100%;
   margin: 0 auto;
 }
+.ProjectWrap form::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.ProjectWrap form > button {
+  float: right;
+  margin-top: 20px;
+}
 .ProjectWrap1 {
-  width: 100%;
-  height: 400px;
+  width: 40%;
+  height: 300px;
   position: relative;
   background-color: #ddd;
   cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  border-radius: 10px;
 }
 .ProjectWrap1 img {
   width: 100%;
   height: 100%;
-  display: none;
 }
-.ProjectWrap1 span {
+.ProjectWrap1 label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  text-align: center;
+  line-height: 300px;
+  transition: 0.2s;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 5rem;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: 0;
+  top: 0;
+}
+.ProjectWrap1 label:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.ProjectWrap1 input[type='file'] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 .ProjectWrap2 {
-  margin-top: 20px;
+  padding-left: 40px;
+  width: 60%;
+  display: inline-block;
+  vertical-align: top;
 }
 .ProjectWrap2 > input {
   font-size: 1.3rem;
   line-height: 1.3rem;
   font-weight: 600;
   width: 100%;
-}
-.ProjectWrap2 > input::placeholder {
-  color: black;
 }
 .ProjectWrap2 .date {
   display: inline-block;
@@ -69,12 +102,80 @@
   color: #999;
   margin-top: 10px;
 }
+.ProjectWrap2 .date input:first-child {
+  margin-right: 10px;
+}
+.ProjectWrap .ProjectWrap2 textarea {
+  min-height: 150px;
+  width: 100%;
+  margin-top: 10px;
+  line-height: 1.5rem;
+}
+.ProjectWrap2 > p {
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #999;
+  width: 100%;
+}
+.ProjectWrap2 > p svg {
+  width: 20px;
+}
+.ProjectWrap2 > p span {
+  margin-left: 5px;
+}
+.ProjectWrap .ProjectWrap2 > p span input {
+  width: calc(100% - 25px);
+  box-sizing: border-box;
+  font-weight: bold;
+}
+
+.ProjectWrap2 h3 {
+  font-size: 1.3rem;
+  line-height: 2rem;
+  margin-bottom: 10px;
+}
+.ProjectWrap2 .date span {
+  font-size: 0.8rem;
+  color: #999;
+}
+.ProjectWrap2 .CommentWrap {
+  border-top: 1px solid #ddd;
+  color: black;
+  margin-top: 20px;
+  padding-top: 30px;
+  line-height: 1.7rem;
+}
+.ProjectWrap2 .LinkWrap {
+  margin-top: 20px;
+}
+.ProjectWrap2 .LinkWrap a {
+  margin-left: 10px;
+  color: var(--sub2-color);
+}
+.ProjectWrap2 .LinkWrap a:active {
+  color: var(--sub2-color);
+}
+.ProjectWrap2 .LinkWrap a:visited {
+  color: var(--sub2-color);
+}
+.ProjectList > div {
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #eee;
+}
+.ProjectList > div button.DeleteBtn {
+  margin-top: 20px;
+  line-height: 30px;
+}
+
+/*
 .ProjectWrap2 .date input[type='date']::-webkit-inner-spin-button,
 .ProjectWrap2 .date input[type='date']::-webkit-calendar-picker-indicator {
   display: none;
   -webkit-appearance: none;
 }
-.ProjectWrap3 {
+ .ProjectWrap3 {
   margin-top: 20px;
 }
 .ProjectWrap3 textarea {
@@ -84,29 +185,21 @@
   min-height: 100px;
   resize: none;
 }
-.ProjectWrap3 textarea::placeholder {
+.ProjectWrap2 textarea::placeholder {
   color: black;
 }
-.ProjectWrap4 {
+.ProjectWrap2 {
   margin-bottom: 20px;
 }
-.ProjectWrap4 p {
+.ProjectWrap2 p {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   color: #999;
   width: 100%;
 }
-.ProjectWrap4 span {
+.ProjectWrap2 span {
   margin-left: 5px;
 }
-.ProjectWrap4 input {
+.ProjectWrap2 input {
   width: 95%;
-}
-
-/*슬라이드 컨트롤러*/
-.ProjectWrap .swiper {
-  /* overflow: visible; */
-}
-.swiper .swiper-button-next {
-  /* right: -20px; */
-}
+} */

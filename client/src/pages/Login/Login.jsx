@@ -1,18 +1,20 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  Alert,
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-// fixme 아래와 같이 import 하면 코드가 더 깔끔합니다.
-// import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import Header from '../../components/Header';
 
 function Copyright(props) {
   return (
@@ -23,31 +25,39 @@ function Copyright(props) {
       {...props}
     >
       {'Copyright © '}
-      <Link color="inherit" href="/">
+      <Link
+        to="/"
+        style={{
+          color: 'rgba(0, 0, 0, 0.6)',
+        }}
+      >
         잇츠미
       </Link>{' '}
+      {new Date().getFullYear()}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
   );
 }
 
-// fixme theme은 모든 페이지에 적용하는것이 앱이 통일성 있어보일거같습니다.
 const theme = createTheme();
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [loginError, setLoginError] = useState('');
+  const navigate = useNavigate();
 
   const onChangeEmail = (e) => setEmail(e.target.value);
   const onChangePw = (e) => setPw(e.target.value);
 
   const onHandlePost = async (data) => {
     axios
-      .post('http://localhost:3001/auth/login', data)
+      .post('https://elice-its-me.herokuapp.com/auth/login', data)
       .then((res) => {
         console.log(res, '성공');
+        localStorage.setItem('token', res.data.data.token);
+        localStorage.setItem('userIdx', res.data.data.user_idx);
         navigate('/');
       })
       .catch((err) => {
@@ -63,12 +73,23 @@ export default function SignIn() {
       pw: pw,
     };
 
+    if (!email) setLoginError('이메일을 입력해주세요');
+    if (email && !pw) setLoginError('비밀번호를 입력해주세요');
     if (email && pw) onHandlePost(data);
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Header />
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          marginTop: 14,
+          border: 'solid 1px #bdbdbd',
+          borderRadius: '10px',
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -114,6 +135,11 @@ export default function SignIn() {
               value={pw}
               onChange={onChangePw}
             />
+            {loginError !== '' && (
+              <Alert sx={{ mt: 3 }} severity="error">
+                {<strong>{loginError}</strong>}
+              </Alert>
+            )}
             <Button
               type="submit"
               fullWidth
@@ -124,12 +150,28 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="/resetPassword" variant="body2">
+                <Link
+                  to="/resetPassword"
+                  variant="body2"
+                  style={{
+                    color: '#aaa',
+                    fontSize: '.8rem',
+                    textDecoration: 'underline',
+                  }}
+                >
                   비밀번호 찾기
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link
+                  to="/signup"
+                  variant="body2"
+                  style={{
+                    color: '#aaa',
+                    fontSize: '.8rem',
+                    textDecoration: 'underline',
+                  }}
+                >
                   회원가입
                 </Link>
               </Grid>

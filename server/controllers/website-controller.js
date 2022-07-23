@@ -1,3 +1,4 @@
+import { request } from 'http';
 import * as websiteService from '../services/website-service.js';
 
 export async function getWebSite(req, res, next) {
@@ -15,6 +16,15 @@ export async function getWebSite(req, res, next) {
 }
 export async function newWebSite(req, res, next) {
   try {
+    let imageUrl = '';
+    let imageKey = '';
+    if (req.file) {
+      imageUrl = req.file.location;
+      imageKey = req.file.key;
+      req.body.thumbnail = imageUrl;
+    } else {
+      req.body.thumbnail = '';
+    }
     const newwebsite = await websiteService.NewWebSite(req.body);
     res.status(200).send({
       status: 200,
@@ -30,7 +40,6 @@ export async function deleteWebSite(req, res, next) {
   try {
     const websiteIdx = req.params.website_idx;
     const deletedwebsite = await websiteService.deleteWebSite(websiteIdx);
-    console.log(deletedwebsite);
     res.status(200).send({
       status: 200,
       message: '웹사이트 정보 삭제 완료',

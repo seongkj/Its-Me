@@ -42,7 +42,9 @@ export async function remove(etc_educationIdx) {
       'DELETE FROM etc_education WHERE etc_education_idx=?',
       etc_educationIdx,
       (err, result) => {
-        return err ? reject(err) : resolve(etc_educationIdx);
+        return result.affectedRows == 0
+          ? resolve({ error: 'error' })
+          : resolve({ result: `${etc_educationIdx} 삭제 완료` });
       }
     );
   });

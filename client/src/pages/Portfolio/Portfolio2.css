@@ -1,0 +1,253 @@
+:root {
+  --main-color: rgb(16, 72, 146);
+  --main2-color: #293241;
+  --sub-color: #8bc9ee;
+  --sub2-color: #54b3d6;
+  --etc-color: #d9d9d9;
+  --error-color: #ee6c4d;
+}
+@font-face {
+  font-family: 'EliceDigitalBaeum';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+.MainHr {
+  width: 0%;
+  /* margin: 1em auto; */
+}
+
+.second-theme {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #181818;
+  padding-bottom: 50px;
+  min-height: 100vh;
+}
+.second-theme > div {
+  width: 60%;
+  margin: 0 auto;
+  font-family: 'EliceDigitalBaeum';
+  padding: 50px 0;
+  color: white;
+  background-color: #2e2e2e;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  padding: 50px;
+  border-top: 2px solid var(--error-color);
+}
+.second-theme > div:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+.second-theme .PortUserInfo {
+  flex-direction: row;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #2a2a2a;
+  color: white;
+  width: 100%;
+  padding: 50px 20%;
+  justify-items: center;
+  border-bottom: 0;
+  overflow: hidden;
+  position: relative;
+  border-radius: 0;
+  border-width: 5px;
+}
+.second-theme .PortUserInfo .PortImgWrap {
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+  overflow: hidden;
+  vertical-align: middle;
+  box-sizing: content-box;
+  border: 3px solid var(--error-color);
+  box-sizing: border-box;
+  display: inline-block;
+  background-color: #aaa;
+}
+.second-theme .PortUserInfo .PortImgWrap img {
+  width: 100%;
+  height: 100%;
+}
+.second-theme .PortUserInfo .PortTxtWrap {
+  padding-top: 3vh;
+  text-align: left;
+  position: relative;
+  display: inline-block;
+  width: 68%;
+  vertical-align: middle;
+  padding-left: 80px;
+}
+.second-theme .PortUserInfo .PortTxtWrap p {
+  font-size: 1rem;
+  line-height: 2rem;
+  font-weight: bold;
+  display: inline-block;
+  width: 100%;
+  /* margin-right: 10px; */
+  padding: 0.5vh 0;
+  border-radius: 5vh;
+}
+.second-theme .PortUserInfo .PortTxtWrap p:first-child {
+  width: 100%;
+  font-size: 2.5rem;
+  margin-bottom: 2vh;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0);
+  margin-right: 0;
+  padding-bottom: 30px;
+}
+.second-theme .PortUserInfo .PortTxtWrap p:first-child::after {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 2px;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.second-theme .PortUserInfo .PortTxtWrap p svg {
+  margin-right: 10px;
+}
+
+.second-theme .PortTxtWrap2 {
+  line-height: 2rem;
+}
+.second-theme .PortTxtWrap3 {
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.second-theme .PortTxtWrap3:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.second-theme .PortMainTxt {
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin-bottom: 3vh;
+}
+.second-theme .DateTxt {
+  color: #999;
+  font-size: 0.8rem;
+}
+
+.second-theme .SkillWrap > span {
+  margin-right: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  line-height: 3vh;
+  display: inline-block;
+  padding: 0 15px;
+  border-radius: 1.5vh;
+  color: white;
+}
+
+.second-theme .WebWrap .PortTxtWrap3 {
+}
+.second-theme .WebWrap .PortTxtWrap3 .WebImg {
+  width: 40%;
+  height: 300px;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.second-theme .WebWrap .PortTxtWrap3 .WebImg img {
+  width: 100%;
+  height: 100%;
+}
+.second-theme .WebWrap .PortTxtWrap3 .WebText {
+  display: inline-block;
+  width: 60%;
+  vertical-align: top;
+  padding-left: 40px;
+}
+.second-theme .WebWrap .PortTxtWrap3 .WebText .Title {
+  font-size: 1.3rem;
+}
+.second-theme .WebWrap .PortTxtWrap3 .WebText .DateTxt {
+  margin-bottom: 1.5vh;
+  padding-bottom: 1vh;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.second-theme .WebWrap .PortTxtWrap3 .WebText .Link {
+  margin-top: 10px;
+}
+.second-theme .WebWrap .PortTxtWrap3 .WebText .Link svg {
+  color: #aaa;
+  margin-right: 10px;
+}
+.second-theme .WebWrap .PortTxtWrap3 .WebText .Link a {
+  color: var(--error-color);
+  vertical-align: middle;
+}
+
+.second-theme .AwardWrap span {
+  margin-right: 20px;
+}
+
+.second-theme .MainBG2 {
+  animation: theme 21s linear infinite;
+  height: 0;
+  width: 100% !important;
+  padding: 0 !important;
+  /* position: fixed;
+  left: 0;
+  top: 0; */
+}
+.second-theme .MainBG2:after,
+.second-theme .MainBG2:before {
+  content: '';
+  display: block;
+  position: absolute;
+  /* z-index: -1; */
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  width: 100vmax;
+  height: 100vmax;
+  background: rgba(255, 255, 255, 0.03);
+  animation: background1 90s linear infinite;
+}
+.second-theme .MainBG2:after {
+  left: 15vw;
+}
+.second-theme .MainBG2:before {
+  right: 15vw;
+  animation-delay: -30s;
+  animation-direction: reverse;
+}
+@keyframes theme {
+  0% {
+    background: #2395ff;
+  }
+  16% {
+    background: #9682f7;
+  }
+  33% {
+    background: var(--sub-color);
+  }
+  50% {
+    background: var(--sub2-color);
+  }
+  66% {
+    background: rgba(37, 21, 255, 0.75);
+  }
+  83% {
+    background: var(--sub2-color);
+  }
+  100% {
+    background: #2395ff;
+  }
+}
+@keyframes background1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

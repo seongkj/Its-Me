@@ -1,140 +1,257 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Mypage.css';
-import userInfo from '../../assets/mypage.json';
 import Header from '../../components/Header';
-
-const datas = userInfo.map((data) => {
-  return data;
-});
+import axios from 'axios';
+import {
+  getPortfolio,
+  getPortfolios,
+  postPortfolios,
+  deletePortfolios,
+} from '../../utils/api';
 
 const Mypage = () => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPhone, setUserPhone] = useState('');
   const [userImg, setUserImg] = useState('');
-  const [portfolios, setPortfolios] = useState([
-    {
-      url: '/test',
-      destcription: `안녕하세요, ${userName}의 포트폴리오입니다.`,
-    },
-  ]);
+  const [state, setState] = useState('');
+  const [imgFile, setImgFile] = useState('');
 
+  // 유저 정보, 유저 포폴 정보
+  const getToken = localStorage.getItem('token');
+  const getUserIdx = localStorage.getItem('userIdx');
+
+  const [inputs, setInputs] = useState({
+    user_idx: Number(getUserIdx),
+    profile_img: '',
+    name: '',
+    email: '',
+    phone: '',
+  });
+
+  const { user_idx, profile_img, name, email, phone } = inputs;
+
+  // user 정보 get
+  const getUserInfo = () => {
+    axios
+      .get(`https://elice-its-me.herokuapp.com/users/${getUserIdx}`, {
+        headers: {
+          authorization: getToken,
+        },
+      })
+      .then((res) => {
+        setUserName(res.data.data[0].name);
+        setUserEmail(res.data.data[0].email);
+        setUserPhone(res.data.data[0].phone);
+        setUserImg(res.data.data[0].profile_img);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // 저장 되어있던 포트폴리오 GET
+  const [getPofol, setGetPofol] = useState([]);
   useEffect(() => {
-    for (let i = 0; i < datas.length; i++) {
-      if (datas[i].name === '홍길동') {
-        setUserName(datas[i].name);
-        setUserEmail(datas[i].email);
-        setUserPhone(datas[i].phone);
-        setUserImg(datas[i].profile_img);
-      }
-    }
+    getPortfolios().then((res) => {
+      setGetPofol(res);
+    });
   }, []);
 
-  console.log(userName);
+  getUserInfo();
 
   const PortLists = (props) => {
-    const handleCopyPort = (e) => {
-      e.preventDefault();
-      alert('복사ㅏㅏㅏㅏ');
-    };
-    const portList = props.data.map((e) => {
-      return (
-        <div className="PfWrap">
-          <Link to={e.url} className="LinkTitle">
-            {e.destcription}
-          </Link>
-          <div className="Btns">
+    const getData = props.data;
+    return (
+      <div className="PfWrap">
+        <Link
+          to={`/PdfComponent/${getData.portfolio_idx}`}
+          className="LinkTitle"
+        >
+          {getData.title}
+        </Link>
+        <div className="Btns">
+          <Link to={`/edit/${getData.portfolio_idx}`}>
             <button type="button" className="Modify">
               수정
             </button>
-            <button type="button" className="Copy" onClick={handleCopyPort}>
-              복사
-            </button>
-          </div>
+          </Link>
+          <button
+            type="button"
+            id={getData.portfolio_idx}
+            className="Modify"
+            onClick={removePofol}
+          >
+            삭제
+          </button>
         </div>
-      );
-    });
-    return portList;
+      </div>
+    );
   };
 
-  const handleMorePort = (e) => {
-    e.preventDefault();
-    if (portfolios.length < 3) {
-      setPortfolios([
-        ...portfolios,
+  // 팝업창
+  const openPopup = () => {
+    document.querySelector('.ProfilePopup').style.display = 'block';
+  };
+  const closePopup = () => {
+    document.querySelector('.ProfilePopup').style.display = 'none';
+  };
+
+  // 정보수정
+
+  const editProfile = (e) => {
+    const { name, value } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+
+  // 이미지 미리보기
+  const previewImg = (e) => {
+    const reader = new FileReader();
+    const img = e.target.files[0];
+    setImgFile(img);
+    reader.readAsDataURL(img);
+    reader.onload = function (e) {
+      setState(e.target.result);
+    };
+  };
+
+  const UserInfo = () => {
+    return (
+      <div className="UserInfo">
+        <div className="ImgWrap">
+          <img src={userImg} alt="" />
+        </div>
+        <div className="TxtWrap">
+          <ul>
+            <li>
+              <span>이름</span>
+              {userName}
+            </li>
+            <li>
+              <span>이메일</span>
+              {userEmail}
+            </li>
+            <li>
+              <span>연락처</span>
+              {userPhone}
+            </li>
+          </ul>
+        </div>
+        <button type="button" className="ProfileEdit" onClick={openPopup}>
+          프로필 수정
+        </button>
+      </div>
+    );
+  };
+
+  // 프로필 업데이트
+  const patchProfile = () => {
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('name', name);
+    formData.append('phone', phone);
+    formData.append('user_idx', getUserIdx);
+    formData.append('img', imgFile);
+
+    axios
+      .patch(
+        `https://elice-its-me.herokuapp.com/users/${getUserIdx}`,
+        formData,
         {
-          url: '/test',
-          destcription: `${userName}의 새로운 포트폴리오`,
+          headers: {
+            authorization: `Bearer ${getToken}`,
+          },
         },
-      ]);
+      )
+      .then((res) => getUserInfo())
+      .catch((err) => console.log(err));
+    document.querySelector('.ProfilePopup').style.display = 'none';
+  };
+
+  //포트폴리오 생성 POST
+  const postPofol = () => {
+    const newPofol = {
+      template: 0,
+      title: '포트폴리오',
+      user_idx: localStorage.getItem('userIdx'),
+    };
+    if (getPofol.length < 3) {
+      postPortfolios(newPofol).then((res) => {
+        setGetPofol([...getPofol, res]);
+      });
     } else alert('포트폴리오 작성은 최대 3개까지 가능합니다.');
   };
 
-  const handleCopyPort = (event) => {
-    event.preventDefault();
-    setPortfolios([...portfolios, { url: '/test', description: '안녕하세여, ㅇㅇㅇ의 포트폴리오입니다.'}])
-  }
+  //포트폴리오 삭제 delete
+  const removePofol = (e) => {
+    deletePortfolios(e.target.id).then((res) => {
+      const delIdx = Number(e.target.id);
+      const filterPofol = getPofol.filter((el) => el.portfolio_idx !== delIdx);
+      setGetPofol(filterPofol);
+    });
+  };
 
   return (
     <div className="Mypage">
-      <div
-        className="MainBG"
-        style={{ height: '10vh', position: 'relative', marginBottom: '100px' }}
-      ></div>
-      <Header />
-      <div className="MypageWrap">
-        <div className="UserInfo">
-          <div className="ImgWrap">
-            <img src={userImg} alt="" />
-          </div>
-          <div className="TxtWrap">
-            <ul>
-              <li>이름 : {userName}</li>
-              <li>이메일 : {userEmail}</li>
-              <li>연락처 : {userPhone}</li>
-            </ul>
-          </div>
+      <div className="ProfilePopup">
+        <div className="wrap">
+          <form>
+            <div className="Buttons">
+              <button type="button" onClick={patchProfile}>
+                저장
+              </button>
+              <button type="button" onClick={closePopup}>
+                취소
+              </button>
+            </div>
+            <div className="ImgWrap">
+              <p>프로필 이미지</p>
+              <div className="InputWrap">
+                <img src={state} alt="" name="thumbnail" />
+                <label htmlFor="ImgInput">+</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  name="img"
+                  id="ImgInput"
+                  onChange={previewImg}
+                  style={{ position: 'absolute', left: '0', top: '0' }}
+                />
+              </div>
+            </div>
+            <div className="TxtWrap">
+              <div>
+                <p>이름</p>
+                <input type="text" name="name" onChange={editProfile}></input>
+              </div>
+              <div>
+                <p>이메일</p>
+                <input type="text" name="email" onChange={editProfile}></input>
+              </div>
+              <div>
+                <p>연락처</p>
+                <input type="text" name="phone" onChange={editProfile}></input>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
-
-      <div className="Portfolios">
-        <button type="button" className="MorePf" onClick={handleCopyPort}>
-          +
-        </button>
-        <h2>포트폴리오</h2>
-        {portfolios.map(portfolio => (
-            <div className="Pf">
-              <div className="PfWrap">
-                <a href="/">안녕하세요, ㅇㅇㅇ의 포트폴리오 입니다.</a>
-                <div className="Btns">
-                  <button type="button" className="Modify" onClick={handleCopyPort}>
-                    수정
-                  </button>
-                  <button type="button" className="Copy">
-                    복사
-                  </button>
-                </div>
-              </div>
-
-            </div>
-        ))}
-        {/*<div className="Pf">*/}
-        {/*  <div className="PfWrap">*/}
-        {/*    <a href="/">안녕하세요, ㅇㅇㅇ의 포트폴리오 입니다.</a>*/}
-        {/*    <div className="Btns">*/}
-        {/*      <button type="button" className="Modify">*/}
-        {/*        수정*/}
-        {/*      </button>*/}
-        {/*      <button type="button" className="Copy">*/}
-        {/*        복사*/}
-        {/*      </button>*/}
-        {/*    </div>*/}
-        {/*  </div>*/}
-        {/*  <button type="button" className="MorePf">*/}
-        {/*    +*/}
-        {/*  </button>*/}
-        {/*</div>*/}
+      <Header />
+      <div className="MypageWrap">
+        <UserInfo />
+        <div className="Portfolios">
+          <h2>포트폴리오</h2>
+          <div className="Pf">
+            {getPofol.map((el) => (
+              <PortLists key={el.portfolio_idx} data={el} />
+            ))}
+            <button type="button" className="MorePf" onClick={postPofol}>
+              +
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

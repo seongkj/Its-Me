@@ -32,7 +32,6 @@ export async function deleteEducation(req, res, next) {
     const deletededucation = await educationService.deleteEducation(
       educationIdx
     );
-    console.log(deletededucation);
     res.status(200).send({
       status: 200,
       message: '에듀케이션 정보 삭제 완료',

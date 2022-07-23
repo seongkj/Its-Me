@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Route, Link } from 'react-router-dom';
 import {
   Avatar,
   Button,
   CssBaseline,
   TextField,
-  Link,
   Grid,
   Box,
   Typography,
@@ -14,13 +13,10 @@ import {
   FormHelperText,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-// fixme 아래와 같이 import 하면 코드가 더 깔끔합니다.
-// import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import styled from 'styled-components';
+import Header from '../../components/Header';
 
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
@@ -38,16 +34,12 @@ function Copyright(props) {
       {...props}
     >
       {'Copyright © '}
-      <Link color="inherit" href="/">
-        잇츠미
-      </Link>{' '}
-      {new Date().getFullYear()}
+      <Link to="/">잇츠미</Link> {new Date().getFullYear()}
       {'.'}
     </Typography>
   );
 }
 
-// fixme theme은 모든 페이지에 적용하는것이 앱이 통일성 있어보일거같습니다.
 const theme = createTheme();
 
 export default function SignUp() {
@@ -69,10 +61,11 @@ export default function SignUp() {
 
   const onHandlePost = async (data) => {
     axios
-      .post('http://localhost:3001/auth/signup', data)
+      .post('https://elice-its-me.herokuapp.com/auth/signup', data)
       .then((res) => {
         console.log(res, '성공');
-        navigate('/');
+        alert('회원가입이 완료되었습니다.');
+        navigate('/login');
       })
       .catch((err) => {
         console.log(err);
@@ -91,17 +84,29 @@ export default function SignUp() {
       profile_img: null,
     };
 
-    if (pw !== confirmPw) setPwError('비밀번호가 일치하지 않습니다.');
-    else setPwError('');
-
-    if (pw.length >= 6 && pw === confirmPw) {
+    if (!name) setSignupError('이름을 입력해주세요');
+    else if (name && !email) setSignupError('이메일을 입력해주세요');
+    else if (name && email && !pw) setSignupError('비밀번호를 입력해주세요');
+    else if (pw !== confirmPw) setSignupError('비밀번호가 일치하지 않습니다');
+    else if (name && email && pw === confirmPw && pw.length > 0 && !phone)
+      setSignupError('연락처를 입력해주세요');
+    else if (pw.length >= 6 && pw === confirmPw) {
       onHandlePost(data);
     }
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Header />
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          marginTop: 10,
+          border: 'solid 1px #bdbdbd',
+          borderRadius: '10px',
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -205,14 +210,22 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/login" variant="body2">
+                <Link
+                  to="/login"
+                  variant="body2"
+                  style={{
+                    color: '#aaa',
+                    fontSize: '.8rem',
+                    textDecoration: 'underline',
+                  }}
+                >
                   이미 회원이라면? 로그인
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

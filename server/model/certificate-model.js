@@ -40,7 +40,9 @@ export async function remove(certificateIdx) {
       'DELETE FROM certificate WHERE certificate_idx=?',
       certificateIdx,
       (err, result) => {
-        return err ? reject(err) : resolve(certificateIdx);
+        return result.affectedRows == 0
+          ? resolve({ error: 'error' })
+          : resolve({ result: `${certificateIdx} 삭제 완료` });
       }
     );
   });

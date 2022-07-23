@@ -1,5 +1,18 @@
 import * as portfolioService from '../services/portfolio-service.js';
 
+export async function getPortfolios(req, res, next) {
+  try {
+    const userIdx = req.currentUserIdx;
+    const portfolios = await portfolioService.findPortfoliosById(userIdx);
+    res.status(200).send({
+      status: 200,
+      message: 'portfolios 조회 성공',
+      data: portfolios,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
 export async function getPortfolio(req, res, next) {
   try {
     const portfolioIdx = req.params.portfolio_idx;
@@ -32,7 +45,6 @@ export async function deletePortfolio(req, res, next) {
     const deletedportfolio = await portfolioService.deletePortfolio(
       portfolioIdx
     );
-    console.log(deletedportfolio);
     res.status(200).send({
       status: 200,
       message: 'portfolio 정보 삭제 완료',

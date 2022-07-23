@@ -1,13 +1,16 @@
 import * as userService from '../services/user-service.js';
 import sendMailer from '../config/email-config.js';
+import { CustomError } from '../middlewares/customError.js';
+import statusCode from '../utils/status-code.js';
+import responseMessage from '../utils/response-message.js';
 
 export async function getUser(req, res, next) {
   try {
-    const userId = req.params.user_id;
-    const user = await userService.findUserById(userId);
-    res.status(200).send({
-      status: 200,
-      message: '유저 조회 성공',
+    const userIdx = req.params.user_idx;
+    const user = await userService.findUserById(userIdx);
+    res.status(statusCode.OK).send({
+      status: statusCode.OK,
+      message: responseMessage.USER_READ_SUCCESS,
       data: user,
     });
   } catch (err) {
@@ -25,10 +28,9 @@ export async function deleteUser(req, res, next) {
       userPw,
       currentUserEmail
     );
-    console.log(deletedUser);
-    res.status(200).send({
-      status: 200,
-      message: '유저 정보 삭제 완료',
+    res.status(statusCode.OK).send({
+      status: statusCode.OK,
+      message: responseMessage.USER_DELETE_SUCCESS,
       data: deletedUser,
     });
   } catch (err) {
@@ -39,14 +41,19 @@ export async function deleteUser(req, res, next) {
 export async function updateUser(req, res, next) {
   try {
     const userIdx = req.params.user_idx;
-    // const currentUserIdx = req.currentUserIdx;
-    // if(userIdx != currentUserIdx) {
-
-    // }
+    let imageUrl = '';
+    let imageKey = '';
+    if (req.file) {
+      imageUrl = req.file.location;
+      imageKey = req.file.key;
+      req.body.profile_img = imageUrl;
+    } else {
+      req.body.profile_img = '';
+    }
     const updated = await userService.setUser(userIdx, req.body);
-    res.status(201).send({
-      status: 201,
-      message: '유저 정보 업데이트 완료',
+    res.status(statusCode.CREATED).send({
+      status: statusCode.CREATED,
+      message: responseMessage.USER_UPDATE_SUCCESS,
       data: updated,
     });
   } catch (err) {
@@ -64,29 +71,23 @@ function generaeRandomPassword() {
 export async function resetPassword(req, res, next) {
   try {
     if (req.body.email == '') {
-      res.status.send({
-        status: 400,
-        message: '이메일을 입력해주세요',
-      });
+      throw new CustomError(
+        statusCode.BAD_REQUEST,
+        responseMessage.EMPTY_EMAIL
+      );
     }
-    const email = req.body;
-    const userIdx = req.currentUserIdx;
-    const user = await userService.findUserById(email);
+    const email = req.body.email;
+
+    const user = await userService.findUserByEmail(email);
     if (!user) {
-      res.status.send({
-        status: 404,
-        message: '해당 유저가 존재하지 않습니다.',
-      });
+      throw new CustomError(statusCode.NOT_FOUND, responseMessage.NO_USER);
     }
     const randomPassword = generaeRandomPassword();
-    const currentUser = await userService.resetPassword(
-      userIdx,
-      randomPassword
-    );
+    const currentUser = await userService.resetPassword(email, randomPassword);
     await sendMailer(email, randomPassword);
-    res.status(200).send({
-      status: 200,
-      message: '비밀번호 초기화 완료',
+    res.status(statusCode.OK).send({
+      status: statusCode.OK,
+      message: responseMessage.PASSWORD_RESET_SUCCESS,
       data: currentUser,
     });
   } catch (err) {
@@ -97,15 +98,11 @@ export async function resetPassword(req, res, next) {
 export async function updatePassword(req, res, next) {
   try {
     const pw = req.body.pw;
-    const currentUserIdx = req.currentUserIdx;
-    const user = await userService.updatePassword(
-      currentUserEmail,
-      currentUserIdx,
-      pw
-    );
-    res.status(200).send({
-      ststus: 200,
-      message: '비밀번호 재설정 완료',
+    const currentUserEmail = req.currentUserEmail;
+    const user = await userService.updatePassword(currentUserEmail, pw);
+    res.status(statusCode.OK).send({
+      ststus: statusCode.OK,
+      message: responseMessage.PASSWORD_UPDATE_SUCCESS,
       data: user,
     });
   } catch (err) {
