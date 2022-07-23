@@ -53,7 +53,7 @@ function Myself() {
       portfolio_idx: portfolio_idx,
     };
     const newPofol = {
-      template: 0,
+      template: clickedButtonIndex,
       title: data.comment,
       user_idx: localStorage.getItem('userIdx'),
     };
