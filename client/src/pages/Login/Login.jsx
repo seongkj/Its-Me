@@ -53,7 +53,7 @@ export default function SignIn() {
 
   const onHandlePost = async (data) => {
     axios
-      .post('http://kdt-sw2-seoul-team10.elicecoding.com//login', data)
+      .post('http://kdt-sw2-seoul-team10.elicecoding.com/login', data)
       .then((res) => {
         console.log(res, '성공');
         localStorage.setItem('token', res.data.data.token);
