@@ -20,9 +20,12 @@ function EtcEducation() {
 
   // 정보 불러오기
   const getEtcEduList = async () => {
-    await fetch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
-      method: 'GET',
-    })
+    await fetch(
+      `https://elice-its-me.herokuapp.com/portfolios/${portfolio_idx}`,
+      {
+        method: 'GET',
+      },
+    )
       .then((res) => res.json())
       .then((data) => {
         const care = data.data.etc_education;
@@ -54,7 +57,7 @@ function EtcEducation() {
 
     if (title && organization && openDate) {
       axios
-        .post('http://localhost:3001/etc_educations', data)
+        .post('https://elice-its-me.herokuapp.com/etc_educations', data)
         .then((res) => getEtcEduList())
         .catch((err) => console.log(err, '실패'));
     }
@@ -73,7 +76,7 @@ function EtcEducation() {
     console.log(delEtcEdu);
     await axios
       .delete(
-        `http://localhost:3001/etc_educations/${delEtcEdu.etc_education_idx}`,
+        `https://elice-its-me.herokuapp.com/etc_educations/${delEtcEdu.etc_education_idx}`,
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));

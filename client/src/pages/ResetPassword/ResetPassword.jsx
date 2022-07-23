@@ -50,7 +50,7 @@ export default function ResetPassword() {
 
   const onHandlePost = async (data) => {
     axios
-      .post('http://localhost:3001/users/reset-password', data)
+      .post('https://elice-its-me.herokuapp.com/users/reset-password', data)
       .then((res) => {
         console.log(res, '성공');
         setResetError(`${email} 로 임시 비밀번호를 발송했습니다`);

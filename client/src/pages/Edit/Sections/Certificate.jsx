@@ -19,9 +19,12 @@ function Certificate() {
   const { certificateDate, certificateName, certificateOrg } = inputs;
 
   const getCertificate = async () => {
-    await fetch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
-      method: 'GET',
-    })
+    await fetch(
+      `https://elice-its-me.herokuapp.com/portfolios/${portfolio_idx}`,
+      {
+        method: 'GET',
+      },
+    )
       .then((res) => res.json())
       .then((data) => {
         const cert = data.data.certificate;
@@ -72,7 +75,7 @@ function Certificate() {
       };
 
       axios
-        .post('http://localhost:3001/certificates', data)
+        .post('https://elice-its-me.herokuapp.com/certificates', data)
         .then((res) => getCertificate())
         .catch((err) => console.log(err, '실패'));
     }
@@ -81,7 +84,7 @@ function Certificate() {
   // 삭제
   const onRemove = (id) => {
     axios
-      .delete(`http://localhost:3001/certificates/${id}`)
+      .delete(`https://elice-its-me.herokuapp.com/certificates/${id}`)
       .then((res) => getCertificate())
       .catch((err) => console.log(err));
   };
