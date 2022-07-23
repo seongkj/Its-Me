@@ -38,7 +38,7 @@ function Myself() {
       portfolio_idx: portfolio_idx,
     };
     const newPofol = {
-      template: 1,
+      template: 0,
       title: data.comment,
       user_idx: localStorage.getItem('userIdx'),
     };
