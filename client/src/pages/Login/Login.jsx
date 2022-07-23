@@ -53,7 +53,7 @@ export default function SignIn() {
 
   const onHandlePost = async (data) => {
     axios
-      .post('https://elice-its-me.herokuapp.com/login', data)
+      .post('https://elice-its-me.herokuapp.com/auth/login', data)
       .then((res) => {
         console.log(res, '성공');
         localStorage.setItem('token', res.data.data.token);
