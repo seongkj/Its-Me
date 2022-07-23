@@ -20,9 +20,12 @@ function Career() {
 
   //정보 불러오기
   const getCareerList = async () => {
-    await fetch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
-      method: 'GET',
-    })
+    await fetch(
+      `https://elice-its-me.herokuapp.com/portfolios/${portfolio_idx}`,
+      {
+        method: 'GET',
+      },
+    )
       .then((res) => res.json())
       .then((data) => {
         const care = data.data.career;
@@ -54,7 +57,7 @@ function Career() {
 
     if (company && startDate && position) {
       axios
-        .post('http://localhost:3001/careers', data)
+        .post('https://elice-its-me.herokuapp.com/careers', data)
         .then((res) => getCareerList())
         .catch((err) => console.log(err, '실패'));
     }
@@ -70,7 +73,9 @@ function Career() {
   // 삭제
   async function removeCareer(delCareer) {
     await axios
-      .delete(`http://localhost:3001/careers/${delCareer.career_idx}`)
+      .delete(
+        `https://elice-its-me.herokuapp.com/careers/${delCareer.career_idx}`,
+      )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
     const deletCareer = career.filter((el) => el !== delCareer);

@@ -35,7 +35,7 @@ const Mypage = () => {
   // user 정보 get
   const getUserInfo = () => {
     axios
-      .get(`http://localhost:3001/users/${getUserIdx}`, {
+      .get(`https://elice-its-me.herokuapp.com/users/${getUserIdx}`, {
         headers: {
           authorization: getToken,
         },
@@ -156,11 +156,15 @@ const Mypage = () => {
     formData.append('img', imgFile);
 
     axios
-      .patch(`http://localhost:3001/users/${getUserIdx}`, formData, {
-        headers: {
-          authorization: `Bearer ${getToken}`,
+      .patch(
+        `https://elice-its-me.herokuapp.com/users/${getUserIdx}`,
+        formData,
+        {
+          headers: {
+            authorization: `Bearer ${getToken}`,
+          },
         },
-      })
+      )
       .then((res) => getUserInfo())
       .catch((err) => console.log(err));
     document.querySelector('.ProfilePopup').style.display = 'none';
