@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = `http://localhost:3001`;
+const BASE_URL = `https://elice-its-me.herokuapp.com`;
 
 // 포트폴리오 조회 GET (로그인 유저가 가진 포트폴리오)
 export async function getPortfolios() {
