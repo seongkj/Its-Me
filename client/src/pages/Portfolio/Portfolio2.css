@@ -65,6 +65,7 @@
   border: 3px solid var(--error-color);
   box-sizing: border-box;
   display: inline-block;
+  background-color: #aaa;
 }
 .second-theme .PortUserInfo .PortImgWrap img {
   width: 100%;

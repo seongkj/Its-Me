@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Avatar,
   Button,
   CssBaseline,
   TextField,
-  Link,
   Grid,
   Box,
   Typography,
@@ -14,6 +14,7 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import Header from '../../components/Header';
 
 function Copyright(props) {
   return (
@@ -24,7 +25,12 @@ function Copyright(props) {
       {...props}
     >
       {'Copyright © '}
-      <Link color="inherit" href="/">
+      <Link
+        to="/"
+        style={{
+          color: 'rgba(0, 0, 0, 0.6)',
+        }}
+      >
         잇츠미
       </Link>{' '}
       {new Date().getFullYear()}
@@ -66,11 +72,12 @@ export default function ResetPassword() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Header />
       <Container
         component="main"
         maxWidth="xs"
         sx={{
-          marginTop: 6,
+          marginTop: 14,
           border: 'solid 1px #bdbdbd',
           borderRadius: '10px',
         }}

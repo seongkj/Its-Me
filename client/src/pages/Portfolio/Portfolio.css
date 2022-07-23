@@ -54,6 +54,7 @@
   vertical-align: middle;
   box-sizing: content-box;
   margin: 0 auto;
+  background-color: white;
 }
 .first-theme .PortUserInfo .PortImgWrap img {
   width: 100%;
