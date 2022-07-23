@@ -57,6 +57,7 @@ function Edit() {
         datas.forEach((e) => {
           if (e.portfolio_idx === Number(portfolio_idx)) {
             setUserPortTitle(e.title);
+            setClickedButtonIndex(e.template);
           }
         });
       })
