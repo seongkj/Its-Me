@@ -61,7 +61,7 @@ export default function SignUp() {
 
   const onHandlePost = async (data) => {
     axios
-      .post('http://localhost:3001/auth/signup', data)
+      .post('https://elice-its-me.herokuapp.com/auth/signup', data)
       .then((res) => {
         console.log(res, '성공');
         alert('회원가입이 완료되었습니다.');

@@ -12,6 +12,7 @@ function Myself() {
 
   const [mySelf, setMySelf] = useState('');
   const [newMySelf, setNewMySelf] = useState([]);
+  const [clickedButtonIndex, setClickedButtonIndex] = useState(0);
 
   const { portfolio_idx } = useParams();
 
@@ -21,6 +22,20 @@ function Myself() {
 
   // 한 줄 소개 GET
   const getStack = async () => {
+    await axios
+      .get(`http://localhost:3001/portfolios`, {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+      })
+      .then((res) => {
+        const datas = res.data.data;
+        datas.forEach((e) => {
+          if (e.portfolio_idx === Number(portfolio_idx)) {
+            setClickedButtonIndex(e.template);
+          }
+        });
+      });
     await axios
       .get(`http://localhost:3001/portfolios/${portfolio_idx}`)
       .then((res) => {
@@ -38,7 +53,7 @@ function Myself() {
       portfolio_idx: portfolio_idx,
     };
     const newPofol = {
-      template: 0,
+      template: clickedButtonIndex,
       title: data.comment,
       user_idx: localStorage.getItem('userIdx'),
     };
