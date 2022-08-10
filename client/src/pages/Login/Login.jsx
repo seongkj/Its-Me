@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {
   Avatar,
   Button,
   CssBaseline,
   TextField,
-  Link,
   Grid,
   Box,
   Typography,
@@ -26,9 +25,15 @@ function Copyright(props) {
       {...props}
     >
       {'Copyright © '}
-      <Link color="inherit" href="/">
+      <Link
+        to="/"
+        style={{
+          color: 'rgba(0, 0, 0, 0.6)',
+        }}
+      >
         잇츠미
       </Link>{' '}
+      {new Date().getFullYear()}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -145,12 +150,28 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="/resetPassword" variant="body2">
+                <Link
+                  to="/resetPassword"
+                  variant="body2"
+                  style={{
+                    color: '#aaa',
+                    fontSize: '.8rem',
+                    textDecoration: 'underline',
+                  }}
+                >
                   비밀번호 찾기
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link
+                  to="/signup"
+                  variant="body2"
+                  style={{
+                    color: '#aaa',
+                    fontSize: '.8rem',
+                    textDecoration: 'underline',
+                  }}
+                >
                   회원가입
                 </Link>
               </Grid>

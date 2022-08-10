@@ -8,6 +8,7 @@ function Header() {
   const onClick = () => {
     localStorage.clear();
     navigate('/');
+    alert('로그아웃 되었습니다.');
   };
 
   return (

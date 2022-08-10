@@ -21,6 +21,7 @@ const FooterText = styled.div`
   color: #293241;
   font-size: 14px;
   font-weight: 600;
+  cursor: default;
 `;
 
 export default Footer;

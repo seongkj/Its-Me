@@ -23,6 +23,7 @@
   margin: 0 auto;
   background-color: #181818;
   padding-bottom: 50px;
+  min-height: 100vh;
 }
 .second-theme > div {
   width: 60%;
@@ -64,6 +65,7 @@
   border: 3px solid var(--error-color);
   box-sizing: border-box;
   display: inline-block;
+  background-color: #aaa;
 }
 .second-theme .PortUserInfo .PortImgWrap img {
   width: 100%;

@@ -1,6 +1,7 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Header from '../../components/Header';
+import axios from 'axios';
 
 import Section from './Section';
 import Design from './Design';
@@ -29,17 +30,39 @@ function Edit() {
   }, [theme]);
 
   const getThemeToLocalStorage = () => window.localStorage.getItem('theme');
+  const getUserIdx = window.localStorage.getItem('userIdx');
+  const getToken = window.localStorage.getItem('token');
 
   const [sections, setSections] = useState([]);
   const [designs, setDesigns] = useState(designName);
   const [clickedButtonIndex, setClickedButtonIndex] = useState(0);
   const [sectionButton, setSectionButton] = useState([]);
   const [designButton, setDesignButton] = useState([]);
+  const [userPortTitle, setUserPortTitle] = useState('');
 
   const [displaySection, setDisplaySection] = useState({ display: 'flex' });
   const [displayDesign, setDisplayDesign] = useState({ display: 'none' });
 
   const { portfolio_idx } = useParams();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/portfolios`, {
+        headers: {
+          Authorization: `Bearer ${getToken}`,
+        },
+      })
+      .then((res) => {
+        const datas = res.data.data;
+        datas.forEach((e) => {
+          if (e.portfolio_idx === Number(portfolio_idx)) {
+            setUserPortTitle(e.title);
+            setClickedButtonIndex(e.template);
+          }
+        });
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   // 포트폴리오 GET (포폴을 수정할 때 기존에 사용했던 세션을 미리 열어두기 위함)
   const getPofol = () => {
@@ -110,7 +133,28 @@ function Edit() {
 
   const onClickTempButton = (index) => {
     setClickedButtonIndex(index);
-  }
+    if (index === 1) {
+      axios
+        .patch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
+          template: 1,
+          title: userPortTitle,
+          user_idx: getUserIdx,
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+      alert('다크 모드 템플릿이 적용되었습니다.');
+    } else {
+      axios
+        .patch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
+          template: 0,
+          title: userPortTitle,
+          user_idx: getUserIdx,
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+      alert('일반 모드 템플릿이 적용되었습니다.');
+    }
+  };
 
   return (
     <div className={getThemeToLocalStorage()}>
@@ -159,6 +203,12 @@ function Edit() {
             </ul>
             <div className="DesignBar">
               <ul style={displayDesign}>
+                {/* <li className="DayBtn ThemeBtn" key="keyDay" onClick={checkTheme}>
+                  <img src="https://lingopolo.org/thai/sites/lingopolo.org.thai/files/styles/entry/public/images/2016/08/29/day-landscape-664923_1920.jpg" />
+                </li>
+                <li className="NightBtn ThemeBtn" key="keyNight">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/%D0%A1%D0%B2%D0%B5%D1%82_%D0%BE%D1%82_%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BD%D0%B8_-_panoramio.jpg/640px-%D0%A1%D0%B2%D0%B5%D1%82_%D0%BE%D1%82_%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BD%D0%B8_-_panoramio.jpg" />
+                </li> */}
                 {designs.map((el, i) => (
                   <li key={i}>
                     <DesignChoiceButton

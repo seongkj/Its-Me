@@ -8,7 +8,7 @@ import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { faMobileScreen } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
-const Portfolio = () => {
+export const Portfolio = React.forwardRef((props, ref) => {
   const [skill, setSkill] = useState([]);
   const [career, setCareer] = useState([]);
   const [education, setEducation] = useState([]);
@@ -22,6 +22,16 @@ const Portfolio = () => {
   const getToken = localStorage.getItem('token');
   const getUserIdx = localStorage.getItem('userIdx');
   const { portfolio_idx } = useParams();
+
+  const getTheme = localStorage.getItem('theme');
+  const [themeName, setThemeName] = useState('');
+  useEffect(() => {
+    if (getTheme === 'day-theme') {
+      setThemeName('first-theme');
+    } else {
+      setThemeName('second-theme');
+    }
+  });
 
   const [userInfo, setUserInfo] = useState([]);
 
@@ -59,13 +69,46 @@ const Portfolio = () => {
       .catch((err) => console.log(err, '실패'));
   };
 
+  // portfolio info get
+  const [userPortInfo, setUserPortInfo] = useState('');
+
+  const getPortInfo = () => {
+    axios
+      .get(`http://localhost:3001/portfolios`, {
+        headers: {
+          Authorization: `Bearer ${getToken}`,
+        },
+      })
+      .then((res) => {
+        const datas = res.data.data;
+        datas.forEach((e) => {
+          if (e.portfolio_idx === Number(portfolio_idx)) {
+            setUserPortInfo(e.template);
+          }
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const [templateCss, setTemplateCss] = useState('');
+
   useEffect(() => {
     getUserInfo();
     getPortfolio();
+    getPortInfo();
   }, []);
 
+  useEffect(() => {
+    userPortInfo == 1
+      ? setTemplateCss('second-theme')
+      : setTemplateCss('first-theme');
+  }, [userPortInfo]);
+
+  console.log(userPortInfo);
+  console.log(templateCss);
+
   return (
-    <div className="PortfolioWrap first-theme">
+    <div ref={ref} className={templateCss}>
       <div className="PortUserInfo">
         <div className="MainBG2"></div>
         {userInfo.map((e) => {
@@ -74,7 +117,7 @@ const Portfolio = () => {
               <div className="PortImgWrap">
                 <img src={e.profile_img} />
               </div>
-              <div class="PortTxtWrap">
+              <div className="PortTxtWrap">
                 <p>{e.name}</p>
                 <p>
                   <FontAwesomeIcon icon={faEnvelope} />
@@ -259,6 +302,6 @@ const Portfolio = () => {
       ) : null}
     </div>
   );
-};
+});
 
 export default Portfolio;

@@ -37,6 +37,12 @@ function Myself() {
       comment: data.comment,
       portfolio_idx: portfolio_idx,
     };
+    const newPofol = {
+      template: 0,
+      title: data.comment,
+      user_idx: localStorage.getItem('userIdx'),
+    };
+
     if (newMySelf.length >= 1) {
       await axios
         .patch(
@@ -54,6 +60,10 @@ function Myself() {
           ]);
         })
         .catch((err) => console.log(err));
+      // 포트폴리오 타이틀 제목 PATCH
+      await axios
+        .patch(`http://localhost:3001/portfolios/${portfolio_idx}`, newPofol)
+        .catch((err) => console.log(err));
     } else {
       await axios
         .post('http://localhost:3001/introduces', newData)
@@ -67,6 +77,10 @@ function Myself() {
             },
           ]);
         })
+        .catch((err) => console.log(err));
+      // 포트폴리오 타이틀 제목 PATCH
+      await axios
+        .patch(`http://localhost:3001/portfolios/${portfolio_idx}`, newPofol)
         .catch((err) => console.log(err));
     }
   }

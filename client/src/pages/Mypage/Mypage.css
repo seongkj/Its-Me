@@ -20,6 +20,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
   display: none;
+  font-family: 'LeferiPoint-WhiteA';
 }
 .Mypage .ProfilePopup .wrap {
   width: 700px;
@@ -51,6 +52,7 @@
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
+  font-family: 'LeferiPoint-WhiteA';
 }
 .Mypage .ProfilePopup .wrap .Buttons button:first-child {
   background-color: var(--main-color);

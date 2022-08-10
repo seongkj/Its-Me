@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Route, Link } from 'react-router-dom';
 import {
   Avatar,
   Button,
   CssBaseline,
   TextField,
-  Link,
   Grid,
   Box,
   Typography,
@@ -35,10 +34,7 @@ function Copyright(props) {
       {...props}
     >
       {'Copyright © '}
-      <Link color="inherit" href="/">
-        잇츠미
-      </Link>{' '}
-      {new Date().getFullYear()}
+      <Link to="/">잇츠미</Link> {new Date().getFullYear()}
       {'.'}
     </Typography>
   );
@@ -68,7 +64,8 @@ export default function SignUp() {
       .post('http://localhost:3001/auth/signup', data)
       .then((res) => {
         console.log(res, '성공');
-        navigate('/');
+        alert('회원가입이 완료되었습니다.');
+        navigate('/login');
       })
       .catch((err) => {
         console.log(err);
@@ -88,16 +85,12 @@ export default function SignUp() {
     };
 
     if (!name) setSignupError('이름을 입력해주세요');
-    if (name && !email) setSignupError('이메일을 입력해주세요');
-    if (name && email && !pw) setSignupError('비밀번호를 입력해주세요');
-
-    if (pw !== confirmPw) setSignupError('비밀번호가 일치하지 않습니다');
-
-    if (name && email && pw === confirmPw && pw.length > 0 && !phone)
+    else if (name && !email) setSignupError('이메일을 입력해주세요');
+    else if (name && email && !pw) setSignupError('비밀번호를 입력해주세요');
+    else if (pw !== confirmPw) setSignupError('비밀번호가 일치하지 않습니다');
+    else if (name && email && pw === confirmPw && pw.length > 0 && !phone)
       setSignupError('연락처를 입력해주세요');
-    else setSignupError('입력한 정보를 다시 확인해주세요');
-
-    if (pw.length >= 6 && pw === confirmPw) {
+    else if (pw.length >= 6 && pw === confirmPw) {
       onHandlePost(data);
     }
   };
@@ -217,7 +210,15 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/login" variant="body2">
+                <Link
+                  to="/login"
+                  variant="body2"
+                  style={{
+                    color: '#aaa',
+                    fontSize: '.8rem',
+                    textDecoration: 'underline',
+                  }}
+                >
                   이미 회원이라면? 로그인
                 </Link>
               </Grid>
