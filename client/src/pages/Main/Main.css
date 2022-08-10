@@ -1,10 +1,10 @@
 :root {
   --main-color: rgb(16, 72, 146);
   --main2-color: #293241;
-  --sub-color: #8BC9EE;
+  --sub-color: #8bc9ee;
   --sub2-color: #54b3d6;
-  --etc-color: #D9D9D9;
-  --error-color: #EE6C4D;
+  --etc-color: #d9d9d9;
+  --error-color: #ee6c4d;
 }
 
 @font-face {
@@ -22,37 +22,42 @@
   font-style: normal;
 }
 
-body {
+.MainBG {
   animation: theme 21s linear infinite;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
 }
-body:after,
-body:before {
+.MainBG:after,
+.MainBG:before {
   content: '';
   display: block;
   position: fixed;
-  z-index: -1;
+  /* z-index: -1; */
   top: 0;
   width: 100vw;
   height: 100vh;
   width: 100vmax;
   height: 100vmax;
-  background: rgba(0, 0, 0, 0.05);
-  animation: background 90s linear infinite;
+  background: rgba(255, 255, 255, 0.05);
+  animation: background1 90s linear infinite;
 }
-body:after {
+.MainBG:after {
   left: 15vw;
 }
-body:before {
+.MainBG:before {
   right: 15vw;
   animation-delay: -30s;
   animation-direction: reverse;
 }
 @keyframes theme {
   0% {
-    background: #74c390;
+    background: #2395ff;
   }
   16% {
-    background: #5dbdb6;
+    background: #9682f7;
   }
   33% {
     background: var(--sub-color);
@@ -61,16 +66,16 @@ body:before {
     background: var(--sub2-color);
   }
   66% {
-    background: rgba(16, 72, 146, 0.75);
+    background: rgba(37, 21, 255, 0.75);
   }
   83% {
     background: var(--sub2-color);
   }
   100% {
-    background: #74c390;
+    background: #2395ff;
   }
 }
-@keyframes background {
+@keyframes background1 {
   0% {
     transform: rotate(0deg);
   }
@@ -79,9 +84,9 @@ body:before {
   }
 }
 
-.Title {
+/* .Title {
   display: none;
-}
+} */
 
 .MainContainer {
   display: flex;
@@ -119,7 +124,8 @@ body:before {
   border-bottom-left-radius: 10px;
   transition: all 1s;
 }
-.MadeBtn:after, .MadeBtn:before {
+.MadeBtn:after,
+.MadeBtn:before {
   content: '';
   width: 10px;
   height: 10px;
@@ -143,7 +149,8 @@ body:before {
   border-top-right-radius: 0px;
   border-bottom-left-radius: 0px;
 }
-.MadeBtn:hover:before, .MadeBtn:hover:after {
+.MadeBtn:hover:before,
+.MadeBtn:hover:after {
   width: 100%;
   height: 100%;
 }

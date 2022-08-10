@@ -1,10 +1,10 @@
 :root {
   --main-color: rgb(16, 72, 146);
   --main2-color: #293241;
-  --sub-color: #8BC9EE;
+  --sub-color: #8bc9ee;
   --sub2-color: #54b3d6;
-  --etc-color: #D9D9D9;
-  --error-color: #EE6C4D;
+  --etc-color: #d9d9d9;
+  --error-color: #ee6c4d;
 }
 
 @font-face {
@@ -22,14 +22,34 @@
   font-style: normal;
 }
 
-.Title {
+.HeaderTitle a {
   cursor: pointer;
-  color: white;
+  color: var(--main-color);
   font-family: 'yg-jalnan';
   position: fixed;
   top: 4vh;
   left: 3vw;
   font-size: 1.5rem;
+}
+.HeaderTitle a:hover {
+  animation: logoAni 3s infinite ease-in;
+}
+@keyframes logoAni {
+  0% {
+    color: var(--main-color);
+  }
+  25% {
+    color: var(--sub2-color);
+  }
+  50% {
+    color: var(--main2-color);
+  }
+  75% {
+    color: var(--error-color);
+  }
+  100% {
+    color: var(--main-color);
+  }
 }
 .NavLinks {
   display: flex;
@@ -41,10 +61,11 @@
 }
 .NavLinks .NavLink a {
   font-family: 'KoPubDotumMedium';
-  color: white;
+  color: var(--main2-color);
   cursor: pointer;
 }
 
 .NavLinks .NavLink a:hover {
-  color: black;
+  color: var(--main2-color);
+  font-weight: bold;
 }

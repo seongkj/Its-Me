@@ -1,0 +1,205 @@
+.ProjectWrap {
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  margin-top: 0 !important;
+  border: none !important;
+  padding-top: 0 !important;
+}
+.ProjectWrap .AddSlider {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  border: 3px solid #104892;
+  font-size: 2rem;
+  color: #104892;
+  font-weight: 500;
+  line-height: 30px;
+  cursor: pointer;
+  transition: 0.2s;
+  z-index: 999;
+}
+.ProjectWrap .AddSlider:hover {
+  color: white;
+  background-color: #104892;
+}
+.ProjectWrap form {
+  max-width: 100%;
+  margin: 0 auto;
+}
+.ProjectWrap form::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.ProjectWrap form > button {
+  float: right;
+  margin-top: 20px;
+}
+.ProjectWrap1 {
+  width: 40%;
+  height: 300px;
+  position: relative;
+  background-color: #ddd;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.ProjectWrap1 img {
+  width: 100%;
+  height: 100%;
+}
+.ProjectWrap1 label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  text-align: center;
+  line-height: 300px;
+  transition: 0.2s;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 5rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.ProjectWrap1 label:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.ProjectWrap1 input[type='file'] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.ProjectWrap2 {
+  padding-left: 40px;
+  width: 60%;
+  display: inline-block;
+  vertical-align: top;
+}
+.ProjectWrap2 > input {
+  font-size: 1.3rem;
+  line-height: 1.3rem;
+  font-weight: 600;
+  width: 100%;
+}
+.ProjectWrap2 .date {
+  display: inline-block;
+}
+.ProjectWrap2 .date input {
+  color: #999;
+  margin-top: 10px;
+}
+.ProjectWrap2 .date input:first-child {
+  margin-right: 10px;
+}
+.ProjectWrap .ProjectWrap2 textarea {
+  min-height: 150px;
+  width: 100%;
+  margin-top: 10px;
+  line-height: 1.5rem;
+}
+.ProjectWrap2 > p {
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #999;
+  width: 100%;
+}
+.ProjectWrap2 > p svg {
+  width: 20px;
+}
+.ProjectWrap2 > p span {
+  margin-left: 5px;
+}
+.ProjectWrap .ProjectWrap2 > p span input {
+  width: calc(100% - 25px);
+  box-sizing: border-box;
+  font-weight: bold;
+}
+
+.ProjectWrap2 h3 {
+  font-size: 1.3rem;
+  line-height: 2rem;
+  margin-bottom: 10px;
+}
+.ProjectWrap2 .date span {
+  font-size: 0.8rem;
+  color: #999;
+}
+.ProjectWrap2 .CommentWrap {
+  border-top: 1px solid #ddd;
+  color: black;
+  margin-top: 20px;
+  padding-top: 30px;
+  line-height: 1.7rem;
+}
+.ProjectWrap2 .LinkWrap {
+  margin-top: 20px;
+}
+.ProjectWrap2 .LinkWrap a {
+  margin-left: 10px;
+  color: var(--sub2-color);
+}
+.ProjectWrap2 .LinkWrap a:active {
+  color: var(--sub2-color);
+}
+.ProjectWrap2 .LinkWrap a:visited {
+  color: var(--sub2-color);
+}
+.ProjectList > div {
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #eee;
+}
+.ProjectList > div button.DeleteBtn {
+  margin-top: 20px;
+  line-height: 30px;
+}
+
+/*
+.ProjectWrap2 .date input[type='date']::-webkit-inner-spin-button,
+.ProjectWrap2 .date input[type='date']::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+ .ProjectWrap3 {
+  margin-top: 20px;
+}
+.ProjectWrap3 textarea {
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 0.9rem;
+  width: 100%;
+  min-height: 100px;
+  resize: none;
+}
+.ProjectWrap2 textarea::placeholder {
+  color: black;
+}
+.ProjectWrap2 {
+  margin-bottom: 20px;
+}
+.ProjectWrap2 p {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #999;
+  width: 100%;
+}
+.ProjectWrap2 span {
+  margin-left: 5px;
+}
+.ProjectWrap2 input {
+  width: 95%;
+} */
