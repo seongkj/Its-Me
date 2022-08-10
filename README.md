@@ -24,31 +24,31 @@
 
 |메인페이지|
 |--|
-|![main](/uploads/fc807939cb2b01601c4e4ea806a89dcb/main.png)|
+|![main](https://kdt-gitlab.elice.io/sw_track/class_02_seoul/web_project_2/team10/portfolio-manager/uploads/fc807939cb2b01601c4e4ea806a89dcb/main.png)|
 
 |회원가입|
 |--|
-|![signup](/uploads/6efb297550ad42d6c9230d974696ae1a/signup.png)|
+|![signup](https://kdt-gitlab.elice.io/sw_track/class_02_seoul/web_project_2/team10/portfolio-manager/uploads/6efb297550ad42d6c9230d974696ae1a/signup.png)|
 
 
 |로그인|
 |--|
-|![login](/uploads/8c59940333f64186867f4fe41f96979f/login.png)|
+|![login](https://kdt-gitlab.elice.io/sw_track/class_02_seoul/web_project_2/team10/portfolio-manager/uploads/8c59940333f64186867f4fe41f96979f/login.png)|
 
 
 
 |마이페이지|
 |--|
-|![mypage](/uploads/a32ad9af84c832595053fe665f4219ee/mypage.png)|
+|![mypage](https://kdt-gitlab.elice.io/sw_track/class_02_seoul/web_project_2/team10/portfolio-manager/uploads/a32ad9af84c832595053fe665f4219ee/mypage.png)|
 
 
 |포트폴리오 편집 페이지|
 |--|
-|![edit](/uploads/21ad7696ea93a2589cd8106035edcf50/edit.png)|
+|![edit](https://kdt-gitlab.elice.io/sw_track/class_02_seoul/web_project_2/team10/portfolio-manager/uploads/21ad7696ea93a2589cd8106035edcf50/edit.png)|
 
 |포트폴리오 조회 페이지|
 |--|
-|![portfolio](/uploads/1c002e8aaed0a73c1ebdaafc05c1b043/portfolio.png)|
+|![portfolio](https://kdt-gitlab.elice.io/sw_track/class_02_seoul/web_project_2/team10/portfolio-manager/uploads/1c002e8aaed0a73c1ebdaafc05c1b043/portfolio.png)|
 <br>
 
 ## 🚗  프로젝트만의 차별점, 기대 효과
