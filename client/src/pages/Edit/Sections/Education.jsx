@@ -18,7 +18,7 @@ function Education() {
   //학력 GET
   const getEducations = async () => {
     await axios
-      .get(`http://localhost:3001/portfolios/${portfolio_idx}`)
+      .get(`https://elice-its-me.herokuapp.com/portfolios/${portfolio_idx}`)
       .then((res) => {
         setGetEdu(res.data.data.education);
       });
@@ -37,7 +37,7 @@ function Education() {
       portfolio_idx: portfolio_idx,
     };
     await axios
-      .post('http://localhost:3001/educations', newData)
+      .post('https://elice-its-me.herokuapp.com/educations', newData)
       .then((res) => {
         getEducations();
       })
@@ -46,7 +46,9 @@ function Education() {
   //학력 delete
   async function removeEdu() {
     await axios
-      .delete(`http://localhost:3001/educations/${event.target.id}`)
+      .delete(
+        `https://elice-its-me.herokuapp.com/educations/${event.target.id}`,
+      )
       .then((res) => {
         getEducations();
       });

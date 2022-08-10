@@ -38,7 +38,7 @@ export const Portfolio = React.forwardRef((props, ref) => {
   // user 정보 get
   const getUserInfo = () => {
     axios
-      .get(`http://localhost:3001/users/${getUserIdx}`, {
+      .get(`https://elice-its-me.herokuapp.com/users/${getUserIdx}`, {
         headers: {
           authorization: getToken,
         },
@@ -53,7 +53,7 @@ export const Portfolio = React.forwardRef((props, ref) => {
   // portfolio get
   const getPortfolio = () => {
     axios
-      .get(`http://localhost:3001/portfolios/${portfolio_idx}`)
+      .get(`https://elice-its-me.herokuapp.com/portfolios/${portfolio_idx}`)
       .then((res) => {
         const datas = res.data.data;
         setSkill(datas.skill);
@@ -74,7 +74,7 @@ export const Portfolio = React.forwardRef((props, ref) => {
 
   const getPortInfo = () => {
     axios
-      .get(`http://localhost:3001/portfolios`, {
+      .get(`https://elice-its-me.herokuapp.com/portfolios`, {
         headers: {
           Authorization: `Bearer ${getToken}`,
         },

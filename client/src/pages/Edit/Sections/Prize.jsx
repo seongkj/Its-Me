@@ -18,9 +18,12 @@ function Prize() {
   const { prizeName, prizeDate } = inputs;
 
   const getPrize = async () => {
-    await fetch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
-      method: 'GET',
-    })
+    await fetch(
+      `https://elice-its-me.herokuapp.com/portfolios/${portfolio_idx}`,
+      {
+        method: 'GET',
+      },
+    )
       .then((res) => res.json())
       .then((data) => {
         const prize = data.data.award;
@@ -63,7 +66,7 @@ function Prize() {
       };
 
       axios
-        .post('http://localhost:3001/awards', data)
+        .post('https://elice-its-me.herokuapp.com/awards', data)
         .then((res) => getPrize())
         .catch((err) => console.log(err, '실패'));
     }
@@ -72,7 +75,7 @@ function Prize() {
   // 삭제
   async function removePrize(delPrize) {
     await axios
-      .delete(`http://localhost:3001/awards/${delPrize.award_idx}`)
+      .delete(`https://elice-its-me.herokuapp.com/awards/${delPrize.award_idx}`)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
     const deletPrize = prizes.filter((el) => el !== delPrize);

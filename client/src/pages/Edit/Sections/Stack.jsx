@@ -23,7 +23,7 @@ function Stack() {
   //기술 스택 GET
   const getStack = async () => {
     await axios
-      .get(`http://localhost:3001/portfolios/${portfolio_idx}`)
+      .get(`https://elice-its-me.herokuapp.com/portfolios/${portfolio_idx}`)
       .then((res) => {
         setStack(res.data.data.skill);
       });
@@ -39,7 +39,7 @@ function Stack() {
       portfolio_idx: portfolio_idx,
     };
     await axios
-      .post('http://localhost:3001/skills', newData)
+      .post('https://elice-its-me.herokuapp.com/skills', newData)
       .then((res) => {
         setStack([
           ...stack,
@@ -53,7 +53,7 @@ function Stack() {
   //기술 스택 삭제
   async function removeStack(delStack) {
     await axios
-      .delete(`http://localhost:3001/skills/${delStack.skill_idx}`)
+      .delete(`https://elice-its-me.herokuapp.com/skills/${delStack.skill_idx}`)
       .catch((err) => console.log(err));
     const deletStack = stack.filter((el) => el !== delStack);
     setStack(deletStack);

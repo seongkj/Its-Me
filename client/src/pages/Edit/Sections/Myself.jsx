@@ -23,7 +23,7 @@ function Myself() {
   // 한 줄 소개 GET
   const getStack = async () => {
     await axios
-      .get(`http://localhost:3001/portfolios`, {
+      .get(`https://elice-its-me.herokuapp.com/portfolios`, {
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem('token')}`,
         },
@@ -37,7 +37,7 @@ function Myself() {
         });
       });
     await axios
-      .get(`http://localhost:3001/portfolios/${portfolio_idx}`)
+      .get(`https://elice-its-me.herokuapp.com/portfolios/${portfolio_idx}`)
       .then((res) => {
         setNewMySelf(res.data.data.introduce);
       });
@@ -61,7 +61,7 @@ function Myself() {
     if (newMySelf.length >= 1) {
       await axios
         .patch(
-          `http://localhost:3001/introduces/${newMySelf[0].introduce_idx}`,
+          `https://elice-its-me.herokuapp.com/introduces/${newMySelf[0].introduce_idx}`,
           newData,
         )
         .then((res) => {
@@ -77,11 +77,14 @@ function Myself() {
         .catch((err) => console.log(err));
       // 포트폴리오 타이틀 제목 PATCH
       await axios
-        .patch(`http://localhost:3001/portfolios/${portfolio_idx}`, newPofol)
+        .patch(
+          `https://elice-its-me.herokuapp.com/portfolios/${portfolio_idx}`,
+          newPofol,
+        )
         .catch((err) => console.log(err));
     } else {
       await axios
-        .post('http://localhost:3001/introduces', newData)
+        .post('https://elice-its-me.herokuapp.com/introduces', newData)
         .then((res) => {
           const newdata = res.data.data;
           setNewMySelf([
@@ -95,7 +98,10 @@ function Myself() {
         .catch((err) => console.log(err));
       // 포트폴리오 타이틀 제목 PATCH
       await axios
-        .patch(`http://localhost:3001/portfolios/${portfolio_idx}`, newPofol)
+        .patch(
+          `https://elice-its-me.herokuapp.com/portfolios/${portfolio_idx}`,
+          newPofol,
+        )
         .catch((err) => console.log(err));
     }
   }

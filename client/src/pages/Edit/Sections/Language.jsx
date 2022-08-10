@@ -19,9 +19,12 @@ function Language() {
   const { languageDate, languageName, languageScore } = inputs;
 
   const getLanguage = async () => {
-    await fetch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
-      method: 'GET',
-    })
+    await fetch(
+      `https://elice-its-me.herokuapp.com/portfolios/${portfolio_idx}`,
+      {
+        method: 'GET',
+      },
+    )
       .then((res) => res.json())
       .then((data) => {
         const lang = data.data.language;
@@ -72,7 +75,7 @@ function Language() {
       };
 
       axios
-        .post('http://localhost:3001/languages', data)
+        .post('https://elice-its-me.herokuapp.com/languages', data)
         .then((res) => getLanguage())
         .catch((err) => console.log(err, '실패'));
     }
@@ -81,7 +84,9 @@ function Language() {
   // 삭제
   async function removeLang(delLang) {
     await axios
-      .delete(`http://localhost:3001/languages/${delLang.language_idx}`)
+      .delete(
+        `https://elice-its-me.herokuapp.com/languages/${delLang.language_idx}`,
+      )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
     const deletLang = languages.filter((el) => el !== delLang);

@@ -30,9 +30,12 @@ const Project = ({ ownerData, setOwnerData }) => {
   const { img, title, start_date, end_date, comment, link } = inputs;
 
   const getWebsite = async () => {
-    await fetch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
-      method: 'GET',
-    })
+    await fetch(
+      `https://elice-its-me.herokuapp.com/portfolios/${portfolio_idx}`,
+      {
+        method: 'GET',
+      },
+    )
       .then((res) => res.json())
       .then((data) => {
         const webs = data.data.website;
@@ -107,7 +110,7 @@ const Project = ({ ownerData, setOwnerData }) => {
       formData.append('portfolio_idx', portfolio_idx);
 
       axios
-        .post('http://localhost:3001/websites', formData)
+        .post('https://elice-its-me.herokuapp.com/websites', formData)
         .then((res) => getWebsite())
         .catch((err) => console.log(err));
     }
@@ -116,7 +119,7 @@ const Project = ({ ownerData, setOwnerData }) => {
   // 삭제
   const onRemove = (id) => {
     axios
-      .delete(`http://localhost:3001/websites/${id}`)
+      .delete(`https://elice-its-me.herokuapp.com/websites/${id}`)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 

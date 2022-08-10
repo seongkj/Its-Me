@@ -47,7 +47,7 @@ function Edit() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/portfolios`, {
+      .get(`https://elice-its-me.herokuapp.com/portfolios`, {
         headers: {
           Authorization: `Bearer ${getToken}`,
         },
@@ -135,21 +135,27 @@ function Edit() {
     setClickedButtonIndex(index);
     if (index === 1) {
       axios
-        .patch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
-          template: 1,
-          title: userPortTitle,
-          user_idx: getUserIdx,
-        })
+        .patch(
+          `https://elice-its-me.herokuapp.com/portfolios/${portfolio_idx}`,
+          {
+            template: 1,
+            title: userPortTitle,
+            user_idx: getUserIdx,
+          },
+        )
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
       alert('다크 모드 템플릿이 적용되었습니다.');
     } else {
       axios
-        .patch(`http://localhost:3001/portfolios/${portfolio_idx}`, {
-          template: 0,
-          title: userPortTitle,
-          user_idx: getUserIdx,
-        })
+        .patch(
+          `https://elice-its-me.herokuapp.com/portfolios/${portfolio_idx}`,
+          {
+            template: 0,
+            title: userPortTitle,
+            user_idx: getUserIdx,
+          },
+        )
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
       alert('일반 모드 템플릿이 적용되었습니다.');
